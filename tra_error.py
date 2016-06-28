@@ -3,7 +3,7 @@ import numpy as np
 import Oger
 import csv
 
-def keep_max_for_each_time_step_with_default(input_signal, default_min_value=0):
+def keep_max_for_each_time_step_with_default(input_signal, default_min_value=-1):
     # get the maximum for each line (= each time step)
     m_arr = np.max(input_signal, axis=1)
     m_arr = np.atleast_2d(m_arr).T
@@ -12,7 +12,7 @@ def keep_max_for_each_time_step_with_default(input_signal, default_min_value=0):
     return (input_signal >= m_mat)*input_signal + (input_signal < m_mat)*default_min_value
 
 
-def threshold_and_take_max_before_error(input_signal, target_signal, error_measure, thresh, default_min_value=0):
+def threshold_and_take_max_before_error(input_signal, target_signal, error_measure, thresh, default_min_value=-1):
     """
     First keep only the maximum for each line (i.e. keep the maximum for each time step)
     then applies a threshold to input_signal and target_signal,
@@ -34,7 +34,7 @@ class ThematicRoleError(object):
     """
     Specific language error: measure defined for a special language task on thematic role assignment.
     """
-    def __init__(self,error_measure=Oger.utils.loss_01, threshold=0.5, verbose=False):
+    def __init__(self,error_measure=Oger.utils.loss_01, threshold=0, verbose=False):
         """
         Inputs:
             - error_measure: method used to compute the error on the given interval defined by self.time_step_slice
@@ -224,6 +224,7 @@ class ThematicRoleError(object):
         # compute the fraction of time when all the pertinent NVa are correct (for NVa present in the sentence)
         all_output_signal = []
         all_target_signal = []
+
         for NVassoc_tuple in NVassoc_contributing_anwser:
             all_output_signal.append(keep_max_for_each_time_step_with_default(NVassoc_tuple[1]))
             all_target_signal.append(NVassoc_tuple[2])
