@@ -3,7 +3,6 @@ Created on Sun Mar 27 13:40:22 2016
 
 @author: fox
 """
-
 #! /usr/bin/env python
 import mdp
 import csv
@@ -146,8 +145,8 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
         reservoir = LeakyReservoirNode(nonlin_func=mdp.numx.tanh,input_dim=self.input_dim,output_dim=self.reservoir_size,
                                             leak_rate=self.leak_rate,w=w_r,w_in=w_in,w_bias=w_bias,_instance=self._instance)
 
-        #read_out = RidgeRegressionNode(ridge_param=self.ridge, use_pinv=True, with_bias=True)
-        read_out = RidgeRegressionNode(ridge_param=self.ridge,other_error_measure= rmse,cross_validate_function=n_fold_random,n_folds=10,verbose=self.verbose)
+        read_out = RidgeRegressionNode(ridge_param=self.ridge, use_pinv=True, with_bias=True)
+        #read_out = RidgeRegressionNode(ridge_param=self.ridge,other_error_measure= rmse,cross_validate_function=n_fold_random,n_folds=10,verbose=self.verbose)
         self.flow = mdp.Flow([reservoir, read_out],verbose=self.verbose)
 
     def trainModel(self,training_sentences,training_labels):
@@ -247,7 +246,9 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
             print '\n mean sentence error::',mdp.numx.mean(all_mean_sentence_err)
             print 'SD in mean sentence error::',mdp.numx.std(all_mean_sentence_err)
 
-        return mdp.numx.mean(all_mean_meaning_err), mdp.numx.mean(all_mean_sentence_err)
+        return mdp.numx.mean(all_mean_rmse),mdp.numx.std(all_mean_rmse),\
+                mdp.numx.mean(all_mean_meaning_err),mdp.numx.std(all_mean_meaning_err), \
+                mdp.numx.mean(all_mean_sentence_err),mdp.numx.std(all_mean_sentence_err)
 
     def grid_search(self,output_csv_name=None,progress=True,verbose=False):
         '''
@@ -268,10 +269,9 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
         #dictionary of parameter to do grid search on
         #Note the parameter key should match the name with variable of this class
         gridsearch_parameters = {
-                                '_instance':range(2),
-                                'spectral_radius':mdp.numx.arange(0.5, 5.0, 0.5),
-                                'input_scaling':mdp.numx.arange(0.5, 5.0, 0.5),
-                                'leak_rate':mdp.numx.arange(0.1,0.5,0.1)
+                                'spectral_radius':mdp.numx.arange(0.8, 1.5, 0.1),
+                                'input_scaling':mdp.numx.arange(0.5, 1.5, 0.15),
+                                'leak_rate':mdp.numx.arange(0.1,0.5,0.05)
                                 }
         parameter_ranges = []
         parameters_lst = []
@@ -294,7 +294,7 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
         # Loop over all points in the parameter space i.e for each parameters combination
         with open(out_csv,'wb+') as csv_file:
             w=csv.writer(csv_file,delimiter=';')
-            csv_header=['S.No','Meaning_Error', 'Sentence_Error']
+            csv_header=['S.No','RMSE','std. RMSE','Meaning_Error','std. Meaning Error', 'Sentence_Error','std. Meaning Error']
             csv_header+=[param for param in parameters_lst]
             w.writerow(csv_header)
 
@@ -311,27 +311,31 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
                 errors = self.execute()
 
                 # Store the current errors in the respective errors arrays for a param combination
-                mean_meaning_error =  errors[0]
-                mean_sentence_error =  errors[1]
+                mean_rmse=errors[0]
+                std_rmse=errors=[1]
+                mean_meaning_error =  errors[2]
+                std_meaning_error =  errors[3]
+                mean_sentence_error =  errors[4]
+                std_sentence_error =  errors[5]
 
-                row=[paramspace_index_flat+1, mean_meaning_error, mean_sentence_error]
+                row=[paramspace_index_flat+1,mean_rmse,std_rmse, mean_meaning_error, std_meaning_error,mean_sentence_error,std_sentence_error]
                 row+=list(param_space[paramspace_index_flat])
                 w.writerow(row)
 
 if __name__=="__main__":
-    corpus=45
-    subset=range(15,41)
+    corpus=462
+    subset=range(0,462)
     model_instances=1
-    ridge=mdp.numx.power(10, mdp.numx.arange(-10,5,0.5))
-    model = ThematicRoleModel(corpus=corpus,input_dim=50,reservoir_size=1000,input_scaling=0.75,spectral_radius=1.0,
-                            leak_rate=0.1,bias_scaling=0,ridge=ridge,subset=subset,n_folds=10,verbose=False)
+    ridge=mdp.numx.power(10, mdp.numx.arange(-10,0,1))
+    model = ThematicRoleModel(corpus=corpus,input_dim=50,reservoir_size=1200,input_scaling=0.75,spectral_radius=1.0,
+                            leak_rate=0.15,bias_scaling=0,ridge=1e-6,subset=subset,n_folds=10,verbose=True)
 
-    '''inst_meaning_error=[]
+    inst_meaning_error=[]
     inst_sent_error=[]
     for instance in range(model_instances):
-        meaning_error,sentence_error=model.execute(verbose=True)
+        rmse,std_rmse,meaning_error,std_me,sentence_error,std_se=model.execute(verbose=True)
         inst_meaning_error.append(meaning_error)
         inst_sent_error.append(sentence_error)
-    print 'errors: ', (mdp.numx.mean(inst_meaning_error),mdp.numx.mean(inst_sent_error))'''
+    print 'errors: ', (mdp.numx.mean(inst_meaning_error),mdp.numx.mean(inst_sent_error))
 
-    model.grid_search()
+    #model.grid_search()
