@@ -19,12 +19,12 @@ def threshold_and_take_max_before_error(input_signal, target_signal, error_measu
     finally determines the error using the error_measure function.
     The threshold is estimated as the mean of the target_signal maximum and minimum unless a threshold 'thresh' is specified
     """
-    # check if default_min_value is coherent with the threshold
-    if default_min_value >= thresh and thresh is not None:
-        raise Exception, 'the default value applied after the max is taken is equal or superior to the threshold.'
-
     if thresh == None:
         thresh = (max(target_signal) + min(target_signal)) / 2.
+
+    # check if default_min_value is coherent with the threshold
+    if default_min_value >= thresh:
+        raise Exception, 'the default value applied after the max is taken is equal or superior to the threshold.'
 
     input_signal_max = keep_max_for_each_time_step_with_default(input_signal, default_min_value=default_min_value)
     return error_measure(input_signal_max>thresh, target_signal>thresh)
@@ -260,5 +260,4 @@ class ThematicRoleError(object):
                 nr_of_erroneous_SW, total_nr_of_pertinent_SW, NVa_correct, NVa_erroneous)'''
 
         return 1 - perf_asso_present, global_err_answer
-
 

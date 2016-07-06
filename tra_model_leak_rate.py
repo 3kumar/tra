@@ -17,17 +17,18 @@ from copy import deepcopy
 from tra_error import ThematicRoleError
 
 from reservoir_weights import generate_sparse_w, generate_sparse_w_in
-from ridge_node import RidgeRegressionNode
-#from Oger.nodes import RidgeRegressionNode
+#from random_res_weights import generate_internal_weights,generate_input_weights
+#from ridge_node import RidgeRegressionNode
+from Oger.nodes import RidgeRegressionNode
 from tra_plot import PlotRoles
 
 class ThematicRoleModel(ThematicRoleError,PlotRoles):
 
-    def __init__(self,corpus=45,subset=range(15,41),reservoir_size= 600,input_dim=50,
+    def __init__(self,corpus='462',subset=range(0,462),reservoir_size= 600,input_dim=50,
                  spectral_radius=1.0, input_scaling= 0.75, bias_scaling=0,leak_rate=0.1,
                  ridge = 10**-6, _instance=0, n_folds = 0, seed=1, verbose=True):
 
-                 self.COPRUS_W2V_MODEL_DICT='data/corpus-word-vectors-'+str(input_dim)+'dim.pkl'
+                 self.COPRUS_W2V_MODEL_DICT='/home/fox/xavier_corpus/corpus_word_vectors/corpus-word-vectors-'+str(input_dim)+'dim.pkl'
 
                  #all the parameters required for ESN
                  self.input_dim=input_dim
@@ -53,15 +54,10 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
                  self.max_sent_len=max(self.sentences_len) #calculate max sentence length
                  self.sentences_offsets=[self.max_sent_len - sent_len for sent_len in self.sentences_len]
                  self.X_data,self.Y_data=self.__generate_input_data() # generate input data for ESN
-                 self.initialize_esn()
 
     @staticmethod
-    def load_corpus(corpus_size=45,subset=range(15,41)):
-        if corpus_size==45:
-           file_name='data/corpus_45.txt'
-        if corpus_size==462:
-           file_name='data/corpus_462.txt'
-
+    def load_corpus(corpus_size='462',subset=range(0,462)):
+        file_name='data/corpus_'+str(corpus_size)+'_parsed.txt'
         sentences=[None]*len(subset)
         labels=[None]*len(subset)
         with open(file_name,'rb') as fh:
@@ -75,9 +71,12 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
     @staticmethod
     def __process_line(line):
         s_line=line.strip().split('#')
-        sentence=s_line[0].split('.')[1].strip()
+        sentence=s_line[0].strip()
         label=s_line[1].strip()
         sentence_words= sentence.split()
+        # insert two new tokens to mark the beginning and end of sentence i.e. <start>, <end>
+        sentence_words.insert(0,'<start>')
+        sentence_words.insert(len(sentence_words),'<end>')
         sentence_labels= label.split()
         return sentence_words,sentence_labels
 
@@ -94,7 +93,7 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
             sentence_matrix[idx]=self.w2v_model[word.lower()]
         return sentence_matrix
 
-    def __generate_label_matrix(self,tokenized_labels,sent_index,start='0'):
+    def __generate_label_matrix(self,tokenized_labels,sent_index,start='<start>'):
         """
             tokenized_labels: tokenized list of a labels index
                 i.e. ['N1-A1','N2-O1','N1-A2','N2-O2'] corresponding labels indices in unique_labels
@@ -104,7 +103,7 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
             returns:
                 a matrix of dimension (sentence length * len(self.unique_labels))
         """
-        teaching_start= self.sentences_len[sent_index]-1 if start=='end' else 0
+        teaching_start= self.sentences_len[sent_index]-1 if start=='<end>' else 1
 
         # activate only the labels which are present in the sentence
         binary_label_array=mdp.numx.zeros((self.sentences_len[sent_index], len(self.unique_labels)))
@@ -136,12 +135,16 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
         return (x_data, y_data)
 
     def initialize_esn(self,verbose=False):
-        #generate sparse reservoir weights and input weights,
+        #generate sparse reservoir weights and input weights, The results are good with sparse weights
         w_r=generate_sparse_w(output_size=self.reservoir_size,specrad=self.spectral_radius,seed=self.seed)
         w_in=generate_sparse_w_in(output_size=self.reservoir_size,input_size=self.input_dim,scaling=self.input_scaling,seed=self.seed)
         w_bias=generate_sparse_w_in(output_size=1,input_size=self.reservoir_size,scaling=self.bias_scaling,seed=self.seed)
 
-       ## Instansiate reservoir node, read-out and flow
+        #w_r=generate_internal_weights(reservoir_size=self.reservoir_size,spectral_radius=self.spectral_radius,seed=self.seed,proba=0.1)
+        #w_in=generate_input_weights(reservoir_size=self.reservoir_size,input_dim=self.input_dim,input_scaling=self.input_scaling,seed=self.seed,proba=0.3)
+        #w_bias=generate_input_weights(reservoir_size=1,input_dim=self.reservoir_size,input_scaling=self.bias_scaling,seed=self.seed,proba=0.3)
+
+        ## Instansiate reservoir node, read-out and flow
         reservoir = LeakyReservoirNode(nonlin_func=mdp.numx.tanh,input_dim=self.input_dim,output_dim=self.reservoir_size,
                                             leak_rate=self.leak_rate,w=w_r,w_in=w_in,w_bias=w_bias,_instance=self._instance)
 
@@ -204,7 +207,6 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
         #prepare a list of training and test sentences arrays based on train_indices and test_indices respectively
         for fold in iteration:
 
-            print 'Fold- %d'%(fold+1)
             #generating training sentences and labels data for each fold
             curr_train_sentences=[self.X_data[index] for index in train_indices[fold]]
             curr_train_labels=[self.Y_data[index] for index in train_indices[fold]]
@@ -228,6 +230,7 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
                     #compute error method returns a tuple of errors
                     errors=self.compute_error(sent_activation,curr_test_labels[sent_no],fold)
                     meaning_error, sentence_error=errors
+                    #print 'Fold-%d :: ME- %f :: SE- %f'%(fold+1,meaning_error,sentence_error)
                     fold_meaning_error.append(meaning_error)
                     fold_sentence_error.append(sentence_error)
                     fold_rmse.append(rmse(sent_activation,curr_test_labels[sent_no]))
@@ -261,6 +264,7 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
             out_csv='outputs/tra-'+str(self.corpus)+'-'+\
                      str(self.reservoir_size)+'res-'+\
                      str(self.n_folds)+'folds-'+\
+                     str(self.ridge)+'ridge-'+\
                      str(self.input_dim)+'w2vdim-'+\
                      ct+'.csv'
         else:
@@ -269,8 +273,8 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
         #dictionary of parameter to do grid search on
         #Note the parameter key should match the name with variable of this class
         gridsearch_parameters = {
-                                'spectral_radius':mdp.numx.arange(0.8, 1.5, 0.1),
-                                'input_scaling':mdp.numx.arange(0.5, 1.5, 0.15),
+                                'spectral_radius':mdp.numx.arange(0.8, 2.0, 0.1),
+                                'input_scaling':mdp.numx.arange(0.5, 2.5, 0.2),
                                 'leak_rate':mdp.numx.arange(0.1,0.5,0.05)
                                 }
         parameter_ranges = []
@@ -312,7 +316,7 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
 
                 # Store the current errors in the respective errors arrays for a param combination
                 mean_rmse=errors[0]
-                std_rmse=errors=[1]
+                std_rmse=errors[1]
                 mean_meaning_error =  errors[2]
                 std_meaning_error =  errors[3]
                 mean_sentence_error =  errors[4]
@@ -323,19 +327,21 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
                 w.writerow(row)
 
 if __name__=="__main__":
-    corpus=462
+    corpus='462'
     subset=range(0,462)
     model_instances=1
-    ridge=mdp.numx.power(10, mdp.numx.arange(-10,0,1))
-    model = ThematicRoleModel(corpus=corpus,input_dim=50,reservoir_size=1200,input_scaling=0.75,spectral_radius=1.0,
-                            leak_rate=0.15,bias_scaling=0,ridge=1e-6,subset=subset,n_folds=10,verbose=True)
+    #ridge=mdp.numx.power(10, mdp.numx.arange(-5,5,0.5))
+    model = ThematicRoleModel(corpus=corpus,input_dim=50,reservoir_size=1000,input_scaling=1.25,spectral_radius=1.4,
+                            leak_rate=0.15,ridge=1e-6,subset=subset,n_folds=10,verbose=True,seed=2)
+    model.initialize_esn()
 
-    inst_meaning_error=[]
+    '''inst_meaning_error=[]
     inst_sent_error=[]
     for instance in range(model_instances):
-        rmse,std_rmse,meaning_error,std_me,sentence_error,std_se=model.execute(verbose=True)
+        rmse_error,std_rmse,meaning_error,std_me,sentence_error,std_se= model.execute(verbose=True)
         inst_meaning_error.append(meaning_error)
         inst_sent_error.append(sentence_error)
-    print 'errors: ', (mdp.numx.mean(inst_meaning_error),mdp.numx.mean(inst_sent_error))
-
-    #model.grid_search()
+    print 'Mean RMSE: ', mdp.numx.mean(rmse_error)
+    print 'Mean ME and SE: ', (mdp.numx.mean(inst_meaning_error),mdp.numx.mean(inst_sent_error))'''
+    model.grid_search()
+    #model.flow.save('trained_flow_462.pkl')

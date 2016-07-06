@@ -8,11 +8,14 @@ Created on Sun Mar 27 13:40:22 2016
 import mdp
 import csv
 import itertools
-import numpy as np
+import time
+
+#from reservoir_weights import generate_sparse_w, generate_sparse_w_in
+from random_res_weights import generate_internal_weights,generate_input_weights
 from Oger.nodes import RidgeRegressionNode
 from Oger.nodes import LeakyReservoirNode
 from Oger.evaluation import n_fold_random,leave_one_out,Optimizer
-from Oger.utils import enable_washout,make_inspectable,nrmse
+from Oger.utils import enable_washout,make_inspectable,rmse
 from gensim.models.word2vec import Word2Vec
 from copy import deepcopy
 from tra_error import ThematicRoleError
@@ -24,23 +27,21 @@ except:
 
 class ThematicRoleModel(ThematicRoleError,PlotRoles):
 
-    def __init__(self,unique_labels=None,subset=range(15,41),reservoir_size= 1000,activation_time=10,tau=6,input_dim=30,
-                 spectral_radius=1, input_scaling= 0.75, bias_scaling=0,start_token=True,keep_internal_states=False,
-                 ridge = 10**-5, _instance=1,fan_in_res=10,fan_in_i=1, n_folds = 0, seed=1, verbose=True):
+    def __init__(self,corpus=45,unique_labels=None,subset=range(15,41),reservoir_size= 1000,activation_time=10,tau=6,input_dim=50,
+                 spectral_radius=1, input_scaling= 0.75, bias_scaling=0,ridge = 1e-6, _instance=1,fan_in_res=10,fan_in_i=2, n_folds = 0, seed=1, verbose=True):
 
                  self.W2V_WIKI_TRA_MODEL='word2vec/sgns-'+str(input_dim)+'-tra.model'
-                 self.COPRUS_W2V_MODEL_DICT='data/data-w2vdict-'+str(input_dim)+'dim.pkl'
+                 self.COPRUS_W2V_MODEL_DICT='data/corpus-word-vectors-'+str(input_dim)+'dim.pkl'
 
                  self._instance=_instance
-                 self.start_token=start_token
                  self.activation_time=activation_time
-                 self.keep_internal_states=keep_internal_states
-
+                 self.tau=tau
+                 self.corpus=corpus
                  #all the parameters required for ESN
                  self.input_dim=input_dim
                  self.reservoir_size = reservoir_size
                  self.spectral_radius = spectral_radius
-                 self.tau=tau
+
                  self.input_scaling = input_scaling
                  self.fan_in_i=fan_in_i
                  self.fan_in_res=fan_in_res
@@ -56,18 +57,20 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
                      self.unique_labels=unique_labels
 
                  #load raw sentneces and labels from the files and compute several other meta info.
-                 self.sentences,self.labels=self.load_corpus(corpus_size=45,subset=self.subset,start_token=start_token)
+                 self.sentences,self.labels=self.load_corpus(corpus_size=corpus,subset=self.subset)
                  self.labels_to_index=dict([(label,index) for index,label in enumerate(self.unique_labels)])
                  self.sentences_len=[len(sent) for sent in self.sentences]
                  self.max_sent_len=max(self.sentences_len) #calculate max sentence length
+                 print self.max_sent_len
                  self.sentences_offsets=[self.max_sent_len - sent_len for sent_len in self.sentences_len]
-                 self.full_time=[self.activation_time *sent_len for sent_len in self.sentences_len]
+
+                 self.full_time=self.activation_time *self.max_sent_len
 
                  self.initialize_esn() # initialize ESN i.e reservoir and readout
                  self.X_data,self.Y_data=self.__generate_input_data() # generate input data for ESN
 
     @staticmethod
-    def load_corpus(corpus_size=45,subset=range(15,41),start_token=False):
+    def load_corpus(corpus_size=45,subset=range(15,41)):
 
         if corpus_size==45:
            file_name='data/corpus_45.txt'
@@ -80,12 +83,12 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
             i=0
             for index,line in enumerate(fh):
                 if index in subset:
-                   sentences[i],labels[i]=ThematicRoleModel.__process_line(line,start_token)
+                   sentences[i],labels[i]=ThematicRoleModel.__process_line(line)
                    i+=1
         return sentences,labels
 
     @staticmethod
-    def __process_line(line,start_token=False):
+    def __process_line(line):
         '''
         Inputs:
             line:   process each line from the raw data file where each line contain a sentence and corresponding labels
@@ -99,9 +102,6 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
         label=s_line[1].strip()
         sentence_words= sentence.split()
         sentence_labels= label.split()
-        if start_token:
-            #insert a start dummy start token, do not change this token as word2vec model is trained for this token
-            sentence_words.insert(0,'ST')
         return sentence_words,sentence_labels
 
     def __generate_sentence_matrix(self,tokenized_sentence,sent_index):
@@ -113,10 +113,12 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
                 a matrix of dimension (sentence length * word2vec dimension)
         """
         input_size=self.input_dim # Dimensions of Word2Vec Model
-        sentence_matrix=mdp.numx.zeros((self.full_time[sent_index],input_size))
+        offset=self.sentences_offsets[sent_index]
+
+        sentence_matrix=mdp.numx.zeros((self.full_time,input_size))
         for idx,word in enumerate(tokenized_sentence):
-                word= word.lower() if word != 'ST' else word #because word2vec model is trained on 'ST' and not 'st'
-                sentence_matrix[self.activation_time*idx:self.activation_time*(idx+1)]=self.w2v_model[word]
+                word= word.lower()
+                sentence_matrix[self.activation_time*(idx+offset):self.activation_time*(idx+offset+1)]=self.w2v_model[word]
         return sentence_matrix
 
     def __generate_label_matrix(self,tokenized_labels,sent_index,start=0):
@@ -131,11 +133,12 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
         """
 
         teaching_start= self.sentences_len[sent_index]-1 if start=='end' else 0
+        offset=self.sentences_offsets[sent_index]
         # activate only the labels which are present in the sentence
-        binary_label_array=mdp.numx.zeros((self.full_time[sent_index], len(self.unique_labels)))
+        binary_label_array=mdp.numx.zeros((self.full_time, len(self.unique_labels)))
         binary_label_array[:]=-1
         for idx in tokenized_labels:
-            binary_label_array[teaching_start:,self.unique_labels.index(idx)]=1
+            binary_label_array[self.activation_time*(offset+teaching_start):,self.unique_labels.index(idx)]=1
 
         return binary_label_array
 
@@ -152,15 +155,12 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
 
         # Check if the w2v converted data format of raw sentence is available in the pkl file if yes then read from pickle file
         # else load word2vec model and generate a pickle file for further loading
-        try:
-            with open(self.COPRUS_W2V_MODEL_DICT,'r') as f:
-                print 'Please Wait!! Loading data from file...'
-                self.w2v_model=pickle.load(f) # data pickled as list where first element is sentences and second element is corresponding labels
-                print 'Data Loaded Successfully.'
-        except IOError:
-            print "Loading word vectors from Word2Vec model..."
-            self.w2v_model=Word2Vec.load(self.W2V_WIKI_TRA_MODEL)
-            print "Word2vec model loaded successfully."
+
+        with open(self.COPRUS_W2V_MODEL_DICT,'r') as f:
+            print 'Please Wait!! Loading data from file...'
+            self.w2v_model=pickle.load(f) # data pickled as list where first element is sentences and second element is corresponding labels
+            print 'Data Loaded Successfully.'
+
         x_data=[self.__generate_sentence_matrix(sentence,sent_index) for sent_index,sentence in enumerate(self.sentences)]
         y_data=[self.__generate_label_matrix(label,sent_index) for sent_index,label in enumerate(self.labels)]
 
@@ -168,23 +168,24 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
 
     def initialize_esn(self,verbose=False):
 
+        #w_r=generate_internal_weights(reservoir_size=self.reservoir_size,spectral_radius=self.spectral_radius,seed=self.seed,proba=0.1)
+        #w_in=generate_input_weights(reservoir_size=self.reservoir_size,input_dim=self.input_dim,input_scaling=self.input_scaling,seed=self.seed,proba=0.3)
+        #w_bias=generate_input_weights(reservoir_size=1,input_dim=self.reservoir_size,input_scaling=self.bias_scaling,seed=self.seed,proba=0.3)
+
+        w_r=generate_internal_weights(reservoir_size=self.reservoir_size,spectral_radius=self.spectral_radius,seed=self.seed,proba=0.1)
+        w_in=generate_input_weights(reservoir_size=self.reservoir_size,input_dim=self.input_dim,input_scaling=self.input_scaling,seed=self.seed,proba=0.3)
+        w_bias=generate_input_weights(reservoir_size=1,input_dim=self.reservoir_size,input_scaling=self.bias_scaling,seed=self.seed,proba=0.3)
+
         leak_rate=1./(self.tau*self.activation_time)
 
         ## Instansiate reservoir node, read-out and flow
-        reservoir = LeakyReservoirNode(nonlin_func=mdp.numx.tanh,input_dim=self.input_dim, output_dim=self.reservoir_size,seed=self.seed,_instance=self._instance,
-                                                  input_scaling=self.input_scaling,bias_scaling=self.bias_scaling,spectral_radius=self.spectral_radius,
-                                                  fan_in_w=self.fan_in_res,fan_in_i=self.fan_in_i,leak_rate=leak_rate)
+        reservoir = LeakyReservoirNode(nonlin_func=mdp.numx.tanh,input_dim=self.input_dim,output_dim=self.reservoir_size,
+                                            leak_rate=leak_rate,w=w_r,w_in=w_in,w_bias=w_bias,_instance=self._instance)
 
-        read_out = RidgeRegressionNode(ridge_param=self.ridge,use_pinv=True, with_bias=True)
-
-        #disregard first activation_time timesteps of reservoir activation for regression
-        if not hasattr(RidgeRegressionNode, "washout"):
-            print 'Enable washout for first: %d timesteps'%self.activation_time
-            enable_washout(washout_class=read_out.__class__,washout=self.activation_time)
+        read_out = RidgeRegressionNode(ridge_param=self.ridge, use_pinv=True, with_bias=True)
+        #read_out = RidgeRegressionNode(ridge_param=self.ridge,other_error_measure= rmse,cross_validate_function=n_fold_random,n_folds=10,verbose=self.verbose)
 
         self.flow = mdp.Flow([reservoir, read_out])
-        if self.keep_internal_states:
-            make_inspectable(self.flow.__class__)
 
     def trainModel(self,training_sentences,training_labels):
         '''
@@ -236,12 +237,13 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
 
         # containers to receive mean rmse,meaning and sentence error for test sentences on all the folds
         all_mean_meaning_err = []
-        all_mean_rmse = []
         all_mean_sentence_err = []
+        all_mean_rmse = []
 
         iteration = range(len(train_indices))
         #prepare a list of training and test sentences arrays based on train_indices and test_indices respectively
         for fold in iteration:
+
             #generating training sentences and labels data for each fold
             curr_train_sentences=[self.X_data[index] for index in train_indices[fold]]
             curr_train_labels=[self.Y_data[index] for index in train_indices[fold]]
@@ -255,55 +257,40 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
             # Training:- return a flow trained on current fold training sentences
             f_copy=self.trainModel(curr_train_sentences,curr_train_labels)
 
-            #Testing:- collect activations of all test sentences in current fold in a list
             fold_meaning_error=[]
             fold_sentence_error=[]
-            fold_rmse_error=[]
+            fold_rmse=[]
+
+            #Testing:- collect activations of all test sentences in current fold in a list
             test_sentences_activations=self.testModel(f_copy,curr_test_sentences)
             for sent_no,sent_activation in enumerate(test_sentences_activations):
                     #compute error method returns a tuple of errors
-                    errors=self.compute_error(sent_activation,curr_test_labels[sent_no])
-                    rmse_error, meaning_error, sentence_error=errors
-                    fold_rmse_error.append(rmse_error)
+                    errors=self.compute_error(sent_activation,curr_test_labels[sent_no],fold)
+                    meaning_error, sentence_error=errors
+
+                    print 'Fold-%d :: ME- %f :: SE- %f'%(fold+1,meaning_error,sentence_error)
                     fold_meaning_error.append(meaning_error)
                     fold_sentence_error.append(sentence_error)
+                    fold_rmse.append(rmse(sent_activation,curr_test_labels[sent_no]))
 
-            all_mean_rmse.append(mdp.numx.mean(fold_rmse_error))
+            all_mean_rmse.append(mdp.numx.mean(fold_rmse))
             all_mean_meaning_err.append(mdp.numx.mean(fold_meaning_error))
             all_mean_sentence_err.append(mdp.numx.mean(fold_sentence_error))
 
             #self.plot_outputs(test_sentences_activations,test_sentences_subset,plot_subtitle='')
 
         if verbose:
-            print 'mean RMSE error::',mdp.numx.mean(all_mean_rmse)
-            print 'SD in mean RMSE error::',mdp.numx.std(all_mean_rmse)
-            print 'mean meaning error::',mdp.numx.mean(all_mean_meaning_err)
+            print '\n mean rmse::',mdp.numx.mean(all_mean_rmse)
+            print 'SD in mean nrmse::',mdp.numx.std(all_mean_rmse)
+            print '\n mean meaning error::',mdp.numx.mean(all_mean_meaning_err)
             print 'SD in mean meaning error::',mdp.numx.std(all_mean_meaning_err)
-            print 'mean sentence error::',mdp.numx.mean(all_mean_sentence_err)
+            print '\n mean sentence error::',mdp.numx.mean(all_mean_sentence_err)
             print 'SD in mean sentence error::',mdp.numx.std(all_mean_sentence_err)
 
+        return mdp.numx.mean(all_mean_rmse),mdp.numx.std(all_mean_rmse),\
+                mdp.numx.mean(all_mean_meaning_err),mdp.numx.std(all_mean_meaning_err), \
+                mdp.numx.mean(all_mean_sentence_err),mdp.numx.std(all_mean_sentence_err)
 
-        return mdp.numx.mean(all_mean_rmse),mdp.numx.mean(all_mean_meaning_err), mdp.numx.mean(all_mean_sentence_err)
-
-    def optimize_esn(self):
-        data=[self.X_data,zip(self.X_data,self.Y_data)]
-
-        gridsearch_parameters = {self.flow[0]:{
-                                    'input_scaling': mdp.numx.arange(0.1, 5.0, 0.5),
-                                    'spectral_radius':mdp.numx.arange(0.6, 5.0, 0.5),
-                                    'leak_rate':[1./(self.activation_time*tau) for tau in mdp.numx.arange(5, 65, 5)],
-                                    '_instance':range(3)
-                                    }
-
-                                }
-
-        # Instantiate an optimizer
-        opt = Optimizer(gridsearch_parameters, nrmse)
-        # Do the grid search
-        opt.grid_search(data,self.flow,cross_validate_function=n_fold_random, n_folds=self.n_folds)
-        self.flow=opt.get_optimal_flow()
-        print opt.get_minimal_error()
-        opt.save('outputs/grid_search_tau.pkl')
 
     def grid_search(self,output_csv_name=None,progress=True,verbose=False):
         '''
@@ -311,20 +298,25 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
             gridsearch parameters
 
         '''
-
+        ct=time.strftime("%d-%m_%H:%M")
         if output_csv_name is None:
-            out_csv='outputs/errors-45corpus-30w2v'+str(self.activation_time)+'AT-TAU-01.csv'
+            out_csv='outputs/tra-'+str(self.corpus)+'-'+\
+                     str(self.reservoir_size)+'res-'+\
+                     str(self.n_folds)+'folds-'+\
+                     str(self.input_dim)+'w2vdim-'+\
+                     ct+'.csv'
         else:
             out_csv=output_csv_name
 
         #dictionary of parameter to do grid search on
         #Note the parameter key should match the name with variable of this class
-        gridsearch_parameters = {'spectral_radius':mdp.numx.arange(0, 5.0, 0.5),
-                                 'input_scaling': mdp.numx.arange(0, 5.0, 0.5),
-                                 'tau': mdp.numx.arange(1, 70, 5)
+        gridsearch_parameters = {
+                                'spectral_radius':mdp.numx.arange(0.8, 1.5, 0.1),
+                                'input_scaling':mdp.numx.arange(0.5, 1.5, 0.15),
+                                'leak_rate':mdp.numx.arange(0.1,0.5,0.05)
                                 }
         parameter_ranges = []
-        parameters = []
+        parameters_lst = []
 
         # Construct the parameter space
         # Loop over all nodes that need their parameters set
@@ -332,7 +324,7 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
             # Loop over all parameters that need to be set for that node
             # Append the parameter name and ranges to the corresponding lists
                 parameter_ranges.append(gridsearch_parameters[node_key])
-                parameters.append(node_key)
+                parameters_lst.append(node_key)
 
         # Construct all combinations
         param_space = list(itertools.product(*parameter_ranges))
@@ -344,33 +336,53 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
         # Loop over all points in the parameter space i.e for each parameters combination
         with open(out_csv,'wb+') as csv_file:
             w=csv.writer(csv_file,delimiter=';')
-            csv_header=['S.No','RMSE','Meaning_Error', 'Sentence_Error']
-            csv_header+=[param for param in parameters]
-            w=csv.writer(csv_file,delimiter=';')
+            csv_header=['S.No','RMSE','std. RMSE','Meaning_Error','std. Meaning Error', 'Sentence_Error','std. Meaning Error']
+            csv_header+=[param for param in parameters_lst]
             w.writerow(csv_header)
 
             for paramspace_index_flat, parameter_values in iteration:
                 # Set all parameters of all nodes to the correct values
-                for parameter_index, node_parameter in enumerate(parameters):
+                for parameter_index, parameter in enumerate(parameters_lst):
                     # Add the current node to the set of nodes whose parameters are changed, and which should be re-initialized
-                    self.__setattr__(node_parameter,parameter_values[parameter_index])
+                    self.__setattr__(parameter,parameter_values[parameter_index])
 
-                # Re-initialize esn and
+                # Re-initialize esn
                 self.initialize_esn()
 
                 # Do the validation and get the errors for each paramater combination
                 errors = self.execute()
 
                 # Store the current errors in the respective errors arrays for a param combination
-                mean_rmse_error = errors[0]
-                mean_meaning_error =  errors[1]
-                mean_sentence_error =  errors[2]
+                mean_rmse=errors[0]
+                std_rmse=errors[1]
+                mean_meaning_error =  errors[2]
+                std_meaning_error =  errors[3]
+                mean_sentence_error =  errors[4]
+                std_sentence_error =  errors[5]
 
-                row=[paramspace_index_flat+1, mean_rmse_error, mean_meaning_error, mean_sentence_error]
+                row=[paramspace_index_flat+1,mean_rmse,std_rmse, mean_meaning_error, std_meaning_error,mean_sentence_error,std_sentence_error]
                 row+=list(param_space[paramspace_index_flat])
                 w.writerow(row)
+'''
+if __name__=="__main__":
+    corpus=45
+    subset=range(15,41)
+    model_instances=1
+    ridge=mdp.numx.power(10, mdp.numx.arange(-5,5,0.5))
+    model = ThematicRoleModel(corpus=corpus,input_dim=50,reservoir_size=1000,input_scaling=6.75,spectral_radius=1.0,
+                            bias_scaling=0,ridge=1e-6,subset=subset,n_folds=-1,\
+                            activation_time=10,tau=10,verbose=True,seed=1)
 
+    inst_meaning_error=[]
+    inst_sent_error=[]
+    for instance in range(model_instances):
+        rmse,std_rmse,meaning_error,std_me,sentence_error,std_se=model.execute(verbose=True)
+        inst_meaning_error.append(meaning_error)
+        inst_sent_error.append(sentence_error)
+    print 'errors: ', (mdp.numx.mean(inst_meaning_error),mdp.numx.mean(inst_sent_error))
 
+    #model.grid_search()
+'''
 
 
 
