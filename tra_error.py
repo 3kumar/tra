@@ -187,6 +187,9 @@ class ThematicRoleError(object):
         (NVassoc_contributing_anwser, NVassoc_not_contributing_answer_but_present, NVassoc_not_present_in_sentence) = \
             self._get_NVassoc_sliced(input_signal, target_signal,fold,verbose=False)
 
+        if len(NVassoc_contributing_anwser)==0 and len(NVassoc_not_contributing_answer_but_present)==0:
+            return 0,0
+
         NVa_correct = []
         NVa_erroneous = []
 

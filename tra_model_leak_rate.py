@@ -14,7 +14,7 @@ from Oger.nodes import LeakyReservoirNode
 from Oger.evaluation import n_fold_random,leave_one_out
 from Oger.utils import rmse
 from copy import deepcopy
-from random import shuffle
+import random
 from tra_error import ThematicRoleError
 
 from reservoir_weights import generate_sparse_w, generate_sparse_w_in
@@ -270,8 +270,9 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
             gridsearch parameters
 
         '''
-        ct=time.strftime("%d-%m_%H:%M")
+
         if output_csv_name is None:
+            ct=time.strftime("%d-%m_%H:%M")
             out_csv='outputs/tra-'+str(self.corpus)+'-'+\
                      str(self.reservoir_size)+'res-'+\
                      str(self.n_folds)+'folds-'+\
@@ -284,9 +285,9 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
         #dictionary of parameter to do grid search on
         #Note the parameter key should match the name with variable of this class
         gridsearch_parameters = {
-                                'spectral_radius':mdp.numx.arange(0.8, 2.0, 0.1),
-                                'input_scaling':mdp.numx.arange(0.5, 2.5, 0.2),
-                                'leak_rate':mdp.numx.arange(0.1,0.5,0.05)
+                                'spectral_radius':mdp.numx.arange(0.5, 3.5, 0.5),
+                                'input_scaling':mdp.numx.arange(0.5, 3.5, 0.2),
+                                'leak_rate':mdp.numx.arange(0.1,0.2,0.05)
                                 }
         parameter_ranges = []
         parameters_lst = []
@@ -338,24 +339,52 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
                 w.writerow(row)
 
 if __name__=="__main__":
+
+    start_time = time.time()
+
+    #*************************** Corpus 90k ***********************************
+
     corpus='90k'
-    subset=range(0,2000)#90582)
+    sub_corpus_per=25 # percentage of sub-corpus to be selected out of 90582
+    n_folds=2 # train and test set are of equal size, both the set are tested and trained once atleast
+
+    #genrate a sub_corpus randomly
+    sub_corpus_size=20000 #(sub_corpus_per*90582)/100
+    random.seed(1)
+    subset=random.sample(range(0,90582),sub_corpus_size)
+
+
+    #************************** Corpus 462 ************************************
 
     #corpus='462'
     #subset=range(0,462)
+    #n_folds=10
+
+    #******************* Initialize a Model ***********************************
 
     model_instances=1
-    #ridge=mdp.numx.power(10, mdp.numx.arange(-5,5,0.5))
     model = ThematicRoleModel(corpus=corpus,input_dim=50,reservoir_size=1000,input_scaling=2.3,spectral_radius=1.9,
-                            leak_rate=0.1,ridge=1e-6,subset=subset,n_folds=10,verbose=True,seed=2)
+                            leak_rate=0.1,ridge=1e-6,subset=subset,n_folds=n_folds,verbose=True,seed=2)
     model.initialize_esn()
 
-    inst_meaning_error=[]
+    '''inst_meaning_error=[]
     inst_sent_error=[]
     for instance in range(model_instances):
         rmse_error,std_rmse,meaning_error,std_me,sentence_error,std_se= model.execute(verbose=True)
         inst_meaning_error.append(meaning_error)
         inst_sent_error.append(sentence_error)
     print 'Mean RMSE: ', mdp.numx.mean(rmse_error)
-    print 'Mean ME and SE: ', (mdp.numx.mean(inst_meaning_error),mdp.numx.mean(inst_sent_error))
-    #model.grid_search()
+    print 'Mean ME and SE: ', (mdp.numx.mean(inst_meaning_error),mdp.numx.mean(inst_sent_error))'''
+
+    ct=time.strftime("%d-%m_%H:%M")
+    out_csv='outputs/tra-'+str(model.corpus)+'-'+\
+                     str(len(model.subset))+'subcorpus-'+\
+                     str(model.reservoir_size)+'res-'+\
+                     str(model.n_folds)+'folds-'+\
+                     str(model.ridge)+'ridge-'+\
+                     str(model.input_dim)+'w2vdim-start'+\
+                     ct+'.csv'
+    model.grid_search(output_csv_name=out_csv)
+
+    end_time = time.time()
+    print '\nTotal execution time : %s min '%((end_time-start_time)/60)
