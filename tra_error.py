@@ -45,8 +45,14 @@ class ThematicRoleError(object):
         self.threshold = threshold
 
         #TODO: generate it dynamically based on no. of nouns and verbs
+        #use this for corpus 462 and 90k
+        #self.nv_pairs = [('N1','V1'), ('N1','V2'), ('N2','V1'), ('N2','V2'),
+        #                   ('N3','V1'), ('N3','V2'), ('N4','V1'), ('N4','V2')]
+
+        # for corpus 90k
         self.nv_pairs = [('N1','V1'), ('N1','V2'), ('N2','V1'), ('N2','V2'),
-                           ('N3','V1'), ('N3','V2'), ('N4','V1'), ('N4','V2')]
+                           ('N3','V1'), ('N3','V2'), ('N4','V1'), ('N4','V2'),('N5','V1'),('N5','V2')]
+
         self.verbose = verbose
         self._check_output_version()
         self.__initialize_error_algorithm()
@@ -65,7 +71,8 @@ class ThematicRoleError(object):
     def _check_output_version(self):
         if not(self.unique_labels):
             print "!!! WARNING: io dictionary has no 'l_output' entry, version of output could not be checked. !!!"
-        elif self.unique_labels != ['N1-A1','N1-O1','N1-R1','N1-A2','N1-O2','N1-R2','N2-A1','N2-O1','N2-R1','N2-A2','N2-O2','N2-R2','N3-A1','N3-O1','N3-R1','N3-A2','N3-O2','N3-R2','N4-A1','N4-O1','N4-R1','N4-A2','N4-O2','N4-R2']:
+        elif self.corpus!='90k' and self.unique_labels != ['N1-A1','N1-O1','N1-R1','N1-A2','N1-O2','N1-R2','N2-A1','N2-O1','N2-R1','N2-A2','N2-O2','N2-R2',
+        'N3-A1','N3-O1','N3-R1','N3-A2','N3-O2','N3-R2','N4-A1','N4-O1','N4-R1','N4-A2','N4-O2','N4-R2']:
             raise Exception, "Output Coding is not the same as expected"
 
     def _get_max_answers(self):
