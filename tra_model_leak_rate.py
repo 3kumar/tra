@@ -47,6 +47,7 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
 
                  self.n_folds=n_folds
 
+                 # For corpus 462, comment the lower one, also make change in tra_error line 54
                  #self.unique_labels=['N1-A1','N1-O1','N1-R1','N1-A2','N1-O2','N1-R2','N2-A1','N2-O1','N2-R1','N2-A2','N2-O2','N2-R2',
                  #                    'N3-A1','N3-O1','N3-R1','N3-A2','N3-O2','N3-R2','N4-A1','N4-O1','N4-R1','N4-A2','N4-O2','N4-R2']
 
@@ -58,10 +59,10 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
                  #load raw sentneces and labels from the files and compute several other meta info.
                  self.sentences,self.labels=self.__load_corpus(corpus_size=corpus,subset=subset)
 
+                 #Shuffle sentences: same as exp.6 of xavier's paper
                  #for sent in self.sentences:
                  #    shuffle(sent)
 
-                 print self.sentences[0]
                  self.labels_to_index=dict([(label,index) for index,label in enumerate(self.unique_labels)])
                  self.sentences_len=[len(sent) for sent in self.sentences]
                  self.max_sent_len=max(self.sentences_len) #calculate max sentence length
@@ -254,11 +255,11 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
 
         if verbose:
             print '\n mean rmse::',mdp.numx.mean(all_mean_rmse)
-            print 'SD in mean nrmse::',mdp.numx.std(all_mean_rmse)
+            print ' SD in mean nrmse::',mdp.numx.std(all_mean_rmse)
             print '\n mean meaning error::',mdp.numx.mean(all_mean_meaning_err)
-            print 'SD in mean meaning error::',mdp.numx.std(all_mean_meaning_err)
+            print ' SD in mean meaning error::',mdp.numx.std(all_mean_meaning_err)
             print '\n mean sentence error::',mdp.numx.mean(all_mean_sentence_err)
-            print 'SD in mean sentence error::',mdp.numx.std(all_mean_sentence_err)
+            print ' SD in mean sentence error::',mdp.numx.std(all_mean_sentence_err)
 
         return mdp.numx.mean(all_mean_rmse),mdp.numx.std(all_mean_rmse),\
                 mdp.numx.mean(all_mean_meaning_err),mdp.numx.std(all_mean_meaning_err), \
@@ -343,48 +344,46 @@ if __name__=="__main__":
     start_time = time.time()
 
     #*************************** Corpus 90k ***********************************
-
     corpus='90k'
-    sub_corpus_per=25 # percentage of sub-corpus to be selected out of 90582
+    sub_corpus_per=6 # percentage of sub-corpus to be selected out of 90582
     n_folds=2 # train and test set are of equal size, both the set are tested and trained once atleast
-
-    #genrate a sub_corpus randomly
-    sub_corpus_size=20000 #(sub_corpus_per*90582)/100
+    sub_corpus_size=(sub_corpus_per*90582)/100 #genrate a sub-corpus randomly
     random.seed(1)
     subset=random.sample(range(0,90582),sub_corpus_size)
 
-
     #************************** Corpus 462 ************************************
-
     #corpus='462'
     #subset=range(0,462)
     #n_folds=10
 
     #******************* Initialize a Model ***********************************
-
-    model_instances=1
-    model = ThematicRoleModel(corpus=corpus,input_dim=50,reservoir_size=1000,input_scaling=2.3,spectral_radius=1.9,
+    model = ThematicRoleModel(corpus=corpus,input_dim=50,reservoir_size=500,input_scaling=2.3,spectral_radius=1.9,
                             leak_rate=0.1,ridge=1e-6,subset=subset,n_folds=n_folds,verbose=True,seed=2)
     model.initialize_esn()
 
-    '''inst_meaning_error=[]
-    inst_sent_error=[]
-    for instance in range(model_instances):
-        rmse_error,std_rmse,meaning_error,std_me,sentence_error,std_se= model.execute(verbose=True)
-        inst_meaning_error.append(meaning_error)
-        inst_sent_error.append(sentence_error)
-    print 'Mean RMSE: ', mdp.numx.mean(rmse_error)
-    print 'Mean ME and SE: ', (mdp.numx.mean(inst_meaning_error),mdp.numx.mean(inst_sent_error))'''
+    #******************* Execute a Model with multiple Reservoir ***********************************
+    model_instances=5 # No. of instances of reservoir
 
+    # Name of file where to save the execution results
     ct=time.strftime("%d-%m_%H:%M")
-    out_csv='outputs/tra-'+str(model.corpus)+'-'+\
-                     str(len(model.subset))+'subcorpus-'+\
+    out_csv='outputs/instances-tra-'+str(model.corpus)+'-'+\
+                     str(sub_corpus_per)+'subcorpus-'+\
                      str(model.reservoir_size)+'res-'+\
                      str(model.n_folds)+'folds-'+\
                      str(model.ridge)+'ridge-'+\
                      str(model.input_dim)+'w2vdim-start'+\
                      ct+'.csv'
-    model.grid_search(output_csv_name=out_csv)
+
+    with open(out_csv,'wb+') as csv_file:
+        w=csv.writer(csv_file,delimiter=';')
+        csv_header=['Instance','RMSE','std. RMSE','Meaning_Error','std. Meaning Error', 'Sentence_Error','std. Sentence Error']
+        w.writerow(csv_header)
+        for instance in range(model_instances):
+            rmse_error,std_rmse,me,std_me,se,std_se= model.execute(verbose=True)
+            row=[instance+1,rmse_error,std_rmse, me, std_me,se,std_se]
+            w.writerow(row)
+
+    #model.grid_search(output_csv_name=out_csv)
 
     end_time = time.time()
     print '\nTotal execution time : %s min '%((end_time-start_time)/60)
