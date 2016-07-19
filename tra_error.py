@@ -44,14 +44,15 @@ class ThematicRoleError(object):
         self.error_measure = error_measure
         self.threshold = threshold
 
-        #TODO: generate it dynamically based on no. of nouns and verbs
-        #use this for corpus 462 and 90k
-        #self.nv_pairs = [('N1','V1'), ('N1','V2'), ('N2','V1'), ('N2','V2'),
-        #                   ('N3','V1'), ('N3','V2'), ('N4','V1'), ('N4','V2')]
-
-        # for corpus 90k
-        self.nv_pairs = [('N1','V1'), ('N1','V2'), ('N2','V1'), ('N2','V2'),
-                           ('N3','V1'), ('N3','V2'), ('N4','V1'), ('N4','V2'),('N5','V1'),('N5','V2')]
+        if not self.corpus=="90k":
+            #use this for corpus 462 and 90k
+            self.nv_pairs = [('N1','V1'), ('N1','V2'), ('N2','V1'), ('N2','V2'),
+                             ('N3','V1'), ('N3','V2'), ('N4','V1'), ('N4','V2')]
+        else:
+            # for corpus 90k
+            self.nv_pairs = [('N1','V1'), ('N1','V2'), ('N2','V1'), ('N2','V2'),
+                             ('N3','V1'), ('N3','V2'), ('N4','V1'), ('N4','V2'),
+                             ('N5','V1'),('N5','V2')]
 
         self.verbose = verbose
         self._check_output_version()
@@ -67,12 +68,17 @@ class ThematicRoleError(object):
         self.time_step_slice = slice(-1,None)
         self.max_answers = self._get_max_answers()
 
-
     def _check_output_version(self):
         if not(self.unique_labels):
             print "!!! WARNING: io dictionary has no 'l_output' entry, version of output could not be checked. !!!"
+
         elif self.corpus!='90k' and self.unique_labels != ['N1-A1','N1-O1','N1-R1','N1-A2','N1-O2','N1-R2','N2-A1','N2-O1','N2-R1','N2-A2','N2-O2','N2-R2',
-        'N3-A1','N3-O1','N3-R1','N3-A2','N3-O2','N3-R2','N4-A1','N4-O1','N4-R1','N4-A2','N4-O2','N4-R2']:
+                                                           'N3-A1','N3-O1','N3-R1','N3-A2','N3-O2','N3-R2','N4-A1','N4-O1','N4-R1','N4-A2','N4-O2','N4-R2']:
+            raise Exception, "Output Coding is not the same as expected"
+
+        elif self.corpus=='90k' and self.unique_labels != ['N1-A1','N1-O1','N1-R1','N1-A2','N1-O2','N1-R2','N2-A1','N2-O1','N2-R1','N2-A2','N2-O2','N2-R2',
+                                                           'N3-A1','N3-O1','N3-R1','N3-A2','N3-O2','N3-R2','N4-A1','N4-O1','N4-R1','N4-A2','N4-O2','N4-R2',
+                                                           'N5-A1','N5-O1','N5-R1','N5-A2','N5-O2','N5-R2']:
             raise Exception, "Output Coding is not the same as expected"
 
     def _get_max_answers(self):
@@ -141,10 +147,9 @@ class ThematicRoleError(object):
 
             #check if activatiion of a role wrt to noun and corresoponding verb is above threshold or not
             if mdp.numx.any(target_signal[self.time_step_slice, idx:idx+3] > self.threshold): # the non-1 signal could be 0 or -1 (so np.any() is not sufficient)
-                ## add the current NVassoc to the list
+                # add the current NVassoc to the list
                 NVassoc_contributing_anwser.append(NVassoc_tuple)
-                # add the noun and the verb to the list of Noun and Verb present in the sentence (will be used later)
-                # there will be duplicate, but this is not an issue
+                # add the noun and the verb to the list of Noun and Verb present in the sentence (will be used later) there will be duplicate, but this is not an issue
                 n_v_contributing_and_present_in_sentence.extend(self.nv_pairs[NVindex])
             else:
                 NVassoc_not_contributing_answer.append(NVassoc_tuple)
@@ -228,8 +233,8 @@ class ThematicRoleError(object):
                 perf_asso_present = (len(aa)*mdp.numx.mean(aa) + len(naap)*mdp.numx.mean(naap)) / float((len(aa) + len(naap)))
             else:
                 perf_asso_present = mdp.numx.mean(perf_asso_adm_answ)
-        '''else:
-            raise Exception, "There is no answer for this sentence."'''
+        else:
+            raise Warning, "There is no answer for this sentence."
 
         # compute the fraction of time when all the pertinent NVa are correct (for NVa present in the sentence)
         all_output_signal = []

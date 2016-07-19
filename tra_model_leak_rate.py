@@ -25,9 +25,9 @@ from tra_plot import PlotRoles
 
 class ThematicRoleModel(ThematicRoleError,PlotRoles):
 
-    def __init__(self,corpus='462',subset=range(0,462),reservoir_size= 600,input_dim=50,
-                 spectral_radius=1.0, input_scaling= 0.75, bias_scaling=0,leak_rate=0.1,
-                 ridge = 10**-6, _instance=0, n_folds = 0, seed=1, verbose=True):
+    def __init__(self,corpus='462',subset=range(0,462),reservoir_size= 1000,input_dim=50,
+                 spectral_radius=1.9, input_scaling= 2.3, bias_scaling=0,leak_rate=0.1,
+                 ridge = 1e-6, _instance=0, n_folds = 0, seed=2, learning_mode='SFL', verbose=True):
 
                  self.COPRUS_W2V_MODEL_DICT='data/corpus_word_vectors/corpus-word-vectors-'+str(input_dim)+'dim.pkl'
 
@@ -45,16 +45,22 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
                  self.corpus=corpus
                  self.verbose=verbose
 
+                 if learning_mode=='SFL':
+                    self.teaching_start='<end>'
+                 elif learning_mode=='SCL':
+                    self.teaching_start='<end>'
+
                  self.n_folds=n_folds
 
-                 # For corpus 462, comment the lower one, also make change in tra_error line 54
-                 #self.unique_labels=['N1-A1','N1-O1','N1-R1','N1-A2','N1-O2','N1-R2','N2-A1','N2-O1','N2-R1','N2-A2','N2-O2','N2-R2',
-                 #                    'N3-A1','N3-O1','N3-R1','N3-A2','N3-O2','N3-R2','N4-A1','N4-O1','N4-R1','N4-A2','N4-O2','N4-R2']
-
-                 # For corpus 90k, comoment the upper one, also make change in tra_error line 54
-                 self.unique_labels=['N1-A1','N1-O1','N1-R1','N1-A2','N1-O2','N1-R2','N2-A1','N2-O1','N2-R1','N2-A2','N2-O2','N2-R2',
-                                     'N3-A1','N3-O1','N3-R1','N3-A2','N3-O2','N3-R2','N4-A1','N4-O1','N4-R1','N4-A2','N4-O2','N4-R2',
-                                     'N5-A1','N5-O1','N5-R1','N5-A2','N5-O2','N5-R2']
+                 if not corpus=="90k":
+                     # For corpus 462, comment the lower one, also make change in tra_error line 54
+                     self.unique_labels=['N1-A1','N1-O1','N1-R1','N1-A2','N1-O2','N1-R2','N2-A1','N2-O1','N2-R1','N2-A2','N2-O2','N2-R2',
+                                         'N3-A1','N3-O1','N3-R1','N3-A2','N3-O2','N3-R2','N4-A1','N4-O1','N4-R1','N4-A2','N4-O2','N4-R2']
+                 else:
+                     # For corpus 90k, comoment the upper one, also make change in tra_error line 54
+                     self.unique_labels=['N1-A1','N1-O1','N1-R1','N1-A2','N1-O2','N1-R2','N2-A1','N2-O1','N2-R1','N2-A2','N2-O2','N2-R2',
+                                         'N3-A1','N3-O1','N3-R1','N3-A2','N3-O2','N3-R2','N4-A1','N4-O1','N4-R1','N4-A2','N4-O2','N4-R2',
+                                         'N5-A1','N5-O1','N5-R1','N5-A2','N5-O2','N5-R2']
 
                  #load raw sentneces and labels from the files and compute several other meta info.
                  self.sentences,self.labels=self.__load_corpus(corpus_size=corpus,subset=subset)
@@ -115,7 +121,7 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
             returns:
                 a matrix of dimension (sentence length * len(self.unique_labels))
         """
-        teaching_start= self.sentences_len[sent_index]-1 if start=='<end>' else 1
+        teaching_start= self.sentences_len[sent_index]-2 if start=='<end>' else 1
 
         # activate only the labels which are present in the sentence
         binary_label_array=mdp.numx.zeros((self.sentences_len[sent_index], len(self.unique_labels)))
@@ -141,7 +147,7 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
             print 'Data Loaded Successfully.'
 
         x_data=[self.__generate_sentence_matrix(sentence,sent_index) for sent_index,sentence in enumerate(self.sentences)]
-        y_data=[self.__generate_label_matrix(label,sent_index) for sent_index,label in enumerate(self.labels)]
+        y_data=[self.__generate_label_matrix(label,sent_index,start=self.teaching_start) for sent_index,label in enumerate(self.labels)]
 
         return (x_data, y_data)
 
@@ -192,10 +198,10 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
     def apply_nfold(self):
         # Split the data into training and test data depending on the n_folds
         # train_indices,test_indices are list of arrays containg indicies for training and testing correponding to folds
-        if self.n_folds==0 or self.n_folds is None:
+        if self.n_folds==0 or self.n_folds==1 or self.n_folds is None:
              train_indices=[range(len(self.sentences))] # train on all sentences
              test_indices=train_indices
-        elif self.n_folds==1 or self.n_folds < 0: # if negative or 1
+        elif self.n_folds < 0: # if negative or 1
              train_indices, test_indices = leave_one_out(len(self.sentences))
         else:
              train_indices, test_indices = n_fold_random(n_samples=len(self.sentences),n_folds=self.n_folds)
@@ -269,9 +275,7 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
         '''
             this execute method does a grid search over reservoir parameters and log the errors in a csv file w.r.t to
             gridsearch parameters
-
         '''
-
         if output_csv_name is None:
             ct=time.strftime("%d-%m_%H:%M")
             out_csv='outputs/tra-'+str(self.corpus)+'-'+\
@@ -344,29 +348,36 @@ if __name__=="__main__":
     start_time = time.time()
 
     #*************************** Corpus 90k ***********************************
-    corpus='90k'
+    '''corpus='90k'
     sub_corpus_per=6 # percentage of sub-corpus to be selected out of 90582
     n_folds=2 # train and test set are of equal size, both the set are tested and trained once atleast
     sub_corpus_size=(sub_corpus_per*90582)/100 #genrate a sub-corpus randomly
     random.seed(1)
-    subset=random.sample(range(0,90582),sub_corpus_size)
+    subset=random.sample(range(0,90582),sub_corpus_size)'''
 
     #************************** Corpus 462 ************************************
-    #corpus='462'
-    #subset=range(0,462)
-    #n_folds=10
+    corpus='462'
+    sub_corpus_per=100
+    subset=range(0,462)
+    n_folds=10
 
     #******************* Initialize a Model ***********************************
-    model = ThematicRoleModel(corpus=corpus,input_dim=50,reservoir_size=500,input_scaling=2.3,spectral_radius=1.9,
-                            leak_rate=0.1,ridge=1e-6,subset=subset,n_folds=n_folds,verbose=True,seed=2)
+    '''
+        learning mode can be:
+            SFL : sentence final learning
+            SCL : sentence continous learning
+    '''
+    model = ThematicRoleModel(corpus=corpus,input_dim=50,reservoir_size=1000,input_scaling=2.7,spectral_radius=2.5,
+                            leak_rate=0.12,ridge=1e-6,subset=subset,n_folds=n_folds,verbose=True,seed=2,learning_mode='SFL')
     model.initialize_esn()
 
     #******************* Execute a Model with multiple Reservoir ***********************************
     model_instances=5 # No. of instances of reservoir
 
-    # Name of file where to save the execution results
-    ct=time.strftime("%d-%m_%H:%M")
-    out_csv='outputs/instances-tra-'+str(model.corpus)+'-'+\
+    if model_instances > 1:
+        # Name of file where to save the execution results
+        ct=time.strftime("%d-%m_%H:%M")
+        out_csv='outputs/'+str(model_instances)+'instances-tra-'+str(model.corpus)+'-'+\
                      str(sub_corpus_per)+'subcorpus-'+\
                      str(model.reservoir_size)+'res-'+\
                      str(model.n_folds)+'folds-'+\
@@ -374,16 +385,17 @@ if __name__=="__main__":
                      str(model.input_dim)+'w2vdim-start'+\
                      ct+'.csv'
 
-    with open(out_csv,'wb+') as csv_file:
-        w=csv.writer(csv_file,delimiter=';')
-        csv_header=['Instance','RMSE','std. RMSE','Meaning_Error','std. Meaning Error', 'Sentence_Error','std. Sentence Error']
-        w.writerow(csv_header)
-        for instance in range(model_instances):
-            rmse_error,std_rmse,me,std_me,se,std_se= model.execute(verbose=True)
-            row=[instance+1,rmse_error,std_rmse, me, std_me,se,std_se]
-            w.writerow(row)
+        with open(out_csv,'wb+') as csv_file:
+            w=csv.writer(csv_file, delimiter=';')
+            csv_header=['Instance','RMSE','std. RMSE','Meaning_Error','std. Meaning_Error', 'Sentence_Error','std. Sentence_Error']
+            w.writerow(csv_header)
+            for instance in range(model_instances):
+                rmse_error,std_rmse,me,std_me,se,std_se= model.execute(verbose=True)
+                row=[instance+1,rmse_error,std_rmse, me, std_me,se,std_se]
+                w.writerow(row)
+    else:
+        model.execute(verbose=True)
 
     #model.grid_search(output_csv_name=out_csv)
-
     end_time = time.time()
     print '\nTotal execution time : %s min '%((end_time-start_time)/60)
