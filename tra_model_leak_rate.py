@@ -48,7 +48,7 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
                  if learning_mode=='SFL':
                     self.teaching_start='<end>'
                  elif learning_mode=='SCL':
-                    self.teaching_start='<end>'
+                    self.teaching_start='<start>'
 
                  self.n_folds=n_folds
 
@@ -65,7 +65,7 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
                  #load raw sentneces and labels from the files and compute several other meta info.
                  self.sentences,self.labels=self.__load_corpus(corpus_size=corpus,subset=subset)
 
-                 #Shuffle sentences: same as exp.6 of xavier's paper
+                 #Shuffle sentence words and not labels: same as exp.6 of xavier's paper
                  #for sent in self.sentences:
                  #    shuffle(sent)
 
