@@ -290,9 +290,9 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
         #dictionary of parameter to do grid search on
         #Note the parameter key should match the name with variable of this class
         gridsearch_parameters = {
-                                'spectral_radius':mdp.numx.arange(0.5, 3.5, 0.5),
-                                'input_scaling':mdp.numx.arange(0.5, 3.5, 0.2),
-                                'leak_rate':mdp.numx.arange(0.1,0.2,0.05)
+                                'spectral_radius':mdp.numx.arange(1.5, 2.6, 0.1),
+                                'input_scaling':mdp.numx.arange(2.0, 3.1, 0.1),
+                                'leak_rate':mdp.numx.arange(0.01,0.11,0.02)
                                 }
         parameter_ranges = []
         parameters_lst = []
@@ -345,14 +345,19 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
 
 if __name__=="__main__":
 
+    '''
+        learning mode can be:
+            SFL : sentence final learning
+            SCL : sentence continous learning
+    '''
     start_time = time.time()
+    learning_mode='SCL' # 'SCL'
 
     #*************************** Corpus 90k ***********************************
     '''corpus='90k'
     sub_corpus_per=6 # percentage of sub-corpus to be selected out of 90582
     n_folds=2 # train and test set are of equal size, both the set are tested and trained once atleast
     sub_corpus_size=(sub_corpus_per*90582)/100 #genrate a sub-corpus randomly
-    random.seed(1)
     subset=random.sample(range(0,90582),sub_corpus_size)'''
 
     #************************** Corpus 462 ************************************
@@ -362,13 +367,9 @@ if __name__=="__main__":
     n_folds=10
 
     #******************* Initialize a Model ***********************************
-    '''
-        learning mode can be:
-            SFL : sentence final learning
-            SCL : sentence continous learning
-    '''
-    model = ThematicRoleModel(corpus=corpus,input_dim=50,reservoir_size=1000,input_scaling=2.7,spectral_radius=2.5,
-                            leak_rate=0.12,ridge=1e-6,subset=subset,n_folds=n_folds,verbose=True,seed=2,learning_mode='SFL')
+
+    model = ThematicRoleModel(corpus=corpus,input_dim=50,reservoir_size=1000,input_scaling=2.5,spectral_radius=1.8,
+                            leak_rate=0.12,ridge=1e-6,subset=subset,n_folds=n_folds,verbose=True,seed=2,learning_mode=learning_mode)
     model.initialize_esn()
 
     #******************* Execute a Model with multiple Reservoir ***********************************
@@ -382,7 +383,7 @@ if __name__=="__main__":
                      str(model.reservoir_size)+'res-'+\
                      str(model.n_folds)+'folds-'+\
                      str(model.ridge)+'ridge-'+\
-                     str(model.input_dim)+'w2vdim-start'+\
+                     str(model.input_dim)+'w2vdim-'+learning_mode+''+\
                      ct+'.csv'
 
         with open(out_csv,'wb+') as csv_file:
@@ -390,6 +391,7 @@ if __name__=="__main__":
             csv_header=['Instance','RMSE','std. RMSE','Meaning_Error','std. Meaning_Error', 'Sentence_Error','std. Sentence_Error']
             w.writerow(csv_header)
             for instance in range(model_instances):
+                print "***************** Instance: "+str(instance+1)+"***********************"
                 rmse_error,std_rmse,me,std_me,se,std_se= model.execute(verbose=True)
                 row=[instance+1,rmse_error,std_rmse, me, std_me,se,std_se]
                 w.writerow(row)

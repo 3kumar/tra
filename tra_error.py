@@ -193,7 +193,7 @@ class ThematicRoleError(object):
             self._get_NVassoc_sliced(input_signal, target_signal,fold,verbose=False)
 
         if len(NVassoc_contributing_anwser)==0 and len(NVassoc_not_contributing_answer_but_present)==0:
-            return 0,0
+            return 0, 0
 
         NVa_correct = []
         NVa_erroneous = []
@@ -234,6 +234,7 @@ class ThematicRoleError(object):
             else:
                 perf_asso_present = mdp.numx.mean(perf_asso_adm_answ)
         else:
+            perf_asso_present=0
             raise Warning, "There is no answer for this sentence."
 
         # compute the fraction of time when all the pertinent NVa are correct (for NVa present in the sentence)

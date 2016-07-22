@@ -23,7 +23,7 @@ class TRA_Plotting(object):
     def __init__(self,csv_file_name=None):
 
         if csv_file_name is None:
-            csv_file='outputs/tra-45-1000res--1folds-1e-06ridge-50w2vdim-start14-07_02:36.csv'
+            csv_file='outputs/corpus462/tra-462-1000res-10folds-1e-06ridge-50w2vdim-start06-07_13:10.csv'
         else:
             csv_file=csv_file_name
 
@@ -70,9 +70,9 @@ class TRA_Plotting(object):
         #me=100*np.asarray(self.df_me["Meaning_Error"]).reshape(param_space_dim)
         me=100*np.asarray(self.df_se["Sentence_Error"]).reshape(param_space_dim)
 
-        fig=plt.figure(6)
+        fig=plt.figure(7)
         grid = ImageGrid(fig, 111,  # similar to subplot(111)
-                             nrows_ncols=(3, 3),
+                             nrows_ncols=(4, 3),
                              direction="row",
                              axes_pad=0.5,
                              label_mode="all",
