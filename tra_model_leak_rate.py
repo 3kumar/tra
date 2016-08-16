@@ -163,10 +163,10 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
         # Check if the w2v converted data format of raw sentence is available in the pkl file if yes then read from pickle file
         # else load word2vec model and generate a pickle file for further loading
 
-        '''with open(self.COPRUS_W2V_MODEL_DICT,'r') as f:
+        with open(self.COPRUS_W2V_MODEL_DICT,'r') as f:
             print 'Please Wait!! Loading data from file...'
             self.w2v_model=pickle.load(f)
-            print 'Data Loaded Successfully.'''
+            print 'Data Loaded Successfully.'
 
         x_data=self.generate_x_data(sentences=self.sentences)
         y_data=self.__generate_y_data(labels=self.labels)
@@ -379,11 +379,13 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
         """
             This methods returns the word embedding for the input word
         """
-
-        url='http://127.0.0.1:5000/word2vec/model?word='+word
-        response=requests.get(url).text
-        response=base64.decodestring(response)
-        word_vector=np.frombuffer(response,dtype=np.float32)
+        try:
+            url='http://127.0.0.1:5000/word2vec/model?word='+word
+            response=requests.get(url).text
+            response=base64.decodestring(response)
+            word_vector=np.frombuffer(response,dtype=np.float32)
+        except Exception:
+            word_vector=self.w2v_model[word]
         return word_vector
 
     def grid_search(self,output_csv_name=None,progress=True,verbose=False):
