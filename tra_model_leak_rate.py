@@ -7,26 +7,30 @@ Created on Sun Mar 27 13:40:22 2016
 import mdp
 import csv
 import itertools
-import pickle
 import time
-
+import requests
+import base64
+import numpy as np
 from Oger.nodes import LeakyReservoirNode
 from Oger.evaluation import n_fold_random,leave_one_out
 from Oger.utils import rmse
 from copy import deepcopy
 import random
-from tra_error import ThematicRoleError
-
+from tra_error import ThematicRoleError,keep_max_for_each_time_step_with_default
 from reservoir_weights import generate_sparse_w, generate_sparse_w_in
 #from random_res_weights import generate_internal_weights,generate_input_weights
 #from ridge_node import RidgeRegressionNode
 from Oger.nodes import RidgeRegressionNode
 from tra_plot import PlotRoles
+try:
+    import cPickle as pickle
+except:
+    import pickle as pickle
 
 class ThematicRoleModel(ThematicRoleError,PlotRoles):
 
-    def __init__(self,corpus='462',subset=range(0,462),reservoir_size= 1000,input_dim=50,
-                 spectral_radius=1.9, input_scaling= 2.3, bias_scaling=0,leak_rate=0.1,
+    def __init__(self,corpus='462',subset=range(0,462),reservoir_size= 1000,input_dim=50,save_predictions=False,
+                 spectral_radius=1.9, input_scaling= 2.3, bias_scaling=0,leak_rate=0.1,plot_activations=False,
                  ridge = 1e-6, _instance=0, n_folds = 0, seed=2, learning_mode='SFL', verbose=True):
 
                  self.COPRUS_W2V_MODEL_DICT='data/corpus_word_vectors/corpus-word-vectors-'+str(input_dim)+'dim.pkl'
@@ -44,6 +48,8 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
                  self._instance=_instance
                  self.corpus=corpus
                  self.verbose=verbose
+                 self.save_predictions=save_predictions,
+                 self.plot_activations=plot_activations
 
                  if learning_mode=='SFL':
                     self.teaching_start='<end>'
@@ -73,7 +79,7 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
                  self.sentences_len=[len(sent) for sent in self.sentences]
                  self.max_sent_len=max(self.sentences_len) #calculate max sentence length
                  self.sentences_offsets=[self.max_sent_len - sent_len for sent_len in self.sentences_len]
-                 self.X_data,self.Y_data=self.__generate_input_data() # generate input data for ESN
+                 self.X_data,self.Y_data=self.__generate_training_data() # generate input data for ESN
 
     def __load_corpus(self,corpus_size='462',subset=range(0,462)):
         file_name='data/corpus_'+str(corpus_size)+'_parsed.txt'
@@ -108,7 +114,7 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
         """
         sentence_matrix=mdp.numx.zeros((self.sentences_len[sent_index],self.input_dim))
         for idx,word in enumerate(tokenized_sentence):
-            sentence_matrix[idx]=self.w2v_model[word.lower()]
+            sentence_matrix[idx]=self.get_word_vector(word.lower())
         return sentence_matrix
 
     def __generate_label_matrix(self,tokenized_labels,sent_index,start='<start>'):
@@ -121,7 +127,7 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
             returns:
                 a matrix of dimension (sentence length * len(self.unique_labels))
         """
-        teaching_start= self.sentences_len[sent_index]-2 if start=='<end>' else 1
+        teaching_start= self.sentences_len[sent_index]-3 if start=='<end>' else 1
 
         # activate only the labels which are present in the sentence
         binary_label_array=mdp.numx.zeros((self.sentences_len[sent_index], len(self.unique_labels)))
@@ -130,24 +136,40 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
             binary_label_array[teaching_start:,self.unique_labels.index(lbl)]=1
         return binary_label_array
 
-    def __generate_input_data(self):
+    def generate_x_data(self,sentences):
         '''
-            Generate the sequences for each sentences and labels to be used as input and output in ESN
+            sentence: list of list of tokenized sentences
             returns:
                 x_data: create a list of sentence arrays where each array corresponds to a sentence and have shape (no of words,word2vec vector dimension)
+        '''
+        x_data=[self.__generate_sentence_matrix(sentence,sent_index) for sent_index,sentence in enumerate(sentences)]
+        return x_data
+
+    def __generate_y_data(self,labels):
+        '''
+            labels: list of list of labels for training sentences
+            returns:
                 y_data: create a list of labels array for the corresponding sentence of dimensions (no of words, len of unique_labels)
+        '''
+        y_data=[self.__generate_label_matrix(label,sent_index,start=self.teaching_start) for sent_index,label in enumerate(labels)]
+        return y_data
+
+    def __generate_training_data(self):
+        '''
+            Generate the sequences for each sentences and labels to be used as input and output in ESN
+
         '''
 
         # Check if the w2v converted data format of raw sentence is available in the pkl file if yes then read from pickle file
         # else load word2vec model and generate a pickle file for further loading
 
-        with open(self.COPRUS_W2V_MODEL_DICT,'r') as f:
+        '''with open(self.COPRUS_W2V_MODEL_DICT,'r') as f:
             print 'Please Wait!! Loading data from file...'
-            self.w2v_model=pickle.load(f) # data pickled as list where first element is sentences and second element is corresponding labels
-            print 'Data Loaded Successfully.'
+            self.w2v_model=pickle.load(f)
+            print 'Data Loaded Successfully.'''
 
-        x_data=[self.__generate_sentence_matrix(sentence,sent_index) for sent_index,sentence in enumerate(self.sentences)]
-        y_data=[self.__generate_label_matrix(label,sent_index,start=self.teaching_start) for sent_index,label in enumerate(self.labels)]
+        x_data=self.generate_x_data(sentences=self.sentences)
+        y_data=self.__generate_y_data(labels=self.labels)
 
         return (x_data, y_data)
 
@@ -177,8 +199,8 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
             returns:
                 A copy of flow trained of the training_sentences
         '''
-        f_copy=deepcopy(self.flow)# create a deep copy of initial flow for current train-test set
-        data=[training_sentences,zip(training_sentences,training_labels)]
+        f_copy=deepcopy(self.flow) # create a deep copy of initial flow for current train-test set
+        data=[training_sentences, zip(training_sentences,training_labels)]
         f_copy.train(data)
         return f_copy
 
@@ -190,6 +212,7 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
             return:
                 list of arrays where each array is activation of the test sentence
         '''
+
         test_sentences_activations=[]
         for sent_index in range(len(test_sentences)):
             test_sentences_activations.append(f_copy(test_sentences[sent_index]))
@@ -208,13 +231,17 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
 
         return train_indices, test_indices
 
-    def execute(self,verbose=False):
+    def execute(self,verbose=False,train_sent=None,test_sent=None):
 
         #instansiate the error and plot objects specified as parents class
         super(ThematicRoleModel,self).__init__()
 
         #obtain the training and test sentences by applying n_folds
-        train_indices, test_indices=self.apply_nfold()
+        if train_sent is None or test_sent is None:
+            train_indices, test_indices=self.apply_nfold()
+        else:
+            train_indices=[train_sent]
+            test_indices=[test_sent]
 
         # containers to receive mean rmse, meaning and sentence error for test sentences on all the folds
         all_mean_meaning_err = []
@@ -222,9 +249,9 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
         all_mean_rmse = []
 
         iteration = range(len(train_indices))
+
         #prepare a list of training and test sentences arrays based on train_indices and test_indices respectively
         for fold in iteration:
-
             #generating training sentences and labels data for each fold
             curr_train_sentences=[self.X_data[index] for index in train_indices[fold]]
             curr_train_labels=[self.Y_data[index] for index in train_indices[fold]]
@@ -244,11 +271,19 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
 
             #Testing:- collect activations of all test sentences in current fold in a list
             test_sentences_activations=self.testModel(f_copy,curr_test_sentences)
+            if self.save_predictions:
+                y_true_lbl,y_pred_lbl=self.decode_read_out_activations(y_pred=test_sentences_activations,y_true=curr_test_labels)
+                self.save_test_predictions(test_sentences_subset,y_true_lbl,y_pred_lbl,fold)
+
+            if self.n_folds==0:
+                # saved activations will be used to draw graphs
+                #self.save_test_activations(test_sentences_activations)
+                pass
+
             for sent_no,sent_activation in enumerate(test_sentences_activations):
                     #compute error method returns a tuple of errors
-                    errors=self.compute_error(sent_activation,curr_test_labels[sent_no],fold)
+                    errors=self.compute_error(sent_activation,curr_test_labels[sent_no])
                     meaning_error, sentence_error=errors
-                    #print 'Fold-%d :: ME- %f :: SE- %f'%(fold+1,meaning_error,sentence_error)
                     fold_meaning_error.append(meaning_error)
                     fold_sentence_error.append(sentence_error)
                     fold_rmse.append(rmse(sent_activation,curr_test_labels[sent_no]))
@@ -256,8 +291,8 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
             all_mean_rmse.append(mdp.numx.mean(fold_rmse))
             all_mean_meaning_err.append(mdp.numx.mean(fold_meaning_error))
             all_mean_sentence_err.append(mdp.numx.mean(fold_sentence_error))
-
-            #self.plot_outputs(test_sentences_activations,test_sentences_subset,plot_subtitle='')
+            if self.plot_activations:
+                self.plot_outputs(test_sentences_activations,test_sentences_subset,plot_subtitle='')
 
         if verbose:
             print '\n mean rmse::',mdp.numx.mean(all_mean_rmse)
@@ -270,6 +305,86 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
         return mdp.numx.mean(all_mean_rmse),mdp.numx.std(all_mean_rmse),\
                 mdp.numx.mean(all_mean_meaning_err),mdp.numx.std(all_mean_meaning_err), \
                 mdp.numx.mean(all_mean_sentence_err),mdp.numx.std(all_mean_sentence_err)
+
+    def save_test_predictions(self,test_sent_indices,y_true_lbl,y_pred_lbl,fold):
+
+        test_sent = [self.sentences[sent_index] for sent_index in test_sent_indices]
+
+        file_name='outputs/predictions/corpus-'+self.corpus+'.txt'
+        labels=np.array(self.unique_labels)
+        with open(file_name,'a') as f:
+            for sent_index, sent in enumerate(test_sent):
+                f.write(35*'#'+' '+str(fold+1)+'-fold '+ 35*'#' +'\n')
+                role_mask=self.Y_data[test_sent_indices[sent_index]]>0
+                role_mask=role_mask[1,:]
+                yt=labels[role_mask].tolist()
+                yp=y_pred_lbl[sent_index]
+                match= (yt==yp)
+                f.write('Sentence-'+str(self.subset[sent_index])+':'+' '.join(sent) + '\n')
+                f.write('True Roles :: '+' '.join(yt) +'\n')
+                f.write('Pred Roles :: '+' '.join(yp) +'\n')
+                f.write('CORRECT :: '+ str(match) +'\n')
+                f.write('\n')
+
+    def decode_read_out_activations(self,y_true, y_pred, threshold=0):
+        """
+            y_true: list of arrays of sentence true activations
+            y_pred: list of arrays of sentence pred activations
+            returns:
+                y_true_lbl: a list of list containing true roles for each senteces
+                y_pred_lbl: a list of list containing true roles for each senteces
+
+        """
+
+        labels=np.array(self.unique_labels)
+        y_true_lbl, y_pred_lbl=[],[]
+        for idx in range(len(y_true)):
+            sent_true_role, sent_pred_role=[],[]
+            (NVassoc_contributing_anwser, NVassoc_not_contributing_answer_but_present, NVassoc_not_present_in_sentence) = \
+                self._get_NVassoc_sliced(input_signal=y_pred[idx],target_signal= y_true[idx], verbose=False)
+
+            for nva_tuple in NVassoc_contributing_anwser + NVassoc_not_contributing_answer_but_present:
+                nva_index = nva_tuple[0]
+
+                nv_true = nva_tuple[2]
+                nv_true_max_act=keep_max_for_each_time_step_with_default(input_signal=nv_true)
+                nv_true_max_act=np.reshape(nv_true_max_act,3)
+                mask=(nv_true_max_act > threshold)
+                pred_lbl=labels[nva_index*3:nva_index*3+3]
+                sent_true_role+=pred_lbl[mask].tolist()
+
+                nv_pred=nva_tuple[1]
+                nv_pred_max_act=keep_max_for_each_time_step_with_default(input_signal=nv_pred)
+                nv_pred_max_act=np.reshape(nv_pred_max_act,3)
+                mask=(nv_pred_max_act > threshold)
+                pred_lbl=labels[nva_index*3:nva_index*3+3]
+                sent_pred_role+=pred_lbl[mask].tolist()
+
+            y_true_lbl.append(sent_true_role)
+            y_pred_lbl.append(sent_pred_role)
+        return y_true_lbl, y_pred_lbl
+
+    def save_test_activations(self,test_activations):
+        pkl_file='outputs/activations/corpus-'+str(self.corpus)+'.act'
+
+        output_data=[]
+        output_data.append(test_activations)
+        output_data.append(self.sentences)
+
+        with open(pkl_file, 'w') as fhandle:
+            pickle.dump(output_data, fhandle)
+            print 'Activation Dumped successfully.'
+
+    def get_word_vector(self,word):
+        """
+            This methods returns the word embedding for the input word
+        """
+
+        url='http://127.0.0.1:5000/word2vec/model?word='+word
+        response=requests.get(url).text
+        response=base64.decodestring(response)
+        word_vector=np.frombuffer(response,dtype=np.float32)
+        return word_vector
 
     def grid_search(self,output_csv_name=None,progress=True,verbose=False):
         '''
@@ -344,7 +459,6 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
                 w.writerow(row)
 
 if __name__=="__main__":
-
     '''
         learning mode can be:
             SFL : sentence final learning
@@ -358,22 +472,49 @@ if __name__=="__main__":
     sub_corpus_per=6 # percentage of sub-corpus to be selected out of 90582
     n_folds=2 # train and test set are of equal size, both the set are tested and trained once atleast
     sub_corpus_size=(sub_corpus_per*90582)/100 #genrate a sub-corpus randomly
-    subset=random.sample(range(0,90582),sub_corpus_size)'''
+    subset=random.sample(range(0,90582),sub_corpus_size)
+    iss= 2.6  # 2.9 for SFL
+    sr=  1.8  # 1.8 for SFL
+    lr=  0.11 # 0.12 for SFL
+    '''
 
     #************************** Corpus 462 ************************************
     corpus='462'
     sub_corpus_per=100
     subset=range(0,462)
     n_folds=10
+    iss= 2.5 #2.5 for SCL # 2.9 for SFL
+    sr= 2.4 #2.4  for SCL # 2.6 for SFL
+    lr= 0.08 #0.07 for SCL # 0.12 for SFL
+
+    #************************** Corpus 462+45 ************************************
+    '''corpus='462_45'
+    sub_corpus_per=100
+    subset=range(0,462+45)
+    n_folds=0
+    iss= 3.4  # 3.8 for SFL
+    sr= 2.3   # 2.7 for SFL
+    lr= 0.06  # 0.08 for SFL'''
+
+    #************************** Corpus 45 ************************************
+    '''corpus='45'
+    sub_corpus_per=100
+    subset=range(15,41)
+    n_folds=-1
+    iss= 6.6  #  for SFL
+    sr= 2.1   #  for SFL
+    lr= 0.5  #  for SFL'''
 
     #******************* Initialize a Model ***********************************
 
-    model = ThematicRoleModel(corpus=corpus,input_dim=50,reservoir_size=1000,input_scaling=2.5,spectral_radius=1.8,
-                            leak_rate=0.12,ridge=1e-6,subset=subset,n_folds=n_folds,verbose=True,seed=2,learning_mode=learning_mode)
+    model = ThematicRoleModel(corpus=corpus,input_dim=50,reservoir_size=1000,input_scaling=iss,spectral_radius=sr,
+                            leak_rate=lr,ridge=1e-6,subset=subset,n_folds=n_folds,verbose=True,seed=2,
+                            plot_activations=False,save_predictions=False,learning_mode=learning_mode)
     model.initialize_esn()
 
-    #******************* Execute a Model with multiple Reservoir ***********************************
-    model_instances=5 # No. of instances of reservoir
+    #******************* Execute a Model with multiple Reservoir instances ***********************************
+
+    model_instances=10 # No. of instances of reservoir
 
     if model_instances > 1:
         # Name of file where to save the execution results
@@ -398,6 +539,8 @@ if __name__=="__main__":
     else:
         model.execute(verbose=True)
 
-    #model.grid_search(output_csv_name=out_csv)
+    #model.grid_search()
+    #model.flow.save('outputs/flow-'+corpus+'.flow')
+
     end_time = time.time()
     print '\nTotal execution time : %s min '%((end_time-start_time)/60)

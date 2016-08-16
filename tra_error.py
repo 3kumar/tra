@@ -11,7 +11,6 @@ def keep_max_for_each_time_step_with_default(input_signal, default_min_value=-1)
     # keep only the maximum in each line / for each time step, rest is 0
     return (input_signal >= m_mat)*input_signal + (input_signal < m_mat)*default_min_value
 
-
 def threshold_and_take_max_before_error(input_signal, target_signal, error_measure, thresh, default_min_value=-1):
     """
     First keep only the maximum for each line (i.e. keep the maximum for each time step)
@@ -28,7 +27,6 @@ def threshold_and_take_max_before_error(input_signal, target_signal, error_measu
 
     input_signal_max = keep_max_for_each_time_step_with_default(input_signal, default_min_value=default_min_value)
     return error_measure(input_signal_max>thresh, target_signal>thresh)
-
 
 class ThematicRoleError(object):
     """
@@ -89,23 +87,8 @@ class ThematicRoleError(object):
         """
         return max([len(x) for x in self.labels])
 
-    def write_outputs(self,nva_tuples,fold):
-        out_csv='outputs/activations/activations-'+str(fold+1)+'fold.csv'
-        with open(out_csv,'wb+') as csv_file:
-                w=csv.writer(csv_file,delimiter=';')
-                csv_header=['N-V Assoc','Agent', 'Object','Recepient']
-                w.writerow(csv_header)
-                w.writerow(4*[''])
-                for nva_tuple in nva_tuples:
-                    nv=self.nv_pairs[nva_tuple[0]]
-                    nv=nv[0]+'-'+nv[1]
-                    row1=[nv]+list(nva_tuple[1])
-                    row2=[nv]+list(nva_tuple[2])
-                    w.writerow(row1)
-                    w.writerow(row2)
-                    w.writerow(4*[''])
 
-    def _get_NVassoc_sliced(self, input_signal, target_signal,fold, verbose=False):
+    def _get_NVassoc_sliced(self, input_signal, target_signal, verbose=False):
         """
         Output:
             (NVassoc_admiting_anwser, NVassoc_not_present_in_sent)
@@ -173,10 +156,25 @@ class ThematicRoleError(object):
         if (len(NVassoc_contributing_anwser)+len(NVassoc_not_contributing_answer_but_present)+len(NVassoc_not_present_in_sentence)) != len(self.nv_pairs):
             raise Exception, "The number of Noun-Verb association is not correct. Should be "+str(len(self.nv_pairs))
 
-        #self.write_outputs(NVassoc_contributing_anwser+NVassoc_not_contributing_answer,fold)
         return (NVassoc_contributing_anwser, NVassoc_not_contributing_answer_but_present, NVassoc_not_present_in_sentence)
 
-    def compute_error(self, input_signal, target_signal,fold):
+    def write_outputs(self,nva_tuples,fold):
+        out_csv='outputs/activations/corpus-'+self.corpus+'-activations.csv'
+        csv_header=['Sent No.','N-V Association','Agent', 'Object','Recepient']
+        with open(out_csv,'wb+') as csv_file:
+                w=csv.Dictwriter(csv_file,delimiter=';',fieldnames=csv_header)
+                w.writerow(csv_header)
+                w.writerow([])
+                for nva_tuple in nva_tuples:
+                    nv=self.nv_pairs[nva_tuple[0]]
+                    nv=nv[0]+'-'+nv[1]
+                    row1=[nv]+list(nva_tuple[1])
+                    row2=[nv]+list(nva_tuple[2])
+                    w.writerow(row1)
+                    w.writerow(row2)
+                    w.writerow(4*[''])
+
+    def compute_error(self, input_signal, target_signal):
         """
         Inputs:
             input_signal: readout activity of ESN for a sentence
@@ -188,9 +186,9 @@ class ThematicRoleError(object):
         """
 
         ## initialization
-        perf_asso_adm_answ = [] #performance of NVa admiting answer
+        perf_asso_adm_answ = [] # performance of NVa admitting answer
         (NVassoc_contributing_anwser, NVassoc_not_contributing_answer_but_present, NVassoc_not_present_in_sentence) = \
-            self._get_NVassoc_sliced(input_signal, target_signal,fold,verbose=False)
+            self._get_NVassoc_sliced(input_signal, target_signal, verbose=False)
 
         if len(NVassoc_contributing_anwser)==0 and len(NVassoc_not_contributing_answer_but_present)==0:
             return 0, 0
