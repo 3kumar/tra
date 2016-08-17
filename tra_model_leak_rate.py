@@ -48,7 +48,7 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
                  self._instance=_instance
                  self.corpus=corpus
                  self.verbose=verbose
-                 self.save_predictions=save_predictions,
+                 self.save_predictions=save_predictions
                  self.plot_activations=plot_activations
 
                  if learning_mode=='SFL':
@@ -219,8 +219,11 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
         return test_sentences_activations
 
     def apply_nfold(self):
-        # Split the data into training and test data depending on the n_folds
-        # train_indices,test_indices are list of arrays containg indicies for training and testing correponding to folds
+        """
+        Split the data into training and test data depending on the n_folds
+        return:
+            train_indices , test_indices: list of arrays containg indicies for training and testing correponding to folds
+        """
         if self.n_folds==0 or self.n_folds==1 or self.n_folds is None:
              train_indices=[range(len(self.sentences))] # train on all sentences
              test_indices=train_indices
@@ -231,17 +234,17 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
 
         return train_indices, test_indices
 
-    def execute(self,verbose=False,train_sent=None,test_sent=None):
+    def execute(self,verbose=False,train_sent_indices=None,test_sent_indices=None):
 
         #instansiate the error and plot objects specified as parents class
         super(ThematicRoleModel,self).__init__()
 
         #obtain the training and test sentences by applying n_folds
-        if train_sent is None or test_sent is None:
+        if train_sent_indices is None or test_sent_indices is None:
             train_indices, test_indices=self.apply_nfold()
         else:
-            train_indices=[train_sent]
-            test_indices=[test_sent]
+            train_indices=train_sent_indices
+            test_indices=test_sent_indices
 
         # containers to receive mean rmse, meaning and sentence error for test sentences on all the folds
         all_mean_meaning_err = []
@@ -485,9 +488,9 @@ if __name__=="__main__":
     sub_corpus_per=100
     subset=range(0,462)
     n_folds=10
-    iss= 2.5 #2.5 for SCL # 2.9 for SFL
+    iss= 2.5 #2.5 for SCL # 2.7 for SFL
     sr= 2.4 #2.4  for SCL # 2.6 for SFL
-    lr= 0.08 #0.07 for SCL # 0.12 for SFL
+    lr= 0.07 #0.07 for SCL # 0.12 for SFL
 
     #************************** Corpus 462+45 ************************************
     '''corpus='462_45'
@@ -528,14 +531,14 @@ if __name__=="__main__":
                      str(model.ridge)+'ridge-'+\
                      str(model.input_dim)+'w2vdim-'+learning_mode+''+\
                      ct+'.csv'
-
+        train_indices,test_indices=model.apply_nfold()
         with open(out_csv,'wb+') as csv_file:
             w=csv.writer(csv_file, delimiter=';')
             csv_header=['Instance','RMSE','std. RMSE','Meaning_Error','std. Meaning_Error', 'Sentence_Error','std. Sentence_Error']
             w.writerow(csv_header)
             for instance in range(model_instances):
                 print "***************** Instance: "+str(instance+1)+"***********************"
-                rmse_error,std_rmse,me,std_me,se,std_se= model.execute(verbose=True)
+                rmse_error,std_rmse,me,std_me,se,std_se= model.execute(verbose=True,train_sent_indices=train_indices,test_sent_indices=test_indices)
                 row=[instance+1,rmse_error,std_rmse, me, std_me,se,std_se]
                 w.writerow(row)
     else:
