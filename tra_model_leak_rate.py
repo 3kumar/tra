@@ -487,7 +487,7 @@ if __name__=="__main__":
     corpus='462'
     sub_corpus_per=100
     subset=range(0,462)
-    n_folds=10
+    n_folds=0
     iss= 2.5 #2.5 for SCL # 2.7 for SFL
     sr= 2.4 #2.4  for SCL # 2.6 for SFL
     lr= 0.07 #0.07 for SCL # 0.12 for SFL
@@ -519,7 +519,7 @@ if __name__=="__main__":
 
     #******************* Execute a Model with multiple Reservoir instances ***********************************
 
-    model_instances=10 # No. of instances of reservoir
+    model_instances=1 # No. of instances of reservoir
 
     if model_instances > 1:
         # Name of file where to save the execution results
@@ -531,6 +531,7 @@ if __name__=="__main__":
                      str(model.ridge)+'ridge-'+\
                      str(model.input_dim)+'w2vdim-'+learning_mode+''+\
                      ct+'.csv'
+
         train_indices,test_indices=model.apply_nfold()
         with open(out_csv,'wb+') as csv_file:
             w=csv.writer(csv_file, delimiter=';')
@@ -538,6 +539,10 @@ if __name__=="__main__":
             w.writerow(csv_header)
             for instance in range(model_instances):
                 print "***************** Instance: "+str(instance+1)+"***********************"
+                # re-initialize esn
+                model.initialize_esn()
+
+                #execute the model
                 rmse_error,std_rmse,me,std_me,se,std_se= model.execute(verbose=True,train_sent_indices=train_indices,test_sent_indices=test_indices)
                 row=[instance+1,rmse_error,std_rmse, me, std_me,se,std_se]
                 w.writerow(row)

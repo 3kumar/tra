@@ -23,7 +23,7 @@ class TRA_Plotting(object):
     def __init__(self,csv_file_name=None):
 
         if csv_file_name is None:
-            csv_file='../outputs/corpus462/tra-462-1000res-10folds-1e-06ridge-50w2vdim-start06-07_13:10.csv'
+            csv_file='../outputs/corpus462/start/tra-462-1000res-10folds-1e-06ridge-50w2vdim-start22-07_15:47.csv'
         else:
             csv_file=csv_file_name
 
@@ -95,6 +95,7 @@ class TRA_Plotting(object):
              ax.set_xticklabels(xtl)
              ax.set_yticklabels(ytl)
         fig.colorbar(im)
+        plt.tight_layout()
         plt.show()
 
 if __name__=='__main__':
