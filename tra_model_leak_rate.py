@@ -15,6 +15,7 @@ from Oger.nodes import LeakyReservoirNode
 from Oger.evaluation import n_fold_random,leave_one_out
 from Oger.utils import rmse
 from copy import deepcopy
+from random import shuffle
 import random
 from tra_error import ThematicRoleError,keep_max_for_each_time_step_with_default
 from reservoir_weights import generate_sparse_w, generate_sparse_w_in
@@ -398,22 +399,21 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
         '''
         if output_csv_name is None:
             ct=time.strftime("%d-%m_%H:%M")
-            out_csv='outputs/tra-'+str(self.corpus)+'-'+\
+            out_csv='outputs/reservoir_size_shuffle-tra-'+str(self.corpus)+'-'+\
                      str(self.reservoir_size)+'res-'+\
                      str(self.n_folds)+'folds-'+\
                      str(self.ridge)+'ridge-'+\
                      str(self.input_dim)+'w2vdim-'+\
-                     ct+'.csv'
+                     self.teaching_start+'-'+ct+'.csv'
         else:
             out_csv=output_csv_name
 
         #dictionary of parameter to do grid search on
         #Note the parameter key should match the name with variable of this class
         gridsearch_parameters = {
-                                'spectral_radius':mdp.numx.arange(1.5, 2.6, 0.1),
-                                'input_scaling':mdp.numx.arange(2.0, 3.1, 0.1),
-                                'leak_rate':mdp.numx.arange(0.01,0.11,0.02)
-                                }
+                            'reservoir_size':np.concatenate((np.linspace(90,1300,6,endpoint=False, dtype='int'),np.linspace(1776,6200,4,endpoint=False, dtype='int')))
+                                
+                            }
         parameter_ranges = []
         parameters_lst = []
 
@@ -470,27 +470,27 @@ if __name__=="__main__":
             SCL : sentence continous learning
     '''
     start_time = time.time()
-    learning_mode='SCL' # 'SCL'
+    learning_mode='SFL' # 'SCL'
 
     #*************************** Corpus 90k ***********************************
-    '''corpus='90k'
-    sub_corpus_per=6 # percentage of sub-corpus to be selected out of 90582
+    corpus='90k'
+    sub_corpus_per=25 # percentage of sub-corpus to be selected out of 90582
     n_folds=2 # train and test set are of equal size, both the set are tested and trained once atleast
     sub_corpus_size=(sub_corpus_per*90582)/100 #genrate a sub-corpus randomly
     subset=random.sample(range(0,90582),sub_corpus_size)
-    iss= 2.6  # 2.9 for SFL
-    sr=  1.8  # 1.8 for SFL
-    lr=  0.11 # 0.12 for SFL
-    '''
+    iss= 2.3  # 2.3 for SFL
+    sr=  2.2  # 2.2 for SFL
+    lr=  0.13 # 0.13 for SFL
+    
 
     #************************** Corpus 462 ************************************
-    corpus='462'
+    '''corpus='462'
     sub_corpus_per=100
     subset=range(0,462)
-    n_folds=0
-    iss= 2.5 #2.5 for SCL # 2.7 for SFL
-    sr= 2.4 #2.4  for SCL # 2.6 for SFL
-    lr= 0.07 #0.07 for SCL # 0.12 for SFL
+    n_folds=10
+    iss= 2.3 #2.5 for SCL # 2.3 for SFL
+    sr= 2.2 #2.4  for SCL # 2.2 for SFL
+    lr= 0.13 #0.07 for SCL # 0.13 for SFL'''
 
     #************************** Corpus 462+45 ************************************
     '''corpus='462_45'
@@ -512,19 +512,19 @@ if __name__=="__main__":
 
     #******************* Initialize a Model ***********************************
 
-    model = ThematicRoleModel(corpus=corpus,input_dim=50,reservoir_size=1000,input_scaling=iss,spectral_radius=sr,
+    model = ThematicRoleModel(corpus=corpus,input_dim=50,reservoir_size=3000,input_scaling=iss,spectral_radius=sr,
                             leak_rate=lr,ridge=1e-6,subset=subset,n_folds=n_folds,verbose=True,seed=2,
                             plot_activations=False,save_predictions=False,learning_mode=learning_mode)
     model.initialize_esn()
 
     #******************* Execute a Model with multiple Reservoir instances ***********************************
 
-    model_instances=1 # No. of instances of reservoir
+    model_instances=5 # No. of instances of reservoir
 
     if model_instances > 1:
         # Name of file where to save the execution results
         ct=time.strftime("%d-%m_%H:%M")
-        out_csv='outputs/'+str(model_instances)+'instances-tra-'+str(model.corpus)+'-'+\
+        out_csv='outputs/shuffle-'+str(model_instances)+'instances-tra-'+str(model.corpus)+'-'+\
                      str(sub_corpus_per)+'subcorpus-'+\
                      str(model.reservoir_size)+'res-'+\
                      str(model.n_folds)+'folds-'+\
@@ -547,6 +547,7 @@ if __name__=="__main__":
                 row=[instance+1,rmse_error,std_rmse, me, std_me,se,std_se]
                 w.writerow(row)
     else:
+	#pass
         model.execute(verbose=True)
 
     #model.grid_search()
