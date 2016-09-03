@@ -5,7 +5,7 @@ import matplotlib.pyplot
 class PlotRoles(object):
 
     def __init__(self,save_pdf=True,nr_nouns=4, nr_verbs=2,file_name="plots/activations-plot",
-                window=0, verbose=False, y_lim=[-2.0,2.0], no_ext_fct=True):
+                window=0, verbose=False, y_lim=[-2.5,2.5], no_ext_fct=True):
 
             super(PlotRoles,self).__init__()
 
@@ -76,3 +76,42 @@ class PlotRoles(object):
             pp.close()
         print "*** Plotting finished ***"
 
+    def plot_array_in_file(self,root_file_name, array_, data_subset=None, titles_subset=None, plot_slice=None, title="", subtitle="", legend_=None):
+        """
+
+        inputs:
+            array_: is the array or matrix to plot
+            data_subset: correspond to the subset of the whole data that is treated. array_ is corresponds to this subset. /
+                array_ and subset have to have the same length
+            titles_subset: list of subtitles
+            plot_slice: slice determining the element of array_ that will be plotted.
+        """
+        import mdp
+        if data_subset is None:
+            data_subset = range(len(array_))
+        if titles_subset is None:
+            titles_subset = ['' for _ in range(len(data_subset))]
+            nl_titles_sub = ''
+        else:
+            nl_titles_sub = '\n'
+        if array_==[] or array_==mdp.numx.array([]):
+            import warnings
+            warnings.warn("Warning: array empty. Could not be plotted. Title:"+str(title))
+            return
+        if plot_slice is None:
+            plot_slice = slice(0,len(data_subset))
+        else:
+            if (plot_slice.stop-1) > len(data_subset):
+                raise Exception, "The last element of the slice is out of the subset."
+            subtitle = subtitle+"_slice-"+str(plot_slice.start)+"-"+str(plot_slice.stop)+"-"+str(plot_slice.step)
+        ppIS = PdfPages(str(root_file_name)+str(title)+'.pdf')
+
+        for i in range(plot_slice.stop)[plot_slice]:
+            pl.figure()
+            pl.suptitle(title+" "+str(titles_subset[i])+nl_titles_sub+" - seq "+str(data_subset[i])+"\n"+subtitle)
+            pl.plot(array_[i])
+            if legend_ is not None:
+                pl.legend(legend_)
+            ppIS.savefig()
+            pl.close()
+        ppIS.close()

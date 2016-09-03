@@ -13,9 +13,9 @@ import base64
 import numpy as np
 from Oger.nodes import LeakyReservoirNode
 from Oger.evaluation import n_fold_random,leave_one_out
-from Oger.utils import rmse
+from Oger.utils import rmse,make_inspectable
 from copy import deepcopy
-import random
+from random import shuffle
 from tra_error import ThematicRoleError,keep_max_for_each_time_step_with_default
 from reservoir_weights import generate_sparse_w, generate_sparse_w_in
 #from random_res_weights import generate_internal_weights,generate_input_weights
@@ -30,8 +30,8 @@ except:
 class ThematicRoleModel(ThematicRoleError,PlotRoles):
 
     def __init__(self,corpus='462',subset=range(0,462),reservoir_size= 1000,input_dim=50,save_predictions=False,
-                 spectral_radius=1.9, input_scaling= 2.3, bias_scaling=0,leak_rate=0.1,plot_activations=False,
-                 ridge = 1e-6, _instance=0, n_folds = 0, seed=2, learning_mode='SFL', verbose=True):
+                 spectral_radius=2.5, input_scaling= 2.4, bias_scaling=0,leak_rate=0.07,plot_activations=False,
+                 ridge = 1e-6, _instance=1, n_folds = 0, seed=2, learning_mode='SCL', verbose=True):
 
                  self.COPRUS_W2V_MODEL_DICT='data/corpus_word_vectors/corpus-word-vectors-'+str(input_dim)+'dim.pkl'
 
@@ -184,12 +184,13 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
         #w_bias=generate_input_weights(reservoir_size=1,input_dim=self.reservoir_size,input_scaling=self.bias_scaling,seed=self.seed,proba=0.3)
 
         ## Instansiate reservoir node, read-out and flow
-        reservoir = LeakyReservoirNode(nonlin_func=mdp.numx.tanh,input_dim=self.input_dim,output_dim=self.reservoir_size,
+        self.reservoir = LeakyReservoirNode(nonlin_func=mdp.numx.tanh,input_dim=self.input_dim,output_dim=self.reservoir_size,
                                             leak_rate=self.leak_rate,w=w_r,w_in=w_in,w_bias=w_bias,_instance=self._instance)
 
-        read_out = RidgeRegressionNode(ridge_param=self.ridge, use_pinv=True, with_bias=True)
+        self.read_out = RidgeRegressionNode(ridge_param=self.ridge, use_pinv=True, with_bias=True)
         #read_out = RidgeRegressionNode(ridge_param=self.ridge,other_error_measure= rmse,cross_validate_function=n_fold_random,n_folds=10,verbose=self.verbose)
-        self.flow = mdp.Flow([reservoir, read_out],verbose=self.verbose)
+        self.flow = mdp.Flow([self.reservoir, self.read_out],verbose=self.verbose)
+        make_inspectable(LeakyReservoirNode)
 
     def trainModel(self,training_sentences,training_labels):
         '''
@@ -200,11 +201,13 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
                 A copy of flow trained of the training_sentences
         '''
         f_copy=deepcopy(self.flow) # create a deep copy of initial flow for current train-test set
+        if self.n_folds==0:
+            f_copy=self.flow
         data=[training_sentences, zip(training_sentences,training_labels)]
         f_copy.train(data)
         return f_copy
 
-    def testModel(self,f_copy,test_sentences):
+    def testModel(self,f_copy,test_sentences,fold=0):
         '''
             f_copy: A copy of trained flow
             test_sentences= a list of senteces for testing
@@ -214,8 +217,10 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
         '''
 
         test_sentences_activations=[]
+
         for sent_index in range(len(test_sentences)):
             test_sentences_activations.append(f_copy(test_sentences[sent_index]))
+
         return test_sentences_activations
 
     def apply_nfold(self):
@@ -273,20 +278,20 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
             fold_rmse=[]
 
             #Testing:- collect activations of all test sentences in current fold in a list
-            test_sentences_activations=self.testModel(f_copy,curr_test_sentences)
+            test_sentences_activations=self.testModel(f_copy,curr_test_sentences,fold=fold)
             if self.save_predictions:
                 y_true_lbl,y_pred_lbl=self.decode_read_out_activations(y_pred=test_sentences_activations,y_true=curr_test_labels)
                 self.save_test_predictions(test_sentences_subset,y_true_lbl,y_pred_lbl,fold)
 
             if self.n_folds==0:
                 # saved activations will be used to draw graphs
-                #self.save_test_activations(test_sentences_activations)
-                pass
+                self.save_test_activations(test_sentences_activations)
+                #pass
 
             for sent_no,sent_activation in enumerate(test_sentences_activations):
                     #compute error method returns a tuple of errors
                     errors=self.compute_error(sent_activation,curr_test_labels[sent_no])
-                    meaning_error, sentence_error=errors
+                    meaning_error, sentence_error= errors
                     fold_meaning_error.append(meaning_error)
                     fold_sentence_error.append(sentence_error)
                     fold_rmse.append(rmse(sent_activation,curr_test_labels[sent_no]))
@@ -410,9 +415,8 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
         #dictionary of parameter to do grid search on
         #Note the parameter key should match the name with variable of this class
         gridsearch_parameters = {
-                                'spectral_radius':mdp.numx.arange(1.5, 2.6, 0.1),
-                                'input_scaling':mdp.numx.arange(2.0, 3.1, 0.1),
-                                'leak_rate':mdp.numx.arange(0.01,0.11,0.02)
+                                'seed':range(self._instance),
+                                'reservoir_size':[90,291,493,695,896,1098,1776,2882,3988,5094]
                                 }
         parameter_ranges = []
         parameters_lst = []
@@ -487,21 +491,21 @@ if __name__=="__main__":
     corpus='462'
     sub_corpus_per=100
     subset=range(0,462)
-    n_folds=0
-    iss= 2.5 #2.5 for SCL # 2.7 for SFL
-    sr= 2.4 #2.4  for SCL # 2.6 for SFL
-    lr= 0.07 #0.07 for SCL # 0.12 for SFL
+    n_folds=10
+    iss= 2.5 #2.5 for SCL # 2.3 for SFL
+    sr= 2.4 #2.4  for SCL # 2.2 for SFL
+    lr= 0.07 #0.07 for SCL # 0.13 for SFL
 
-    #************************** Corpus 462+45 ************************************
+    #************************** Corpus 462+45 *********************************
     '''corpus='462_45'
     sub_corpus_per=100
     subset=range(0,462+45)
     n_folds=0
-    iss= 3.4  # 3.8 for SFL
-    sr= 2.3   # 2.7 for SFL
-    lr= 0.06  # 0.08 for SFL'''
+    iss= 2.5  # 3.8 for SFL
+    sr= 2.4   # 2.7 for SFL
+    lr= 0.07  # 0.08 for SFL'''
 
-    #************************** Corpus 45 ************************************
+    #************************** Corpus 45 *************************************
     '''corpus='45'
     sub_corpus_per=100
     subset=range(15,41)
@@ -513,44 +517,13 @@ if __name__=="__main__":
     #******************* Initialize a Model ***********************************
 
     model = ThematicRoleModel(corpus=corpus,input_dim=50,reservoir_size=1000,input_scaling=iss,spectral_radius=sr,
-                            leak_rate=lr,ridge=1e-6,subset=subset,n_folds=n_folds,verbose=True,seed=2,
+                            leak_rate=lr,ridge=1e-6,subset=subset,n_folds=n_folds,verbose=True,seed=2,_instance=5,
                             plot_activations=False,save_predictions=False,learning_mode=learning_mode)
     model.initialize_esn()
 
     #******************* Execute a Model with multiple Reservoir instances ***********************************
-
-    model_instances=1 # No. of instances of reservoir
-
-    if model_instances > 1:
-        # Name of file where to save the execution results
-        ct=time.strftime("%d-%m_%H:%M")
-        out_csv='outputs/'+str(model_instances)+'instances-tra-'+str(model.corpus)+'-'+\
-                     str(sub_corpus_per)+'subcorpus-'+\
-                     str(model.reservoir_size)+'res-'+\
-                     str(model.n_folds)+'folds-'+\
-                     str(model.ridge)+'ridge-'+\
-                     str(model.input_dim)+'w2vdim-'+learning_mode+''+\
-                     ct+'.csv'
-
-        train_indices,test_indices=model.apply_nfold()
-        with open(out_csv,'wb+') as csv_file:
-            w=csv.writer(csv_file, delimiter=';')
-            csv_header=['Instance','RMSE','std. RMSE','Meaning_Error','std. Meaning_Error', 'Sentence_Error','std. Sentence_Error']
-            w.writerow(csv_header)
-            for instance in range(model_instances):
-                print "***************** Instance: "+str(instance+1)+"***********************"
-                # re-initialize esn
-                model.initialize_esn()
-
-                #execute the model
-                rmse_error,std_rmse,me,std_me,se,std_se= model.execute(verbose=True,train_sent_indices=train_indices,test_sent_indices=test_indices)
-                row=[instance+1,rmse_error,std_rmse, me, std_me,se,std_se]
-                w.writerow(row)
-    else:
-        model.execute(verbose=True)
+    model.execute(verbose=True)
 
     #model.grid_search()
-    #model.flow.save('outputs/flow-'+corpus+'.flow')
-
     end_time = time.time()
     print '\nTotal execution time : %s min '%((end_time-start_time)/60)
