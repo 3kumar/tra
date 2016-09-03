@@ -16,6 +16,8 @@ from Oger.evaluation import n_fold_random,leave_one_out
 from Oger.utils import rmse,make_inspectable
 from copy import deepcopy
 from random import shuffle
+import random
+
 from tra_error import ThematicRoleError,keep_max_for_each_time_step_with_default
 from reservoir_weights import generate_sparse_w, generate_sparse_w_in
 #from random_res_weights import generate_internal_weights,generate_input_weights
@@ -403,12 +405,12 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
         '''
         if output_csv_name is None:
             ct=time.strftime("%d-%m_%H:%M")
-            out_csv='outputs/tra-'+str(self.corpus)+'-'+\
+            out_csv='outputs/reservoir_size_shuffle-tra-'+str(self.corpus)+'-'+\
                      str(self.reservoir_size)+'res-'+\
                      str(self.n_folds)+'folds-'+\
                      str(self.ridge)+'ridge-'+\
                      str(self.input_dim)+'w2vdim-'+\
-                     ct+'.csv'
+                     self.teaching_start+'-'+ct+'.csv'
         else:
             out_csv=output_csv_name
 
@@ -474,18 +476,18 @@ if __name__=="__main__":
             SCL : sentence continous learning
     '''
     start_time = time.time()
-    learning_mode='SCL' # 'SCL'
+    learning_mode='SFL' # 'SCL'
 
     #*************************** Corpus 90k ***********************************
-    '''corpus='90k'
-    sub_corpus_per=6 # percentage of sub-corpus to be selected out of 90582
+    corpus='90k'
+    sub_corpus_per=25 # percentage of sub-corpus to be selected out of 90582
     n_folds=2 # train and test set are of equal size, both the set are tested and trained once atleast
     sub_corpus_size=(sub_corpus_per*90582)/100 #genrate a sub-corpus randomly
     subset=random.sample(range(0,90582),sub_corpus_size)
-    iss= 2.6  # 2.9 for SFL
-    sr=  1.8  # 1.8 for SFL
-    lr=  0.11 # 0.12 for SFL
-    '''
+    iss= 2.3  # 2.3 for SFL
+    sr=  2.2  # 2.2 for SFL
+    lr=  0.13 # 0.13 for SFL
+
 
     #************************** Corpus 462 ************************************
     corpus='462'
@@ -523,7 +525,6 @@ if __name__=="__main__":
 
     #******************* Execute a Model with multiple Reservoir instances ***********************************
     model.execute(verbose=True)
-
     #model.grid_search()
     end_time = time.time()
     print '\nTotal execution time : %s min '%((end_time-start_time)/60)
