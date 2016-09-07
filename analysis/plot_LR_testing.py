@@ -23,7 +23,7 @@ class TRA_Plotting(object):
     def __init__(self,csv_file_name=None):
 
         if csv_file_name is None:
-            csv_file='/home/fox/tra-462-1000res-10folds-1e-06ridge-50w2vdim-17-08_16:00.csv'
+            csv_file='../outputs/corpus462/start/tra-462-1000res-10folds-1e-06ridge-50w2vdim-start22-07_15:47.csv'
         else:
             csv_file=csv_file_name
 
@@ -53,15 +53,15 @@ class TRA_Plotting(object):
         '''
 
         # this will be used later to form grids of SR * LR for all input scaling
-        #param_space_dim=[len(self.iss),len(self.sr),len(self.lr)]
-        param_space_dim=[len(self.lr),len(self.sr),len(self.iss)]
+        param_space_dim=[len(self.iss),len(self.sr),len(self.lr)]
+        #param_space_dim=[len(self.lr),len(self.sr),len(self.iss)]
 
         #define ticks and lables for each axes
-        #xt=range(len(self.lr))
-        #xtl=list(self.lr)
+        xt=range(len(self.lr))
+        xtl=list(self.lr)
 
-        xt=range(len(self.iss))
-        xtl=list(self.iss)
+        #xt=range(len(self.iss))
+        #xtl=list(self.iss)
 
         yt=range(len(self.sr))
         ytl=list(self.sr)
@@ -70,7 +70,7 @@ class TRA_Plotting(object):
         #me=100*np.asarray(self.df_me["Meaning_Error"]).reshape(param_space_dim)
         me=100*np.asarray(self.df_se["Sentence_Error"]).reshape(param_space_dim)
 
-        fig=plt.figure(8)
+        fig=plt.figure(7)
         grid = ImageGrid(fig, 111,  # similar to subplot(111)
                              nrows_ncols=(4, 3),
                              direction="row",
@@ -86,7 +86,7 @@ class TRA_Plotting(object):
         # will zip errors wrt first columns of df so that we get grid for 2nd and 3rd axis
         i=0
         for ax, me in zip(grid, me):
-             ax.set_title('LR: '+str(self.lr[i]))
+             ax.set_title('ISS: '+str(self.iss[i]))
              i+=1
              im = ax.imshow(me,cmap = 'jet', interpolation='nearest', vmin=0, vmax=100,origin='lower', aspect='auto')
              ax.set_xticks(xt)
