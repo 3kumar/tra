@@ -398,7 +398,7 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
             word_vector=self.w2v_model[word]
         return word_vector
 
-    def grid_search(self,output_csv_name=None,progress=True,verbose=False):
+    def grid_search(self,search_parameters,output_csv_name=None,progress=True,verbose=False):
         '''
             this execute method does a grid search over reservoir parameters and log the errors in a csv file w.r.t to
             gridsearch parameters
@@ -416,10 +416,7 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
 
         #dictionary of parameter to do grid search on
         #Note the parameter key should match the name with variable of this class
-        gridsearch_parameters = {
-                                'seed':range(self._instance),
-                                'reservoir_size':[90,291,493,695,896,1098,1776,2882,3988,5094]
-                                }
+        gridsearch_parameters = search_parameters
         parameter_ranges = []
         parameters_lst = []
 
@@ -476,18 +473,17 @@ if __name__=="__main__":
             SCL : sentence continous learning
     '''
     start_time = time.time()
-    learning_mode='SFL' # 'SCL'
+    learning_mode='SCL' # 'SCL'
 
     #*************************** Corpus 90k ***********************************
-    corpus='90k'
+    '''corpus='90k'
     sub_corpus_per=25 # percentage of sub-corpus to be selected out of 90582
     n_folds=2 # train and test set are of equal size, both the set are tested and trained once atleast
     sub_corpus_size=(sub_corpus_per*90582)/100 #genrate a sub-corpus randomly
     subset=random.sample(range(0,90582),sub_corpus_size)
     iss= 2.3  # 2.3 for SFL
     sr=  2.2  # 2.2 for SFL
-    lr=  0.13 # 0.13 for SFL
-
+    lr=  0.13 # 0.13 for SFL'''
 
     #************************** Corpus 462 ************************************
     corpus='462'
@@ -519,12 +515,17 @@ if __name__=="__main__":
     #******************* Initialize a Model ***********************************
 
     model = ThematicRoleModel(corpus=corpus,input_dim=50,reservoir_size=1000,input_scaling=iss,spectral_radius=sr,
-                            leak_rate=lr,ridge=1e-6,subset=subset,n_folds=n_folds,verbose=True,seed=2,_instance=5,
+                            leak_rate=lr,ridge=1e-6,subset=subset,n_folds=n_folds,verbose=True,seed=3,_instance=1,
                             plot_activations=False,save_predictions=False,learning_mode=learning_mode)
     model.initialize_esn()
+    #model.execute(verbose=True)
 
-    #******************* Execute a Model with multiple Reservoir instances ***********************************
-    model.execute(verbose=True)
-    #model.grid_search()
+    # To run the multiple instance of the model set 'seed' parameter to range of instances, in grid_search_param dict and call the grid search method.
+    grid_search_params={
+            'seed':range(5)
+    }
+
+    model.grid_search(search_parameters=grid_search_params)
+
     end_time = time.time()
     print '\nTotal execution time : %s min '%((end_time-start_time)/60)
