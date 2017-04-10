@@ -1,0 +1,3000 @@
+################################### 1-fold ###################################
+Sentence-0:<start> given by the dog to the mouse was the cat that the girl was kissed by . <end>
+True Roles :: N1-A1 N2-R1 N3-O1 N3-A2 N4-O2
+Pred Roles :: N1-A1 N2-R1 N3-O1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-1:<start> the cat was given to the mouse by the dog that the girl was kissed by . <end>
+True Roles :: N1-O1 N2-R1 N3-A1 N3-A2 N4-O2
+Pred Roles :: N1-O1 N2-R1 N3-A1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-2:<start> john chased the dog . then it bit him . <end>
+True Roles :: N1-A1 N1-O2 N2-O1 N2-A2
+Pred Roles :: N1-R1 N1-O2 N2-O1 N2-A2
+CORRECT :: False
+
+################################### 1-fold ###################################
+Sentence-3:<start> to the mouse the dog that was kissed by the guy gives the cat . <end>
+True Roles :: N1-R2 N2-O1 N2-A2 N3-A1 N4-O2
+Pred Roles :: N1-R2 N2-O1 N2-A2 N3-A1 N4-O2
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-4:<start> it was on the head that john hit the ball . then it hurt him . <end>
+True Roles :: N1-R1 N2-A1 N2-O2 N3-O1 N3-A2
+Pred Roles :: N1-A1 N2-O1 N2-A2 N3-A1 N1-O2
+CORRECT :: False
+
+################################### 1-fold ###################################
+Sentence-5:<start> cut by the beaver that the guy kisses was the fish . <end>
+True Roles :: N1-A1 N1-O2 N2-A2 N3-O1
+Pred Roles :: N1-O1 N1-A2 N2-O2 N3-O1 N2-A1
+CORRECT :: False
+
+################################### 1-fold ###################################
+Sentence-6:<start> the cat was given to the mouse by the dog that the guy kisses . <end>
+True Roles :: N1-O1 N2-R1 N3-A1 N3-O2 N4-A2
+Pred Roles :: N1-O1 N2-R1 N3-A1 N3-O2 N4-A2
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-7:<start> the dog that kisses the girl gives to the mouse the cat . <end>
+True Roles :: N1-A1 N1-A2 N2-O1 N3-R2 N4-O2
+Pred Roles :: N1-A1 N1-A2 N2-O1 N3-R2 N4-O2
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-8:<start> the cat by the dog to the mouse that the girl was kissed by was given . <end>
+True Roles :: N1-O2 N2-A2 N3-A1 N3-R2 N4-O1
+Pred Roles :: N1-O2 N2-A2 N3-A1 N3-R2 N4-O1
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-9:<start> the cat by the dog that was kissed by the guy was given to the mouse . <end>
+True Roles :: N1-O2 N2-O1 N2-A2 N3-A1 N4-R2
+Pred Roles :: N1-O2 N2-O1 N2-A2 N3-A1 N4-R2
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-10:<start> give the cat that kisses the girl to the mouse , the dog did . <end>
+True Roles :: N1-O1 N1-A2 N2-O2 N3-R1 N4-A1
+Pred Roles :: N1-O1 N2-A2 N3-R1 N4-A1
+CORRECT :: False
+
+################################### 1-fold ###################################
+Sentence-11:<start> the cat by the dog to the mouse that the guy kisses was given . <end>
+True Roles :: N1-O2 N2-A2 N3-O1 N3-R2 N4-A1
+Pred Roles :: N1-O2 N2-A2 N3-O1 N3-R2 N4-A1
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-12:<start> give the cat to the mouse , the dog that thinks did . <end>
+True Roles :: N1-O1 N2-R1 N3-A1 N3-A2
+Pred Roles :: N1-O1 N2-R1 N3-A1 N2-A2
+CORRECT :: False
+
+################################### 1-fold ###################################
+Sentence-13:<start> the dog was chased by john . then it bit him . <end>
+True Roles :: N1-O1 N1-A2 N2-A1 N2-O2
+Pred Roles :: N1-R1 N1-A2 N2-O1 N2-A2
+CORRECT :: False
+
+################################### 1-fold ###################################
+Sentence-14:<start> given by the dog that the girl was kissed by was the cat to the mouse . <end>
+True Roles :: N1-A1 N1-A2 N2-O2 N3-O1 N4-R1
+Pred Roles :: N1-A1 N1-A2 N2-O2 N3-O1 N4-R1
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-15:<start> walking was the giraffe . <end>
+True Roles :: N1-A1
+Pred Roles :: N1-A1
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-16:<start> the dog gives the cat that was kissed by the guy to the mouse . <end>
+True Roles :: N1-A1 N2-O1 N2-O2 N3-A2 N4-R1
+Pred Roles :: N1-A1 N2-O1 N2-A2 N3-O2 N4-R1 N3-A1
+CORRECT :: False
+
+################################### 1-fold ###################################
+Sentence-17:<start> the boy caught the ball that was thrown by the man . <end>
+True Roles :: N1-A1 N2-O1 N2-O2 N3-A2
+Pred Roles :: N1-R1 N2-A1 N2-R2 N3-A2 N1-A2 N3-O1
+CORRECT :: False
+
+################################### 1-fold ###################################
+Sentence-18:<start> the cat to the mouse that the girl was kissed by by the dog was given . <end>
+True Roles :: N1-O2 N2-A1 N2-R2 N3-O1 N4-A2
+Pred Roles :: N1-O2 N2-A1 N2-R2 N3-O1 N4-A2
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-19:<start> the man took the ball that hit the glass . <end>
+True Roles :: N1-A1 N2-O1 N2-A2 N3-O2
+Pred Roles :: N1-A1 N2-O1 N2-A2 N3-O2 N1-O2 N3-A1
+CORRECT :: False
+
+################################### 1-fold ###################################
+Sentence-20:<start> the fish was cut by the beaver that the guy kisses . <end>
+True Roles :: N1-O1 N2-A1 N2-O2 N3-A2
+Pred Roles :: N1-O1 N2-A1 N2-O2 N3-A2
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-21:<start> the cat to the mouse that thinks by the dog was given . <end>
+True Roles :: N1-O2 N2-A1 N2-R2 N3-A2
+Pred Roles :: N1-O2 N2-A1 N2-R2 N3-A2
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-22:<start> the cat to the mouse that the guy kisses by the dog was given . <end>
+True Roles :: N1-O2 N2-O1 N2-R2 N3-A1 N4-A2
+Pred Roles :: N1-O2 N2-O1 N2-R2 N3-A1 N4-A2
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-23:<start> the cat was chased by john . <end>
+True Roles :: N1-O1 N2-A1
+Pred Roles :: N1-O1 N2-O1
+CORRECT :: False
+
+################################### 1-fold ###################################
+Sentence-24:<start> the fish that the guy kisses was cut by the beaver . <end>
+True Roles :: N1-O1 N1-O2 N2-A1 N3-A2
+Pred Roles :: N1-O1 N1-O2 N2-A1 N3-A2 N2-A2 N3-O1
+CORRECT :: False
+
+################################### 1-fold ###################################
+Sentence-25:<start> given to the mouse was the cat by the dog . <end>
+True Roles :: N1-R1 N2-O1 N3-A1
+Pred Roles :: N1-R1 N2-O1 N3-A1
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-26:<start> given was the cat by the dog to the mouse that the girl was kissed by . <end>
+True Roles :: N1-O1 N2-A1 N3-R1 N3-A2 N4-O2
+Pred Roles :: N1-O1 N2-A1 N3-R1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-27:<start> the cat to the mouse by the dog that kisses the girl was given . <end>
+True Roles :: N1-O2 N2-R2 N3-A1 N3-A2 N4-O1
+Pred Roles :: N1-O2 N2-R2 N3-A1 N3-A2 N4-O1
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-28:<start> the dog to the mouse gives the cat that thinks . <end>
+True Roles :: N1-A1 N2-R1 N3-O1 N3-A2
+Pred Roles :: N1-A1 N2-R1 N3-O1 N3-A2
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-29:<start> the dog that kisses the girl gives the cat to the mouse . <end>
+True Roles :: N1-A1 N1-A2 N2-O1 N3-O2 N4-R2
+Pred Roles :: N1-A1 N1-A2 N2-O1 N3-O2 N4-R2
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-30:<start> to the mouse was given the cat by the dog that was kissed by the guy . <end>
+True Roles :: N1-R1 N2-O1 N3-A1 N3-O2 N4-A2
+Pred Roles :: N1-R1 N2-O1 N3-A1 N3-O2 N4-A2
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-31:<start> to the mouse was given the cat that thinks by the dog . <end>
+True Roles :: N1-R1 N2-O1 N2-A2 N3-A1
+Pred Roles :: N1-R1 N2-O1 N2-A2 N3-A1
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-32:<start> given by the dog that kisses the girl was the cat to the mouse . <end>
+True Roles :: N1-A1 N1-A2 N2-O2 N3-O1 N4-R1
+Pred Roles :: N1-A1 N1-A2 N2-O2 N3-O1 N4-R1
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-33:<start> give the cat that thinks to the mouse , the dog did . <end>
+True Roles :: N1-O1 N1-A2 N2-R1 N3-A1
+Pred Roles :: N1-O1 N2-R1 N3-A1 N2-A2 N3-O2
+CORRECT :: False
+
+################################### 1-fold ###################################
+Sentence-34:<start> to the mouse the cat that the guy kisses by the dog was given . <end>
+True Roles :: N1-R2 N2-O1 N2-O2 N3-A1 N4-A2
+Pred Roles :: N1-R2 N2-O1 N2-O2 N3-A1 N4-A2
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-35:<start> cut by the beaver was the fish that the girl was kissed by . <end>
+True Roles :: N1-A1 N2-O1 N2-A2 N3-O2
+Pred Roles :: N1-A1 N2-O1 N2-A2 N3-O2
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-36:<start> the cat that the dog chased bit the man . <end>
+True Roles :: N1-O1 N1-A2 N2-A1 N3-O2
+Pred Roles :: N1-O1 N1-A2 N2-A1 N3-O2 N3-A1
+CORRECT :: False
+
+################################### 1-fold ###################################
+Sentence-37:<start> by the dog to the mouse that kisses the girl the cat was given . <end>
+True Roles :: N1-A2 N2-A1 N2-R2 N3-O1 N4-O2
+Pred Roles :: N1-A2 N2-O1 N2-R2 N3-A1 N4-O2 N3-O2
+CORRECT :: False
+
+################################### 1-fold ###################################
+Sentence-38:<start> given was the cat that the girl was kissed by by the dog to the mouse . <end>
+True Roles :: N1-O1 N1-A2 N2-O2 N3-A1 N4-R1
+Pred Roles :: N1-O1 N1-A2 N2-O2 N3-A1 N4-R1 N2-A1
+CORRECT :: False
+
+################################### 1-fold ###################################
+Sentence-39:<start> given by the dog to the mouse was the cat that thinks . <end>
+True Roles :: N1-A1 N2-R1 N3-O1 N3-A2
+Pred Roles :: N1-A1 N2-R1 N3-O1 N3-A2
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-40:<start> by the dog to the mouse the cat that the guy kisses was given . <end>
+True Roles :: N1-A2 N2-R2 N3-O1 N3-O2 N4-A1
+Pred Roles :: N1-A2 N2-R2 N3-A1 N3-O2 N4-A1 N2-O1
+CORRECT :: False
+
+################################### 1-fold ###################################
+Sentence-41:<start> the cat was given to the mouse by the dog . <end>
+True Roles :: N1-O1 N2-R1 N3-A1
+Pred Roles :: N1-O1 N2-R1 N3-A1
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-42:<start> the cat was given by the dog to the mouse that thinks . <end>
+True Roles :: N1-O1 N2-A1 N3-R1 N3-A2
+Pred Roles :: N1-O1 N2-A1 N3-R1 N3-A2
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-43:<start> to the mouse was given by the dog the cat that was kissed by the guy . <end>
+True Roles :: N1-R1 N2-A1 N3-O1 N3-O2 N4-A2
+Pred Roles :: N1-R1 N2-A1 N3-O1 N3-O2 N4-A2
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-44:<start> the glass was hit by the ball that was given by the man . <end>
+True Roles :: N1-O1 N2-A1 N2-O2 N3-A2
+Pred Roles :: N1-O1 N2-A1 N2-A2 N3-O2 N1-R2
+CORRECT :: False
+
+################################### 1-fold ###################################
+Sentence-45:<start> given by the dog to the mouse that the guy kisses was the cat . <end>
+True Roles :: N1-A1 N2-R1 N2-O2 N3-A2 N4-O1
+Pred Roles :: N1-A1 N2-R1 N2-O2 N3-A2 N4-O1
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-46:<start> the fish , the beaver that the girl was kissed by cut it . <end>
+True Roles :: N1-O2 N2-A1 N2-A2 N3-O1
+Pred Roles :: N1-O2 N2-A1 N2-A2 N3-O1
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-47:<start> give the cat to the mouse , the dog that was kissed by the guy did . <end>
+True Roles :: N1-O1 N2-R1 N3-A1 N3-O2 N4-A2
+Pred Roles :: N1-O1 N2-A1 N3-A1 N3-O2 N4-A2 N2-O2
+CORRECT :: False
+
+################################### 1-fold ###################################
+Sentence-48:<start> to the mouse was given by the dog the cat that the guy kisses . <end>
+True Roles :: N1-R1 N2-A1 N3-O1 N3-O2 N4-A2
+Pred Roles :: N1-R1 N2-A1 N3-O1 N3-O2 N4-A2
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-49:<start> the cat that the guy kisses was given to the mouse by the dog . <end>
+True Roles :: N1-O1 N1-O2 N2-A1 N3-R2 N4-A2
+Pred Roles :: N1-O1 N1-O2 N2-A1 N3-R2 N4-A2
+CORRECT :: True
+
+################################### 2-fold ###################################
+Sentence-0:<start> give the cat to the mouse that the guy kisses , the dog did . <end>
+True Roles :: N1-O1 N2-R1 N2-O2 N3-A2 N4-A1
+Pred Roles :: N2-O1 N2-A2 N3-A2 N4-A1
+CORRECT :: False
+
+################################### 2-fold ###################################
+Sentence-1:<start> the cat to the mouse by the dog that the guy kisses was given . <end>
+True Roles :: N1-O2 N2-R2 N3-O1 N3-A2 N4-A1
+Pred Roles :: N1-O2 N2-R2 N3-A1 N3-A2 N4-A1
+CORRECT :: False
+
+################################### 2-fold ###################################
+Sentence-2:<start> by the dog to the mouse that was kissed by the guy the cat was given . <end>
+True Roles :: N1-A2 N2-O1 N2-R2 N3-A1 N4-O2
+Pred Roles :: N1-A2 N2-O1 N2-R2 N3-A1 N4-O2
+CORRECT :: True
+
+################################### 2-fold ###################################
+Sentence-3:<start> given by the dog was the cat to the mouse that the guy kisses . <end>
+True Roles :: N1-A1 N2-O1 N3-R1 N3-O2 N4-A2
+Pred Roles :: N1-A1 N2-O1 N3-R1 N3-O2 N4-A2
+CORRECT :: True
+
+################################### 2-fold ###################################
+Sentence-4:<start> given to the mouse was the cat by the dog that kisses the girl . <end>
+True Roles :: N1-R1 N2-O1 N3-A1 N3-A2 N4-O2
+Pred Roles :: N1-R1 N2-O1 N3-A1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 2-fold ###################################
+Sentence-5:<start> by the dog to the mouse the cat was given . <end>
+True Roles :: N1-A1 N2-R1 N3-O1
+Pred Roles :: N1-A1 N2-O1 N3-O1
+CORRECT :: False
+
+################################### 2-fold ###################################
+Sentence-6:<start> the dog to the mouse that kisses the girl gives the cat . <end>
+True Roles :: N1-A2 N2-A1 N2-R2 N3-O1 N4-O2
+Pred Roles :: N1-A2 N2-A1 N2-R2 N3-O1 N4-O2
+CORRECT :: True
+
+################################### 2-fold ###################################
+Sentence-7:<start> to the mouse that the guy kisses the dog gives the cat . <end>
+True Roles :: N1-O1 N1-R2 N2-A1 N3-A2 N4-O2
+Pred Roles :: N1-O1 N1-R2 N2-A1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 2-fold ###################################
+Sentence-8:<start> the cat to the mouse by the dog was given . <end>
+True Roles :: N1-O1 N2-R1 N3-A1
+Pred Roles :: N1-O1 N2-A1
+CORRECT :: False
+
+################################### 2-fold ###################################
+Sentence-9:<start> given to the mouse by the dog that the guy kisses was the cat . <end>
+True Roles :: N1-R1 N2-A1 N2-O2 N3-A2 N4-O1
+Pred Roles :: N1-R1 N2-A1 N2-A2 N3-A2 N4-O1
+CORRECT :: False
+
+################################### 2-fold ###################################
+Sentence-10:<start> the dog gives to the mouse that kisses the girl the cat . <end>
+True Roles :: N1-A1 N2-R1 N2-A2 N3-O2 N4-O1
+Pred Roles :: N1-A1 N2-R1 N2-A2 N3-O2 N4-O1
+CORRECT :: True
+
+################################### 2-fold ###################################
+Sentence-11:<start> the cat that the man chased was bitten by the dog . <end>
+True Roles :: N1-O1 N1-O2 N2-A1 N3-A2
+Pred Roles :: N1-O1 N1-O2 N2-O1 N3-R2 N2-A2 N3-A1
+CORRECT :: False
+
+################################### 2-fold ###################################
+Sentence-12:<start> the beaver cuts the fish that the girl was kissed by . <end>
+True Roles :: N1-A1 N2-O1 N2-A2 N3-O2
+Pred Roles :: N1-O1 N2-A1 N2-O2 N3-A2 N1-A2
+CORRECT :: False
+
+################################### 2-fold ###################################
+Sentence-13:<start> the dog to the mouse that the girl was kissed by gives the cat . <end>
+True Roles :: N1-A2 N2-A1 N2-R2 N3-O1 N4-O2
+Pred Roles :: N1-A2 N2-A1 N2-R2 N3-O1 N4-O2
+CORRECT :: True
+
+################################### 2-fold ###################################
+Sentence-14:<start> given to the mouse was the cat that the girl was kissed by by the dog . <end>
+True Roles :: N1-R1 N2-O1 N2-A2 N3-O2 N4-A1
+Pred Roles :: N1-R1 N2-O1 N2-A2 N3-O2 N4-A1
+CORRECT :: True
+
+################################### 2-fold ###################################
+Sentence-15:<start> the cat to the mouse that thinks was given by the dog . <end>
+True Roles :: N1-O2 N2-A1 N2-R2 N3-A2
+Pred Roles :: N1-O2 N2-A1 N2-R2 N3-A2
+CORRECT :: True
+
+################################### 2-fold ###################################
+Sentence-16:<start> by the dog to the mouse that the girl was kissed by the cat was given . <end>
+True Roles :: N1-A2 N2-A1 N2-R2 N3-O1 N4-O2
+Pred Roles :: N1-A2 N2-R2 N3-O1 N4-O2
+CORRECT :: False
+
+################################### 2-fold ###################################
+Sentence-17:<start> the dog gives the cat to the mouse that was kissed by the guy . <end>
+True Roles :: N1-A1 N2-O1 N3-R1 N3-O2 N4-A2
+Pred Roles :: N1-A1 N2-O1 N3-R1 N3-O2 N4-A2
+CORRECT :: True
+
+################################### 2-fold ###################################
+Sentence-18:<start> the dog that the girl was kissed by gives to the mouse the cat . <end>
+True Roles :: N1-A1 N1-A2 N2-O1 N3-R2 N4-O2
+Pred Roles :: N1-A1 N1-A2 N2-O1 N3-R2 N4-O2
+CORRECT :: True
+
+################################### 2-fold ###################################
+Sentence-19:<start> the man gave the rat to the cat that was chased by the dog . <end>
+True Roles :: N1-A1 N2-O1 N3-R1 N3-O2 N4-A2
+Pred Roles :: N1-A1 N2-O1 N3-A2 N1-O2 N2-A2 N4-O1
+CORRECT :: False
+
+################################### 2-fold ###################################
+Sentence-20:<start> to the mouse the cat was given by the dog . <end>
+True Roles :: N1-R1 N2-O1 N3-A1
+Pred Roles :: N1-R1 N2-O1 N3-A1
+CORRECT :: True
+
+################################### 2-fold ###################################
+Sentence-21:<start> to the mouse that kisses the girl the cat by the dog was given . <end>
+True Roles :: N1-A1 N1-R2 N2-O1 N3-O2 N4-A2
+Pred Roles :: N1-A1 N1-R2 N2-O1 N3-O2 N4-A2
+CORRECT :: True
+
+################################### 2-fold ###################################
+Sentence-22:<start> given by the dog that thinks was the cat to the mouse . <end>
+True Roles :: N1-A1 N1-A2 N2-O1 N3-R1
+Pred Roles :: N1-A1 N1-A2 N2-O1 N3-O1 N3-R2
+CORRECT :: False
+
+################################### 2-fold ###################################
+Sentence-23:<start> by the dog that was kissed by the guy the cat to the mouse was given . <end>
+True Roles :: N1-O1 N1-A2 N2-A1 N3-O2 N4-R2
+Pred Roles :: N1-O1 N1-A2 N2-A1 N3-O2 N4-R2
+CORRECT :: True
+
+################################### 2-fold ###################################
+Sentence-24:<start> give the cat to the mouse , the dog that kisses the girl did . <end>
+True Roles :: N1-O1 N2-R1 N3-A1 N3-A2 N4-O2
+Pred Roles :: N1-O1 N2-R1 N3-A1 N3-O2 N4-O2
+CORRECT :: False
+
+################################### 2-fold ###################################
+Sentence-25:<start> given by the dog to the mouse was the cat . <end>
+True Roles :: N1-A1 N2-R1 N3-O1
+Pred Roles :: N1-A1 N2-R1 N3-O1
+CORRECT :: True
+
+################################### 2-fold ###################################
+Sentence-26:<start> to the mouse the cat that kisses the girl by the dog was given . <end>
+True Roles :: N1-R2 N2-A1 N2-O2 N3-O1 N4-A2
+Pred Roles :: N1-R2 N2-A1 N2-O2 N3-O1 N4-A2
+CORRECT :: True
+
+################################### 2-fold ###################################
+Sentence-27:<start> given to the mouse that was kissed by the guy by the dog was the cat . <end>
+True Roles :: N1-R1 N1-O2 N2-A2 N3-A1 N4-O1
+Pred Roles :: N1-R1 N1-O2 N2-A2 N3-A1 N4-O1
+CORRECT :: True
+
+################################### 2-fold ###################################
+Sentence-28:<start> give the cat to the mouse that thinks , the dog did . <end>
+True Roles :: N1-O1 N2-R1 N2-A2 N3-A1
+Pred Roles :: N1-O1 N2-R1 N3-A1 N3-A2
+CORRECT :: False
+
+################################### 2-fold ###################################
+Sentence-29:<start> given to the mouse that thinks was the cat by the dog . <end>
+True Roles :: N1-R1 N1-A2 N2-O1 N3-A1
+Pred Roles :: N1-R1 N1-A2 N3-O1
+CORRECT :: False
+
+################################### 2-fold ###################################
+Sentence-30:<start> the fish that thinks , the beaver cut it . <end>
+True Roles :: N1-A1 N1-O2 N2-A2
+Pred Roles :: N1-A1 N1-O2 N2-O2 N2-R1
+CORRECT :: False
+
+################################### 2-fold ###################################
+Sentence-31:<start> cut was the fish that the guy kisses by the beaver . <end>
+True Roles :: N1-O1 N1-O2 N2-A2 N3-A1
+Pred Roles :: N1-O1 N1-A2 N2-O2 N3-A1 N2-A1 N3-A2
+CORRECT :: False
+
+################################### 2-fold ###################################
+Sentence-32:<start> the dog gives to the mouse the cat that the girl was kissed by . <end>
+True Roles :: N1-A1 N2-R1 N3-O1 N3-A2 N4-O2
+Pred Roles :: N1-A1 N2-R1 N3-O1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 2-fold ###################################
+Sentence-33:<start> the fish , the beaver that thinks cut it . <end>
+True Roles :: N1-O2 N2-A1 N2-A2
+Pred Roles :: N2-A2 N1-A1
+CORRECT :: False
+
+################################### 2-fold ###################################
+Sentence-34:<start> the dog that was kissed by the guy to the mouse gives the cat . <end>
+True Roles :: N1-O1 N1-A2 N2-A1 N3-R2 N4-O2
+Pred Roles :: N1-O1 N1-A2 N2-A1 N3-R2 N4-O2
+CORRECT :: True
+
+################################### 2-fold ###################################
+Sentence-35:<start> the ball that was given by the man hit the glass . <end>
+True Roles :: N1-O1 N1-A2 N2-A1 N3-O2
+Pred Roles :: N1-R1 N1-A2 N2-O1 N3-A2 N2-R2 N3-R1
+CORRECT :: False
+
+################################### 2-fold ###################################
+Sentence-36:<start> the cat by the dog to the mouse that was kissed by the guy was given . <end>
+True Roles :: N1-O2 N2-A2 N3-O1 N3-R2 N4-A1
+Pred Roles :: N1-O2 N2-A2 N3-O1 N3-R2 N4-A1
+CORRECT :: True
+
+################################### 2-fold ###################################
+Sentence-37:<start> given to the mouse that was kissed by the guy was the cat by the dog . <end>
+True Roles :: N1-R1 N1-O2 N2-A2 N3-O1 N4-A1
+Pred Roles :: N1-R1 N1-O2 N2-A2 N3-O1 N4-A1
+CORRECT :: True
+
+################################### 2-fold ###################################
+Sentence-38:<start> by the dog to the mouse the cat that kisses the girl was given . <end>
+True Roles :: N1-A2 N2-R2 N3-A1 N3-O2 N4-O1
+Pred Roles :: N1-A2 N2-R2 N3-A1 N3-O2 N4-O1
+CORRECT :: True
+
+################################### 2-fold ###################################
+Sentence-39:<start> to the mouse that kisses the girl was given by the dog the cat . <end>
+True Roles :: N1-A1 N1-R2 N2-O1 N3-A2 N4-O2
+Pred Roles :: N1-A1 N1-R2 N2-O1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 2-fold ###################################
+Sentence-40:<start> to the mouse the dog that thinks gives the cat . <end>
+True Roles :: N1-R2 N2-A1 N2-A2 N3-O2
+Pred Roles :: N1-R2 N2-A1 N2-A2 N3-O2
+CORRECT :: True
+
+################################### 2-fold ###################################
+Sentence-41:<start> given by the dog was the cat to the mouse . <end>
+True Roles :: N1-A1 N2-O1 N3-R1
+Pred Roles :: N1-A1 N2-O1 N3-R1
+CORRECT :: True
+
+################################### 2-fold ###################################
+Sentence-42:<start> by the dog that the girl was kissed by the cat to the mouse was given . <end>
+True Roles :: N1-A1 N1-A2 N2-O1 N3-O2 N4-R2
+Pred Roles :: N1-A1 N1-A2 N2-O1 N3-O2 N4-R2
+CORRECT :: True
+
+################################### 2-fold ###################################
+Sentence-43:<start> the cat that the guy kisses to the mouse was given by the dog . <end>
+True Roles :: N1-O1 N1-O2 N2-A1 N3-R2 N4-A2
+Pred Roles :: N1-O1 N1-O2 N2-A1 N3-R2 N4-A2
+CORRECT :: True
+
+################################### 2-fold ###################################
+Sentence-44:<start> given to the mouse that the girl was kissed by was the cat by the dog . <end>
+True Roles :: N1-R1 N1-A2 N2-O2 N3-O1 N4-A1
+Pred Roles :: N1-R1 N1-A2 N2-O2 N3-O1 N4-A1
+CORRECT :: True
+
+################################### 2-fold ###################################
+Sentence-45:<start> give the cat to the mouse , the dog that the girl was kissed by did . <end>
+True Roles :: N1-O1 N2-R1 N3-A1 N3-A2 N4-O2
+Pred Roles :: N1-O1 N2-R1 N3-A1 N3-O2 N4-O2 N2-A2
+CORRECT :: False
+
+################################### 2-fold ###################################
+Sentence-46:<start> the dog to the mouse gives the cat that was kissed by the guy . <end>
+True Roles :: N1-A1 N2-R1 N3-O1 N3-O2 N4-A2
+Pred Roles :: N1-A1 N2-R1 N3-O1 N4-A2
+CORRECT :: False
+
+################################### 2-fold ###################################
+Sentence-47:<start> the cat by the dog was given to the mouse that was kissed by the guy . <end>
+True Roles :: N1-O1 N2-A1 N3-R1 N3-O2 N4-A2
+Pred Roles :: N1-O1 N2-A1 N3-R1 N3-O2 N4-A2
+CORRECT :: True
+
+################################### 2-fold ###################################
+Sentence-48:<start> give the cat to the mouse , the dog did . <end>
+True Roles :: N1-O1 N2-R1 N3-A1
+Pred Roles :: N1-O1 N2-R1
+CORRECT :: False
+
+################################### 2-fold ###################################
+Sentence-49:<start> to the mouse that the girl was kissed by the dog gives the cat . <end>
+True Roles :: N1-A1 N1-R2 N2-O1 N3-A2 N4-O2
+Pred Roles :: N1-A1 N1-R2 N2-O1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 3-fold ###################################
+Sentence-0:<start> by the beaver that was kissed by the guy the fish was cut . <end>
+True Roles :: N1-O1 N1-A2 N2-A1 N3-O2
+Pred Roles :: N1-O1 N1-A2 N3-O2
+CORRECT :: False
+
+################################### 3-fold ###################################
+Sentence-1:<start> the dog gives the cat to the mouse that kisses the girl . <end>
+True Roles :: N1-A1 N2-O1 N3-R1 N3-A2 N4-O2
+Pred Roles :: N1-A1 N2-O1 N3-R1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 3-fold ###################################
+Sentence-2:<start> the cat to the mouse was given by the dog that the girl was kissed by . <end>
+True Roles :: N1-O1 N2-R1 N3-A1 N3-A2 N4-O2
+Pred Roles :: N1-O1 N2-R1 N3-A1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 3-fold ###################################
+Sentence-3:<start> the giraffe that the guy kisses walks . <end>
+True Roles :: N1-O1 N1-A2 N2-A1
+Pred Roles :: N1-O1 N1-A2 N2-A1
+CORRECT :: True
+
+################################### 3-fold ###################################
+Sentence-4:<start> given to the mouse was the cat that was kissed by the guy by the dog . <end>
+True Roles :: N1-R1 N2-O1 N2-O2 N3-A2 N4-A1
+Pred Roles :: N1-R1 N2-O1 N2-O2 N3-A2 N4-A1
+CORRECT :: True
+
+################################### 3-fold ###################################
+Sentence-5:<start> the beaver cuts the fish . <end>
+True Roles :: N1-A1 N2-O1
+Pred Roles :: N2-O1
+CORRECT :: False
+
+################################### 3-fold ###################################
+Sentence-6:<start> walking was the giraffe that thinks . <end>
+True Roles :: N1-A1 N1-A2
+Pred Roles :: N1-A1 N1-A2
+CORRECT :: True
+
+################################### 3-fold ###################################
+Sentence-7:<start> john put the apple on the table . then he ate it . <end>
+True Roles :: N1-A1 N1-A2 N2-O1 N2-O2 N3-R1
+Pred Roles :: N1-R1 N1-A2 N2-O1 N2-O2 N3-R1 N3-R2
+CORRECT :: False
+
+################################### 3-fold ###################################
+Sentence-8:<start> by the dog the cat that thinks to the mouse was given . <end>
+True Roles :: N1-A2 N2-A1 N2-O2 N3-R2
+Pred Roles :: N1-A2 N2-A1 N2-O2 N3-R2
+CORRECT :: True
+
+################################### 3-fold ###################################
+Sentence-9:<start> to the mouse that the guy kisses the cat by the dog was given . <end>
+True Roles :: N1-O1 N1-R2 N2-A1 N3-O2 N4-A2
+Pred Roles :: N1-O1 N1-R2 N2-A1 N3-O2 N4-A2
+CORRECT :: True
+
+################################### 3-fold ###################################
+Sentence-10:<start> by the dog the cat that was kissed by the guy was given to the mouse . <end>
+True Roles :: N1-A2 N2-O1 N2-O2 N3-A1 N4-R2
+Pred Roles :: N1-A2 N2-O1 N2-O2 N3-A1 N4-R2
+CORRECT :: True
+
+################################### 3-fold ###################################
+Sentence-11:<start> the ball that hit the boy was given by the man . <end>
+True Roles :: N1-A1 N1-O2 N2-O1 N3-A2
+Pred Roles :: N1-O1 N1-O2 N2-A1 N3-A2 N3-O1
+CORRECT :: False
+
+################################### 3-fold ###################################
+Sentence-12:<start> the man gave the boy the book . <end>
+True Roles :: N1-A1 N2-R1 N3-O1
+Pred Roles :: N1-O1 N2-A1 N3-R1
+CORRECT :: False
+
+################################### 3-fold ###################################
+Sentence-13:<start> the cat that the girl was kissed by was given by the dog to the mouse . <end>
+True Roles :: N1-A1 N1-O2 N2-O1 N3-A2 N4-R2
+Pred Roles :: N1-A1 N1-O2 N2-O1 N3-A2 N4-R2
+CORRECT :: True
+
+################################### 3-fold ###################################
+Sentence-14:<start> the dog gives to the mouse that was kissed by the guy the cat . <end>
+True Roles :: N1-A1 N2-R1 N2-O2 N3-A2 N4-O1
+Pred Roles :: N1-A1 N2-R1 N2-O2 N3-A2 N4-O1
+CORRECT :: True
+
+################################### 3-fold ###################################
+Sentence-15:<start> the cat to the mouse that was kissed by the guy by the dog was given . <end>
+True Roles :: N1-O2 N2-O1 N2-R2 N3-A1 N4-A2
+Pred Roles :: N1-O2 N2-O1 N2-R2 N3-A1 N4-A2
+CORRECT :: True
+
+################################### 3-fold ###################################
+Sentence-16:<start> given by the dog that kisses the girl to the mouse was the cat . <end>
+True Roles :: N1-A1 N1-A2 N2-O2 N3-R1 N4-O1
+Pred Roles :: N1-A1 N1-A2 N2-O2 N3-R1 N4-O1
+CORRECT :: True
+
+################################### 3-fold ###################################
+Sentence-17:<start> the ball that hit the car was given to the boy by the man . <end>
+True Roles :: N1-A1 N1-O2 N2-O1 N3-R2 N4-A2
+Pred Roles :: N1-R1 N1-O2 N2-O1 N3-R2 N4-O2 N3-A1 N4-O1
+CORRECT :: False
+
+################################### 3-fold ###################################
+Sentence-18:<start> the dog that thinks to the mouse gives the cat . <end>
+True Roles :: N1-A1 N1-A2 N2-R2 N3-O2
+Pred Roles :: N1-A1 N1-A2 N2-R2 N3-O2
+CORRECT :: True
+
+################################### 3-fold ###################################
+Sentence-19:<start> by the dog the cat that thinks was given to the mouse . <end>
+True Roles :: N1-A2 N2-A1 N2-O2 N3-R2
+Pred Roles :: N1-A2 N2-A1 N2-O2 N3-R2
+CORRECT :: True
+
+################################### 3-fold ###################################
+Sentence-20:<start> given by the dog that was kissed by the guy to the mouse was the cat . <end>
+True Roles :: N1-A1 N1-O2 N2-A2 N3-R1 N4-O1
+Pred Roles :: N1-A1 N1-O2 N2-A2 N3-R1 N4-O1
+CORRECT :: True
+
+################################### 3-fold ###################################
+Sentence-21:<start> john threw the ball . then he caught it . <end>
+True Roles :: N1-A1 N1-A2 N2-O1 N2-O2
+Pred Roles :: N1-O1 N1-A2 N2-A1 N2-O2
+CORRECT :: False
+
+################################### 3-fold ###################################
+Sentence-22:<start> the dog to the mouse that the guy kisses gives the cat . <end>
+True Roles :: N1-A2 N2-O1 N2-R2 N3-A1 N4-O2
+Pred Roles :: N1-A2 N2-O1 N2-R2 N3-A1 N4-O2
+CORRECT :: True
+
+################################### 3-fold ###################################
+Sentence-23:<start> give the cat to the mouse that was kissed by the guy , the dog did . <end>
+True Roles :: N1-O1 N2-R1 N2-O2 N3-A2 N4-A1
+Pred Roles :: N1-O1 N2-R1 N3-A2 N4-A1
+CORRECT :: False
+
+################################### 3-fold ###################################
+Sentence-24:<start> by the dog that the guy kisses to the mouse the cat was given . <end>
+True Roles :: N1-O1 N1-A2 N2-A1 N3-R2 N4-O2
+Pred Roles :: N1-O1 N1-A2 N2-A1 N3-R2 N4-O2
+CORRECT :: True
+
+################################### 3-fold ###################################
+Sentence-25:<start> the dog ate the rat that was given by the man to the cat . <end>
+True Roles :: N1-A1 N2-O1 N2-O2 N3-A2 N4-R2
+Pred Roles :: N1-O1 N2-R1 N2-O2 N4-O2 N1-R2 N3-O1 N4-A1
+CORRECT :: False
+
+################################### 3-fold ###################################
+Sentence-26:<start> to the mouse that the girl was kissed by by the dog the cat was given . <end>
+True Roles :: N1-A1 N1-R2 N2-O1 N3-A2 N4-O2
+Pred Roles :: N1-A1 N1-R2 N2-O1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 3-fold ###################################
+Sentence-27:<start> the dog gives to the mouse the cat . <end>
+True Roles :: N1-A1 N2-R1 N3-O1
+Pred Roles :: N1-A1 N2-R1 N3-O1
+CORRECT :: True
+
+################################### 3-fold ###################################
+Sentence-28:<start> the fish was cut by the beaver that the girl was kissed by . <end>
+True Roles :: N1-O1 N2-A1 N2-A2 N3-O2
+Pred Roles :: N1-O1 N2-A1 N3-A2
+CORRECT :: False
+
+################################### 3-fold ###################################
+Sentence-29:<start> to the mouse the cat was given by the dog that the guy kisses . <end>
+True Roles :: N1-R1 N2-O1 N3-A1 N3-O2 N4-A2
+Pred Roles :: N1-R1 N2-O1 N3-A1 N3-O2 N4-A2
+CORRECT :: True
+
+################################### 3-fold ###################################
+Sentence-30:<start> to the mouse that thinks by the dog the cat was given . <end>
+True Roles :: N1-A1 N1-R2 N2-A2 N3-O2
+Pred Roles :: N1-A1 N1-R2 N2-A2 N3-O2
+CORRECT :: True
+
+################################### 3-fold ###################################
+Sentence-31:<start> by the dog that kisses the girl the cat was given to the mouse . <end>
+True Roles :: N1-A1 N1-A2 N2-O1 N3-O2 N4-R2
+Pred Roles :: N1-A1 N1-A2 N2-O1 N3-O2 N4-R2
+CORRECT :: True
+
+################################### 3-fold ###################################
+Sentence-32:<start> the cat was given by the dog that kisses the girl to the mouse . <end>
+True Roles :: N1-O1 N2-A1 N2-A2 N3-O2 N4-R1
+Pred Roles :: N1-O1 N2-A1 N2-A2 N3-O2 N4-R1
+CORRECT :: True
+
+################################### 3-fold ###################################
+Sentence-33:<start> the fish , the beaver that kisses the girl cut it . <end>
+True Roles :: N1-O2 N2-A1 N2-A2 N3-O1
+Pred Roles :: N1-O2 N2-O1 N2-A2 N3-A1 N3-O2
+CORRECT :: False
+
+################################### 3-fold ###################################
+Sentence-34:<start> by the dog the cat to the mouse that the girl was kissed by was given . <end>
+True Roles :: N1-A2 N2-O2 N3-A1 N3-R2 N4-O1
+Pred Roles :: N1-A2 N2-O2 N3-R2 N4-O1
+CORRECT :: False
+
+################################### 3-fold ###################################
+Sentence-35:<start> to the mouse that thinks the dog gives the cat . <end>
+True Roles :: N1-A1 N1-R2 N2-A2 N3-O2
+Pred Roles :: N1-R2 N2-A2 N2-A1 N3-O1
+CORRECT :: False
+
+################################### 3-fold ###################################
+Sentence-36:<start> to the mouse that the guy kisses was given by the dog the cat . <end>
+True Roles :: N1-O1 N1-R2 N2-A1 N3-A2 N4-O2
+Pred Roles :: N1-O1 N1-R2 N2-A1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 3-fold ###################################
+Sentence-37:<start> given by the dog was the cat that the girl was kissed by to the mouse . <end>
+True Roles :: N1-A1 N2-O1 N2-A2 N3-O2 N4-R1
+Pred Roles :: N1-A1 N2-O1 N2-A2 N3-O2 N4-R1
+CORRECT :: True
+
+################################### 3-fold ###################################
+Sentence-38:<start> given by the dog to the mouse was the cat that was kissed by the guy . <end>
+True Roles :: N1-A1 N2-R1 N3-O1 N3-O2 N4-A2
+Pred Roles :: N1-A1 N2-R1 N3-O1 N3-O2 N4-A2
+CORRECT :: True
+
+################################### 3-fold ###################################
+Sentence-39:<start> the cat was given by the dog to the mouse that was kissed by the guy . <end>
+True Roles :: N1-O1 N2-A1 N3-R1 N3-O2 N4-A2
+Pred Roles :: N1-O1 N2-A1 N3-R1 N3-O2 N4-A2
+CORRECT :: True
+
+################################### 3-fold ###################################
+Sentence-40:<start> give the cat to the mouse that kisses the girl , the dog did . <end>
+True Roles :: N1-O1 N2-R1 N2-A2 N3-O2 N4-A1
+Pred Roles :: N1-O1 N2-R1 N2-O2 N3-O2 N4-A1
+CORRECT :: False
+
+################################### 3-fold ###################################
+Sentence-41:<start> to the mouse was given by the dog that the girl was kissed by the cat . <end>
+True Roles :: N1-R1 N2-A1 N2-A2 N3-O2 N4-O1
+Pred Roles :: N1-R1 N2-A1 N2-A2 N3-O2 N4-O1
+CORRECT :: True
+
+################################### 3-fold ###################################
+Sentence-42:<start> the dog gives to the mouse that the girl was kissed by the cat . <end>
+True Roles :: N1-A1 N2-R1 N2-A2 N3-O2 N4-O1
+Pred Roles :: N1-A1 N2-R1 N4-O1 N3-O1 N4-O2
+CORRECT :: False
+
+################################### 3-fold ###################################
+Sentence-43:<start> to the mouse the dog gives the cat that thinks . <end>
+True Roles :: N1-R1 N2-A1 N3-O1 N3-A2
+Pred Roles :: N1-R1 N2-A1 N3-O1 N3-A2 N2-A2
+CORRECT :: False
+
+################################### 3-fold ###################################
+Sentence-44:<start> the cat to the mouse that the girl was kissed by was given by the dog . <end>
+True Roles :: N1-O2 N2-A1 N2-R2 N3-O1 N4-A2
+Pred Roles :: N1-O2 N2-A1 N2-R2 N3-O1 N4-A2
+CORRECT :: True
+
+################################### 3-fold ###################################
+Sentence-45:<start> the apple was put on the table by john . then he ate it . <end>
+True Roles :: N1-O1 N1-O2 N2-R1 N3-A1 N3-A2
+Pred Roles :: N1-R1 N1-O2 N2-O1 N3-R1 N3-R2 N2-A2
+CORRECT :: False
+
+################################### 3-fold ###################################
+Sentence-46:<start> the dog gives to the mouse that the guy kisses the cat . <end>
+True Roles :: N1-A1 N2-R1 N2-O2 N3-A2 N4-O1
+Pred Roles :: N1-A1 N2-R1 N2-O2 N4-O1
+CORRECT :: False
+
+################################### 3-fold ###################################
+Sentence-47:<start> to the mouse that thinks the cat was given by the dog . <end>
+True Roles :: N1-A1 N1-R2 N2-O2 N3-A2
+Pred Roles :: N1-A1 N1-R2 N2-O2 N3-A2
+CORRECT :: True
+
+################################### 3-fold ###################################
+Sentence-48:<start> to the mouse was given the cat by the dog . <end>
+True Roles :: N1-R1 N2-O1 N3-A1
+Pred Roles :: N1-R1 N2-O1 N3-A1
+CORRECT :: True
+
+################################### 3-fold ###################################
+Sentence-49:<start> the fish that the girl was kissed by , the beaver cut it . <end>
+True Roles :: N1-A1 N1-O2 N2-O1 N3-A2
+Pred Roles :: N1-A1 N1-O2 N2-O1 N3-A2
+CORRECT :: True
+
+################################### 4-fold ###################################
+Sentence-0:<start> cut by the beaver was the fish . <end>
+True Roles :: N1-A1 N2-O1
+Pred Roles :: N1-A1 N2-O1
+CORRECT :: True
+
+################################### 4-fold ###################################
+Sentence-1:<start> by the dog that the guy kisses the cat was given to the mouse . <end>
+True Roles :: N1-O1 N1-A2 N2-A1 N3-O2 N4-R2
+Pred Roles :: N1-O1 N1-A2 N2-A1 N3-O2 N4-R2
+CORRECT :: True
+
+################################### 4-fold ###################################
+Sentence-2:<start> given to the mouse by the dog was the cat . <end>
+True Roles :: N1-R1 N2-A1 N3-O1
+Pred Roles :: N1-R1 N2-A1 N3-O1
+CORRECT :: True
+
+################################### 4-fold ###################################
+Sentence-3:<start> the man gave the ball to the boy that hit the car . <end>
+True Roles :: N1-A1 N2-O1 N3-R1 N3-A2 N4-O2
+Pred Roles :: N1-O1 N2-R1 N3-O1 N3-R2 N4-O2 N1-A2 N2-A2 N4-R1
+CORRECT :: False
+
+################################### 4-fold ###################################
+Sentence-4:<start> the cat to the mouse that kisses the girl by the dog was given . <end>
+True Roles :: N1-O2 N2-A1 N2-R2 N3-O1 N4-A2
+Pred Roles :: N1-O2 N2-A1 N2-R2 N3-O1 N4-A2
+CORRECT :: True
+
+################################### 4-fold ###################################
+Sentence-5:<start> the cat that the guy kisses to the mouse by the dog was given . <end>
+True Roles :: N1-O1 N1-O2 N2-A1 N3-R2 N4-A2
+Pred Roles :: N1-O1 N1-O2 N2-A1 N3-R2 N4-A2
+CORRECT :: True
+
+################################### 4-fold ###################################
+Sentence-6:<start> given to the mouse by the dog that was kissed by the guy was the cat . <end>
+True Roles :: N1-R1 N2-A1 N2-O2 N3-A2 N4-O1
+Pred Roles :: N1-R1 N2-A2 N3-A2 N4-O1
+CORRECT :: False
+
+################################### 4-fold ###################################
+Sentence-7:<start> by the dog that thinks the cat to the mouse was given . <end>
+True Roles :: N1-A1 N1-A2 N2-O2 N3-R2
+Pred Roles :: N1-A1 N1-A2 N2-O2 N3-R2
+CORRECT :: True
+
+################################### 4-fold ###################################
+Sentence-8:<start> given by the dog was the cat to the mouse that was kissed by the guy . <end>
+True Roles :: N1-A1 N2-O1 N3-R1 N3-O2 N4-A2
+Pred Roles :: N1-A1 N2-O1 N3-R1 N3-O2 N4-A2
+CORRECT :: True
+
+################################### 4-fold ###################################
+Sentence-9:<start> by the dog the cat was given to the mouse that was kissed by the guy . <end>
+True Roles :: N1-A1 N2-O1 N3-R1 N3-O2 N4-A2
+Pred Roles :: N1-A1 N2-O1 N3-R1 N3-O2 N4-A2
+CORRECT :: True
+
+################################### 4-fold ###################################
+Sentence-10:<start> the fish , the beaver that was kissed by the guy cut it . <end>
+True Roles :: N1-O2 N2-O1 N2-A2 N3-A1
+Pred Roles :: N1-O2 N2-O1 N2-A2 N3-A1 N3-O2
+CORRECT :: False
+
+################################### 4-fold ###################################
+Sentence-11:<start> by the dog that the guy kisses the cat to the mouse was given . <end>
+True Roles :: N1-O1 N1-A2 N2-A1 N3-O2 N4-R2
+Pred Roles :: N1-O1 N1-A2 N2-A1 N3-O2 N4-R2
+CORRECT :: True
+
+################################### 4-fold ###################################
+Sentence-12:<start> the cat that kisses the girl by the dog to the mouse was given . <end>
+True Roles :: N1-A1 N1-O2 N2-O1 N3-A2 N4-R2
+Pred Roles :: N1-A1 N1-O2 N2-O1 N3-A2 N4-R2
+CORRECT :: True
+
+################################### 4-fold ###################################
+Sentence-13:<start> to the mouse was given by the dog the cat . <end>
+True Roles :: N1-R1 N2-A1 N3-O1
+Pred Roles :: N1-R1 N2-A1 N3-O1
+CORRECT :: True
+
+################################### 4-fold ###################################
+Sentence-14:<start> by the beaver that the girl was kissed by the fish was cut . <end>
+True Roles :: N1-A1 N1-A2 N2-O1 N3-O2
+Pred Roles :: N1-A1 N1-A2 N2-A1 N3-A2 N2-O2
+CORRECT :: False
+
+################################### 4-fold ###################################
+Sentence-15:<start> by the beaver that kisses the girl the fish was cut . <end>
+True Roles :: N1-A1 N1-A2 N2-O1 N3-O2
+Pred Roles :: N1-A1 N1-A2 N2-A1 N3-A2 N2-O2 N3-O1
+CORRECT :: False
+
+################################### 4-fold ###################################
+Sentence-16:<start> given by the dog was the cat to the mouse that kisses the girl . <end>
+True Roles :: N1-A1 N2-O1 N3-R1 N3-A2 N4-O2
+Pred Roles :: N1-A1 N2-O1 N3-R1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 4-fold ###################################
+Sentence-17:<start> given by the dog to the mouse that was kissed by the guy was the cat . <end>
+True Roles :: N1-A1 N2-R1 N2-O2 N3-A2 N4-O1
+Pred Roles :: N1-A1 N2-R1 N2-A2 N3-O2 N4-O1
+CORRECT :: False
+
+################################### 4-fold ###################################
+Sentence-18:<start> the cat that the girl was kissed by to the mouse by the dog was given . <end>
+True Roles :: N1-A1 N1-O2 N2-O1 N3-R2 N4-A2
+Pred Roles :: N1-A1 N1-O2 N2-O1 N3-R2 N4-A2
+CORRECT :: True
+
+################################### 4-fold ###################################
+Sentence-19:<start> given to the mouse was the cat that the guy kisses by the dog . <end>
+True Roles :: N1-R1 N2-O1 N2-O2 N3-A2 N4-A1
+Pred Roles :: N1-R1 N2-O1 N2-O2 N3-A2 N4-A1
+CORRECT :: True
+
+################################### 4-fold ###################################
+Sentence-20:<start> the beaver that was kissed by the guy cuts the fish . <end>
+True Roles :: N1-O1 N1-A2 N2-A1 N3-O2
+Pred Roles :: N1-O2 N2-O1 N3-O2 N2-A2
+CORRECT :: False
+
+################################### 4-fold ###################################
+Sentence-21:<start> the cat by the dog that thinks was given to the mouse . <end>
+True Roles :: N1-O2 N2-A1 N2-A2 N3-R2
+Pred Roles :: N1-O2 N2-A1 N2-A2 N3-R2
+CORRECT :: True
+
+################################### 4-fold ###################################
+Sentence-22:<start> the dog gives the cat to the mouse that the girl was kissed by . <end>
+True Roles :: N1-A1 N2-O1 N3-R1 N3-A2 N4-O2
+Pred Roles :: N1-A1 N2-O1 N3-R1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 4-fold ###################################
+Sentence-23:<start> the ball was pushed by the man . <end>
+True Roles :: N1-O1 N2-A1
+Pred Roles :: N2-O1
+CORRECT :: False
+
+################################### 4-fold ###################################
+Sentence-24:<start> to the mouse was given by the dog the cat that kisses the girl . <end>
+True Roles :: N1-R1 N2-A1 N3-O1 N3-A2 N4-O2
+Pred Roles :: N1-R1 N2-A1 N3-O1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 4-fold ###################################
+Sentence-25:<start> the ball was hit on the head by john . then it hurt him . <end>
+True Roles :: N1-O1 N1-A2 N2-R1 N3-A1 N3-O2
+Pred Roles :: N1-O1 N1-R2 N2-R1 N3-O1 N3-A2 N2-O2
+CORRECT :: False
+
+################################### 4-fold ###################################
+Sentence-26:<start> cut was the fish by the beaver . <end>
+True Roles :: N1-O1 N2-A1
+Pred Roles :: N1-O1 N2-A1
+CORRECT :: True
+
+################################### 4-fold ###################################
+Sentence-27:<start> the giraffe that was kissed by the guy walks . <end>
+True Roles :: N1-O1 N1-A2 N2-A1
+Pred Roles :: N1-O1 N2-A1 N2-A2
+CORRECT :: False
+
+################################### 4-fold ###################################
+Sentence-28:<start> the dog to the mouse gives the cat that the guy kisses . <end>
+True Roles :: N1-A1 N2-R1 N3-O1 N3-O2 N4-A2
+Pred Roles :: N1-A1 N2-R1 N3-O1 N3-A2 N4-A2
+CORRECT :: False
+
+################################### 4-fold ###################################
+Sentence-29:<start> to the mouse that the girl was kissed by was given by the dog the cat . <end>
+True Roles :: N1-A1 N1-R2 N2-O1 N3-A2 N4-O2
+Pred Roles :: N1-A1 N1-R2 N2-O1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 4-fold ###################################
+Sentence-30:<start> the fish that was kissed by the guy , the beaver cut it . <end>
+True Roles :: N1-O1 N1-O2 N2-A1 N3-A2
+Pred Roles :: N1-O2 N2-O1 N3-O2 N2-A2 N3-A1
+CORRECT :: False
+
+################################### 4-fold ###################################
+Sentence-31:<start> given to the mouse by the dog that kisses the girl was the cat . <end>
+True Roles :: N1-R1 N2-A1 N2-A2 N3-O2 N4-O1
+Pred Roles :: N1-R1 N2-A1 N2-A2 N4-O1
+CORRECT :: False
+
+################################### 4-fold ###################################
+Sentence-32:<start> the cat that thinks was given to the mouse by the dog . <end>
+True Roles :: N1-A1 N1-O2 N2-R2 N3-A2
+Pred Roles :: N1-A1 N1-O2 N2-A2 N3-R2 N2-R1
+CORRECT :: False
+
+################################### 4-fold ###################################
+Sentence-33:<start> the cat to the mouse was given by the dog that was kissed by the guy . <end>
+True Roles :: N1-O1 N2-R1 N3-A1 N3-O2 N4-A2
+Pred Roles :: N1-O1 N2-R1 N3-A1 N3-O2 N4-A2
+CORRECT :: True
+
+################################### 4-fold ###################################
+Sentence-34:<start> given was the cat by the dog that the guy kisses to the mouse . <end>
+True Roles :: N1-O1 N2-A1 N2-O2 N3-A2 N4-R1
+Pred Roles :: N1-O1 N2-A1 N2-O2 N3-A2 N4-R1
+CORRECT :: True
+
+################################### 4-fold ###################################
+Sentence-35:<start> the dog that the guy kisses to the mouse gives the cat . <end>
+True Roles :: N1-O1 N1-A2 N2-A1 N3-R2 N4-O2
+Pred Roles :: N1-O1 N1-A2 N2-A1 N3-R2 N4-O2
+CORRECT :: True
+
+################################### 4-fold ###################################
+Sentence-36:<start> the fish that kisses the girl was cut by the beaver . <end>
+True Roles :: N1-A1 N1-O2 N2-O1 N3-A2
+Pred Roles :: N1-A1 N1-O2 N2-O1 N3-A2
+CORRECT :: True
+
+################################### 4-fold ###################################
+Sentence-37:<start> the cat was given by the dog that the guy kisses to the mouse . <end>
+True Roles :: N1-O1 N2-A1 N2-O2 N3-A2 N4-R1
+Pred Roles :: N1-O1 N2-O1 N3-A2 N4-R1
+CORRECT :: False
+
+################################### 4-fold ###################################
+Sentence-38:<start> by the dog that the girl was kissed by the cat was given to the mouse . <end>
+True Roles :: N1-A1 N1-A2 N2-O1 N3-O2 N4-R2
+Pred Roles :: N1-A1 N1-A2 N2-O1 N3-O2 N4-R2
+CORRECT :: True
+
+################################### 4-fold ###################################
+Sentence-39:<start> the dog to the mouse that was kissed by the guy gives the cat . <end>
+True Roles :: N1-A2 N2-O1 N2-R2 N3-A1 N4-O2
+Pred Roles :: N1-A2 N2-O1 N2-R2 N3-A1 N4-O2
+CORRECT :: True
+
+################################### 4-fold ###################################
+Sentence-40:<start> to the mouse was given by the dog that kisses the girl the cat . <end>
+True Roles :: N1-R1 N2-A1 N2-A2 N3-O2 N4-O1
+Pred Roles :: N1-R1 N2-A1 N2-A2 N3-O2 N4-O1
+CORRECT :: True
+
+################################### 4-fold ###################################
+Sentence-41:<start> the cat to the mouse that kisses the girl was given by the dog . <end>
+True Roles :: N1-O2 N2-A1 N2-R2 N3-O1 N4-A2
+Pred Roles :: N1-O2 N2-A1 N2-R2 N3-O1 N4-A2
+CORRECT :: True
+
+################################### 4-fold ###################################
+Sentence-42:<start> to the mouse the dog gives the cat . <end>
+True Roles :: N1-R1 N2-A1 N3-O1
+Pred Roles :: N1-R1 N2-A1 N3-O1
+CORRECT :: True
+
+################################### 4-fold ###################################
+Sentence-43:<start> given to the mouse that kisses the girl by the dog was the cat . <end>
+True Roles :: N1-R1 N1-A2 N2-O2 N3-A1 N4-O1
+Pred Roles :: N1-R1 N1-A2 N2-O2 N3-A1 N4-O1
+CORRECT :: True
+
+################################### 4-fold ###################################
+Sentence-44:<start> given to the mouse was the cat by the dog that the guy kisses . <end>
+True Roles :: N1-R1 N2-O1 N3-A1 N3-O2 N4-A2
+Pred Roles :: N1-R1 N2-O1 N3-A1 N3-O2 N4-A2
+CORRECT :: True
+
+################################### 4-fold ###################################
+Sentence-45:<start> the cat was given by the dog to the mouse that the girl was kissed by . <end>
+True Roles :: N1-O1 N2-A1 N3-R1 N3-A2 N4-O2
+Pred Roles :: N1-O1 N2-A1 N3-R1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 4-fold ###################################
+Sentence-46:<start> the cat that the girl was kissed by was given to the mouse by the dog . <end>
+True Roles :: N1-A1 N1-O2 N2-O1 N3-R2 N4-A2
+Pred Roles :: N1-A1 N1-O2 N2-O1 N3-R2 N4-A2
+CORRECT :: True
+
+################################### 4-fold ###################################
+Sentence-47:<start> to the mouse that kisses the girl the dog gives the cat . <end>
+True Roles :: N1-A1 N1-R2 N2-O1 N3-A2 N4-O2
+Pred Roles :: N1-A1 N1-R2 N2-O1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 4-fold ###################################
+Sentence-48:<start> the man that chased the dog gave the rat to the cat . <end>
+True Roles :: N1-A1 N1-A2 N2-O1 N3-O2 N4-R2
+Pred Roles :: N1-A1 N1-A2 N2-O1 N3-A2 N4-O2 N2-R2 N3-A1 N4-O1
+CORRECT :: False
+
+################################### 4-fold ###################################
+Sentence-49:<start> the dog gives to the mouse the cat that the guy kisses . <end>
+True Roles :: N1-A1 N2-R1 N3-O1 N3-O2 N4-A2
+Pred Roles :: N1-A1 N2-R1 N3-O1 N3-A2 N4-A2
+CORRECT :: False
+
+################################### 5-fold ###################################
+Sentence-0:<start> given by the dog to the mouse was the cat that the guy kisses . <end>
+True Roles :: N1-A1 N2-R1 N3-O1 N3-O2 N4-A2
+Pred Roles :: N1-A1 N2-R1 N3-O1 N3-O2 N4-A2
+CORRECT :: True
+
+################################### 5-fold ###################################
+Sentence-1:<start> to the mouse that the guy kisses the cat was given by the dog . <end>
+True Roles :: N1-O1 N1-R2 N2-A1 N3-O2 N4-A2
+Pred Roles :: N1-O1 N1-R2 N2-A1 N3-O2 N4-A2
+CORRECT :: True
+
+################################### 5-fold ###################################
+Sentence-2:<start> the dog that was kissed by the guy gives to the mouse the cat . <end>
+True Roles :: N1-O1 N1-A2 N2-A1 N3-R2 N4-O2
+Pred Roles :: N1-O1 N1-A2 N2-A1 N3-R2 N4-O2
+CORRECT :: True
+
+################################### 5-fold ###################################
+Sentence-3:<start> the dog gives the cat to the mouse . <end>
+True Roles :: N1-A1 N2-O1 N3-R1
+Pred Roles :: N1-A1 N2-O1 N3-R1
+CORRECT :: True
+
+################################### 5-fold ###################################
+Sentence-4:<start> cut was the fish that kisses the girl by the beaver . <end>
+True Roles :: N1-O1 N1-A2 N2-O2 N3-A1
+Pred Roles :: N1-O1 N1-A2 N2-O2 N3-O1 N2-A1
+CORRECT :: False
+
+################################### 5-fold ###################################
+Sentence-5:<start> to the mouse was given the cat that was kissed by the guy by the dog . <end>
+True Roles :: N1-R1 N2-O1 N2-O2 N3-A2 N4-A1
+Pred Roles :: N1-R1 N2-O1 N2-O2 N3-A2 N4-A1
+CORRECT :: True
+
+################################### 5-fold ###################################
+Sentence-6:<start> the dog to the mouse that thinks gives the cat . <end>
+True Roles :: N1-A2 N2-A1 N2-R2 N3-O2
+Pred Roles :: N1-A2 N2-A1 N2-R2 N3-O2
+CORRECT :: True
+
+################################### 5-fold ###################################
+Sentence-7:<start> to the mouse the cat by the dog that the guy kisses was given . <end>
+True Roles :: N1-R2 N2-O2 N3-O1 N3-A2 N4-A1
+Pred Roles :: N1-R2 N2-O2 N3-O1 N3-A2 N4-A1
+CORRECT :: True
+
+################################### 5-fold ###################################
+Sentence-8:<start> to the mouse that was kissed by the guy the dog gives the cat . <end>
+True Roles :: N1-O1 N1-R2 N2-A1 N3-A2 N4-O2
+Pred Roles :: N1-O1 N1-R2 N2-A1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 5-fold ###################################
+Sentence-9:<start> the beaver cuts the fish that thinks . <end>
+True Roles :: N1-A1 N2-O1 N2-A2
+Pred Roles :: N1-A1 N2-A1 N2-A2
+CORRECT :: False
+
+################################### 5-fold ###################################
+Sentence-10:<start> the fish was cut by the beaver that kisses the girl . <end>
+True Roles :: N1-O1 N2-A1 N2-A2 N3-O2
+Pred Roles :: N1-O1 N2-A1 N2-A2 N3-O2
+CORRECT :: True
+
+################################### 5-fold ###################################
+Sentence-11:<start> give the cat that was kissed by the guy to the mouse , the dog did . <end>
+True Roles :: N1-O1 N1-O2 N2-A2 N3-R1 N4-A1
+Pred Roles :: N1-O1 N1-O2 N2-O2 N3-R1 N4-A1 N2-A1 N3-A2
+CORRECT :: False
+
+################################### 5-fold ###################################
+Sentence-12:<start> the cat that thinks to the mouse was given by the dog . <end>
+True Roles :: N1-A1 N1-O2 N2-R2 N3-A2
+Pred Roles :: N1-A1 N1-O2 N2-R2 N3-A2
+CORRECT :: True
+
+################################### 5-fold ###################################
+Sentence-13:<start> given to the mouse by the dog was the cat that kisses the girl . <end>
+True Roles :: N1-R1 N2-A1 N3-O1 N3-A2 N4-O2
+Pred Roles :: N1-R1 N2-A1 N3-O1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 5-fold ###################################
+Sentence-14:<start> it was on the desk that john put the cup . <end>
+True Roles :: N1-R1 N2-A1 N3-O1
+Pred Roles :: N1-A1 N2-O1 N3-A1
+CORRECT :: False
+
+################################### 5-fold ###################################
+Sentence-15:<start> the fish that kisses the girl , the beaver cut it . <end>
+True Roles :: N1-A1 N1-O2 N2-O1 N3-A2
+Pred Roles :: N1-A1 N1-O2 N2-O1 N3-A2
+CORRECT :: True
+
+################################### 5-fold ###################################
+Sentence-16:<start> to the mouse by the dog that kisses the girl the cat was given . <end>
+True Roles :: N1-R2 N2-A1 N2-A2 N3-O1 N4-O2
+Pred Roles :: N1-R2 N2-O1 N2-A2 N4-O2 N3-O2
+CORRECT :: False
+
+################################### 5-fold ###################################
+Sentence-17:<start> to the mouse that thinks was given the cat by the dog . <end>
+True Roles :: N1-A1 N1-R2 N2-O2 N3-A2
+Pred Roles :: N1-A1 N1-R2 N3-O2
+CORRECT :: False
+
+################################### 5-fold ###################################
+Sentence-18:<start> to the mouse by the dog the cat that was kissed by the guy was given . <end>
+True Roles :: N1-R2 N2-A2 N3-O1 N3-O2 N4-A1
+Pred Roles :: N1-R2 N2-A2 N3-O1 N3-O2 N4-A1
+CORRECT :: True
+
+################################### 5-fold ###################################
+Sentence-19:<start> by the dog that the girl was kissed by to the mouse the cat was given . <end>
+True Roles :: N1-A1 N1-A2 N2-O1 N3-R2 N4-O2
+Pred Roles :: N1-A1 N1-A2 N2-O1 N3-R2 N4-O2
+CORRECT :: True
+
+################################### 5-fold ###################################
+Sentence-20:<start> given to the mouse by the dog was the cat that the guy kisses . <end>
+True Roles :: N1-R1 N2-A1 N3-O1 N3-O2 N4-A2
+Pred Roles :: N1-R1 N2-A1 N3-O1 N3-O2 N4-A2
+CORRECT :: True
+
+################################### 5-fold ###################################
+Sentence-21:<start> the cat that the girl was kissed by to the mouse was given by the dog . <end>
+True Roles :: N1-A1 N1-O2 N2-O1 N3-R2 N4-A2
+Pred Roles :: N1-A1 N1-O2 N2-O1 N3-R2 N4-A2
+CORRECT :: True
+
+################################### 5-fold ###################################
+Sentence-22:<start> john ate the apple . <end>
+True Roles :: N1-A1 N2-O1
+Pred Roles :: N1-O1 N2-A1
+CORRECT :: False
+
+################################### 5-fold ###################################
+Sentence-23:<start> given was the cat by the dog that was kissed by the guy to the mouse . <end>
+True Roles :: N1-O1 N2-A1 N2-O2 N3-A2 N4-R1
+Pred Roles :: N1-O1 N2-A1 N2-O2 N3-A2 N4-R1
+CORRECT :: True
+
+################################### 5-fold ###################################
+Sentence-24:<start> the dog that the guy kisses gives the cat to the mouse . <end>
+True Roles :: N1-O1 N1-A2 N2-A1 N3-O2 N4-R2
+Pred Roles :: N1-O1 N1-A2 N2-A1 N3-O2 N4-R2
+CORRECT :: True
+
+################################### 5-fold ###################################
+Sentence-25:<start> the dog gives the cat that the girl was kissed by to the mouse . <end>
+True Roles :: N1-A1 N2-O1 N2-A2 N3-O2 N4-R1
+Pred Roles :: N1-A1 N2-O1 N2-O2 N3-A2 N4-R1
+CORRECT :: False
+
+################################### 5-fold ###################################
+Sentence-26:<start> the cat to the mouse was given by the dog . <end>
+True Roles :: N1-O1 N2-R1 N3-A1
+Pred Roles :: N1-O1 N2-R1 N3-A1
+CORRECT :: True
+
+################################### 5-fold ###################################
+Sentence-27:<start> the cat by the dog to the mouse that thinks was given . <end>
+True Roles :: N1-O2 N2-A2 N3-A1 N3-R2
+Pred Roles :: N1-O2 N2-A2 N3-A1 N3-R2
+CORRECT :: True
+
+################################### 5-fold ###################################
+Sentence-28:<start> by the beaver the fish that was kissed by the guy was cut . <end>
+True Roles :: N1-A2 N2-O1 N2-O2 N3-A1
+Pred Roles :: N1-A2 N2-A1 N2-O2 N3-O1
+CORRECT :: False
+
+################################### 5-fold ###################################
+Sentence-29:<start> by the dog the cat was given to the mouse that thinks . <end>
+True Roles :: N1-A1 N2-O1 N3-R1 N3-A2
+Pred Roles :: N1-A1 N2-O1 N3-R1 N3-A2
+CORRECT :: True
+
+################################### 5-fold ###################################
+Sentence-30:<start> to the mouse that was kissed by the guy the cat was given by the dog . <end>
+True Roles :: N1-O1 N1-R2 N2-A1 N3-O2 N4-A2
+Pred Roles :: N1-O1 N1-R2 N2-A1 N3-O2 N4-A2
+CORRECT :: True
+
+################################### 5-fold ###################################
+Sentence-31:<start> the cat was chased by the dog that took the rat to the man . <end>
+True Roles :: N1-O1 N2-A1 N2-A2 N3-O2 N4-R2
+Pred Roles :: N1-R1 N2-A1 N2-O2 N3-A2 N4-O2 N1-O2 N3-O1
+CORRECT :: False
+
+################################### 5-fold ###################################
+Sentence-32:<start> by the dog that was kissed by the guy the cat was given to the mouse . <end>
+True Roles :: N1-O1 N1-A2 N2-A1 N3-O2 N4-R2
+Pred Roles :: N1-O1 N1-A2 N2-A1 N3-O2 N4-R2
+CORRECT :: True
+
+################################### 5-fold ###################################
+Sentence-33:<start> by the beaver the fish that kisses the girl was cut . <end>
+True Roles :: N1-A2 N2-A1 N2-O2 N3-O1
+Pred Roles :: N1-A2 N2-A1 N2-O2 N3-O1
+CORRECT :: True
+
+################################### 5-fold ###################################
+Sentence-34:<start> the beaver cuts the fish that the guy kisses . <end>
+True Roles :: N1-A1 N2-O1 N2-O2 N3-A2
+Pred Roles :: N1-A1 N2-O1 N2-A2 N3-O2 N1-O2 N3-A1
+CORRECT :: False
+
+################################### 5-fold ###################################
+Sentence-35:<start> to the mouse was given the cat that the guy kisses by the dog . <end>
+True Roles :: N1-R1 N2-O1 N2-O2 N3-A2 N4-A1
+Pred Roles :: N1-R1 N2-O1 N2-O2 N3-A2 N4-A1
+CORRECT :: True
+
+################################### 5-fold ###################################
+Sentence-36:<start> given to the mouse that the girl was kissed by by the dog was the cat . <end>
+True Roles :: N1-R1 N1-A2 N2-O2 N3-A1 N4-O1
+Pred Roles :: N1-R1 N1-A2 N2-O2 N4-O1
+CORRECT :: False
+
+################################### 5-fold ###################################
+Sentence-37:<start> given by the dog was the cat to the mouse that the girl was kissed by . <end>
+True Roles :: N1-A1 N2-O1 N3-R1 N3-A2 N4-O2
+Pred Roles :: N1-A1 N2-O1 N3-R1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 5-fold ###################################
+Sentence-38:<start> the dog gives the cat to the mouse that the guy kisses . <end>
+True Roles :: N1-A1 N2-O1 N3-R1 N3-O2 N4-A2
+Pred Roles :: N1-A1 N2-O1 N3-R1 N3-A2 N4-A2 N2-O2
+CORRECT :: False
+
+################################### 5-fold ###################################
+Sentence-39:<start> to the mouse the dog gives the cat that kisses the girl . <end>
+True Roles :: N1-R1 N2-A1 N3-O1 N3-A2 N4-O2
+Pred Roles :: N1-R1 N2-A1 N3-O1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 5-fold ###################################
+Sentence-40:<start> cut was the fish by the beaver that was kissed by the guy . <end>
+True Roles :: N1-O1 N2-A1 N2-O2 N3-A2
+Pred Roles :: N1-O1 N2-A1 N2-O2 N3-A2
+CORRECT :: True
+
+################################### 5-fold ###################################
+Sentence-41:<start> the fish was cut by the beaver . <end>
+True Roles :: N1-O1 N2-A1
+Pred Roles :: N1-O1 N2-A1
+CORRECT :: True
+
+################################### 5-fold ###################################
+Sentence-42:<start> the cup was put on the table by john . <end>
+True Roles :: N1-O1 N2-R1 N3-A1
+Pred Roles :: N1-R1 N2-O1 N3-A1
+CORRECT :: False
+
+################################### 5-fold ###################################
+Sentence-43:<start> to the mouse was given the cat that the girl was kissed by by the dog . <end>
+True Roles :: N1-R1 N2-O1 N2-A2 N3-O2 N4-A1
+Pred Roles :: N1-R1 N2-O1 N2-A2 N3-O2 N4-A1
+CORRECT :: True
+
+################################### 5-fold ###################################
+Sentence-44:<start> by the dog the cat that kisses the girl was given to the mouse . <end>
+True Roles :: N1-A2 N2-A1 N2-O2 N3-O1 N4-R2
+Pred Roles :: N1-A2 N2-A1 N2-O2 N3-O1 N4-R2
+CORRECT :: True
+
+################################### 5-fold ###################################
+Sentence-45:<start> give the cat to the mouse , the dog that the guy kisses did . <end>
+True Roles :: N1-O1 N2-R1 N3-A1 N3-O2 N4-A2
+Pred Roles :: N1-O1 N2-R1 N3-O1 N3-A2 N4-A2 N2-O2
+CORRECT :: False
+
+################################### 5-fold ###################################
+Sentence-46:<start> given to the mouse by the dog that the girl was kissed by was the cat . <end>
+True Roles :: N1-R1 N2-A1 N2-A2 N3-O2 N4-O1
+Pred Roles :: N1-R1 N2-A1 N2-A2 N3-O2 N4-O1
+CORRECT :: True
+
+################################### 5-fold ###################################
+Sentence-47:<start> to the mouse was given by the dog that thinks the cat . <end>
+True Roles :: N1-R1 N2-A1 N2-A2 N3-O1
+Pred Roles :: N1-R1 N2-A1 N2-A2
+CORRECT :: False
+
+################################### 5-fold ###################################
+Sentence-48:<start> given by the dog to the mouse was the cat that kisses the girl . <end>
+True Roles :: N1-A1 N2-R1 N3-O1 N3-A2 N4-O2
+Pred Roles :: N1-A1 N2-R1 N3-O1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 5-fold ###################################
+Sentence-49:<start> to the mouse that kisses the girl by the dog the cat was given . <end>
+True Roles :: N1-A1 N1-R2 N2-O1 N3-A2 N4-O2
+Pred Roles :: N1-A1 N1-R2 N2-O1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 6-fold ###################################
+Sentence-0:<start> to the mouse was given by the dog the cat that thinks . <end>
+True Roles :: N1-R1 N2-A1 N3-O1 N3-A2
+Pred Roles :: N1-R1 N2-A1 N3-O1 N3-A2
+CORRECT :: True
+
+################################### 6-fold ###################################
+Sentence-1:<start> by the dog the cat was given to the mouse that the girl was kissed by . <end>
+True Roles :: N1-A1 N2-O1 N3-R1 N3-A2 N4-O2
+Pred Roles :: N1-A1 N2-O1 N3-R1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 6-fold ###################################
+Sentence-2:<start> cut by the beaver was the fish that kisses the girl . <end>
+True Roles :: N1-A1 N2-O1 N2-A2 N3-O2
+Pred Roles :: N1-A1 N2-O1 N2-A2 N3-O2
+CORRECT :: True
+
+################################### 6-fold ###################################
+Sentence-3:<start> the beaver that kisses the girl cuts the fish . <end>
+True Roles :: N1-A1 N1-A2 N2-O1 N3-O2
+Pred Roles :: N1-A1 N1-A2 N2-O1 N3-O2 N3-A1
+CORRECT :: False
+
+################################### 6-fold ###################################
+Sentence-4:<start> given was the cat by the dog that the girl was kissed by to the mouse . <end>
+True Roles :: N1-O1 N2-A1 N2-A2 N3-O2 N4-R1
+Pred Roles :: N1-O1 N2-A1 N2-A2 N3-O2 N4-R1
+CORRECT :: True
+
+################################### 6-fold ###################################
+Sentence-5:<start> to the mouse was given the cat by the dog that thinks . <end>
+True Roles :: N1-R1 N2-O1 N3-A1 N3-A2
+Pred Roles :: N1-R1 N2-O1 N3-A1 N3-A2
+CORRECT :: True
+
+################################### 6-fold ###################################
+Sentence-6:<start> the book was given to the boy by the man . <end>
+True Roles :: N1-O1 N2-R1 N3-A1
+Pred Roles :: N1-R1 N2-O1 N3-A1
+CORRECT :: False
+
+################################### 6-fold ###################################
+Sentence-7:<start> the cat was given by the dog to the mouse that kisses the girl . <end>
+True Roles :: N1-O1 N2-A1 N3-R1 N3-A2 N4-O2
+Pred Roles :: N1-O1 N2-A1 N3-R1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 6-fold ###################################
+Sentence-8:<start> given by the dog was the cat to the mouse that thinks . <end>
+True Roles :: N1-A1 N2-O1 N3-R1 N3-A2
+Pred Roles :: N1-A1 N2-O1 N3-R1 N3-A2
+CORRECT :: True
+
+################################### 6-fold ###################################
+Sentence-9:<start> the cat was given to the mouse by the dog that kisses the girl . <end>
+True Roles :: N1-O1 N2-R1 N3-A1 N3-A2 N4-O2
+Pred Roles :: N1-O1 N2-R1 N3-A1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 6-fold ###################################
+Sentence-10:<start> the cat was given to the mouse that thinks by the dog . <end>
+True Roles :: N1-O1 N2-R1 N2-A2 N3-A1
+Pred Roles :: N1-O1 N2-R1 N2-A2
+CORRECT :: False
+
+################################### 6-fold ###################################
+Sentence-11:<start> to the mouse the dog that the girl was kissed by gives the cat . <end>
+True Roles :: N1-R2 N2-A1 N2-A2 N3-O1 N4-O2
+Pred Roles :: N1-R2 N2-A1 N2-A2 N3-O1 N4-O2
+CORRECT :: True
+
+################################### 6-fold ###################################
+Sentence-12:<start> the cat was given to the mouse that the girl was kissed by by the dog . <end>
+True Roles :: N1-O1 N2-R1 N2-A2 N3-O2 N4-A1
+Pred Roles :: N1-O1 N2-R1 N2-A2 N3-O2 N4-A1
+CORRECT :: True
+
+################################### 6-fold ###################################
+Sentence-13:<start> by the dog the cat to the mouse that kisses the girl was given . <end>
+True Roles :: N1-A2 N2-O2 N3-A1 N3-R2 N4-O1
+Pred Roles :: N1-A2 N2-O2 N3-A1 N3-R2 N4-O1
+CORRECT :: True
+
+################################### 6-fold ###################################
+Sentence-14:<start> the dog gives to the mouse the cat that kisses the girl . <end>
+True Roles :: N1-A1 N2-R1 N3-O1 N3-A2 N4-O2
+Pred Roles :: N1-A1 N2-R1 N3-O1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 6-fold ###################################
+Sentence-15:<start> the cat by the dog that the girl was kissed by was given to the mouse . <end>
+True Roles :: N1-O2 N2-A1 N2-A2 N3-O1 N4-R2
+Pred Roles :: N1-O2 N2-A1 N2-A2 N3-O1 N4-R2
+CORRECT :: True
+
+################################### 6-fold ###################################
+Sentence-16:<start> given to the mouse was the cat that thinks by the dog . <end>
+True Roles :: N1-R1 N2-O1 N2-A2 N3-A1
+Pred Roles :: N1-R1 N2-O1 N2-A2
+CORRECT :: False
+
+################################### 6-fold ###################################
+Sentence-17:<start> cut was the fish that the girl was kissed by by the beaver . <end>
+True Roles :: N1-O1 N1-A2 N2-O2 N3-A1
+Pred Roles :: N1-O1 N1-A2 N2-A2 N3-A1 N2-O1 N3-O2
+CORRECT :: False
+
+################################### 6-fold ###################################
+Sentence-18:<start> cut was the fish by the beaver that thinks . <end>
+True Roles :: N1-O1 N2-A1 N2-A2
+Pred Roles :: N1-O1 N2-A1 N2-A2
+CORRECT :: True
+
+################################### 6-fold ###################################
+Sentence-19:<start> cut was the fish by the beaver that the guy kisses . <end>
+True Roles :: N1-O1 N2-A1 N2-O2 N3-A2
+Pred Roles :: N1-O1 N2-A1 N2-O2 N3-A2
+CORRECT :: True
+
+################################### 6-fold ###################################
+Sentence-20:<start> given by the dog that the girl was kissed by to the mouse was the cat . <end>
+True Roles :: N1-A1 N1-A2 N2-O2 N3-R1 N4-O1
+Pred Roles :: N1-A1 N1-A2 N2-O2 N3-R1 N4-O1
+CORRECT :: True
+
+################################### 6-fold ###################################
+Sentence-21:<start> the cat by the dog that was kissed by the guy to the mouse was given . <end>
+True Roles :: N1-O2 N2-O1 N2-A2 N3-A1 N4-R2
+Pred Roles :: N1-O2 N2-O1 N2-A2 N3-A1 N4-R2
+CORRECT :: True
+
+################################### 6-fold ###################################
+Sentence-22:<start> by the dog the cat that the girl was kissed by was given to the mouse . <end>
+True Roles :: N1-A2 N2-A1 N2-O2 N3-O1 N4-R2
+Pred Roles :: N1-A2 N2-O2 N3-O1 N4-R2
+CORRECT :: False
+
+################################### 6-fold ###################################
+Sentence-23:<start> the fish , the beaver cut it . <end>
+True Roles :: N1-O1 N2-A1
+Pred Roles :: N2-A1
+CORRECT :: False
+
+################################### 6-fold ###################################
+Sentence-24:<start> give the cat to the mouse that the girl was kissed by , the dog did . <end>
+True Roles :: N1-O1 N2-R1 N2-A2 N3-O2 N4-A1
+Pred Roles :: N1-O1 N2-R1 N3-O2 N4-A1 N3-O1
+CORRECT :: False
+
+################################### 6-fold ###################################
+Sentence-25:<start> the cat to the mouse by the dog that thinks was given . <end>
+True Roles :: N1-O2 N2-R2 N3-A1 N3-A2
+Pred Roles :: N1-O2 N2-R2 N3-A1 N3-A2
+CORRECT :: True
+
+################################### 6-fold ###################################
+Sentence-26:<start> the fish that the girl was kissed by was cut by the beaver . <end>
+True Roles :: N1-A1 N1-O2 N2-O1 N3-A2
+Pred Roles :: N1-A1 N1-O2 N2-O1 N3-A2
+CORRECT :: True
+
+################################### 6-fold ###################################
+Sentence-27:<start> the dog that the man chased gave the cat the rat . <end>
+True Roles :: N1-O1 N1-A2 N2-A1 N2-A2 N3-R2 N4-O2
+Pred Roles :: N1-A1 N1-O2 N2-R1 N2-A2 N3-O2 N4-R2 N3-O1 N4-R1
+CORRECT :: False
+
+################################### 6-fold ###################################
+Sentence-28:<start> cut by the beaver that kisses the girl was the fish . <end>
+True Roles :: N1-A1 N1-A2 N2-O2 N3-O1
+Pred Roles :: N1-A1 N1-A2 N2-O2 N3-O1
+CORRECT :: True
+
+################################### 6-fold ###################################
+Sentence-29:<start> walking was the giraffe that the girl was kissed by . <end>
+True Roles :: N1-A1 N1-A2 N2-O2
+Pred Roles :: N1-R1 N1-O2 N2-O2 N2-A1
+CORRECT :: False
+
+################################### 6-fold ###################################
+Sentence-30:<start> the cat was given to the mouse that kisses the girl by the dog . <end>
+True Roles :: N1-O1 N2-R1 N2-A2 N3-O2 N4-A1
+Pred Roles :: N1-O1 N2-R1 N2-A2 N3-O2 N4-A1
+CORRECT :: True
+
+################################### 6-fold ###################################
+Sentence-31:<start> by the dog the cat that the girl was kissed by to the mouse was given . <end>
+True Roles :: N1-A2 N2-A1 N2-O2 N3-O1 N4-R2
+Pred Roles :: N1-A2 N2-A1 N2-O2 N3-O1 N4-R2
+CORRECT :: True
+
+################################### 6-fold ###################################
+Sentence-32:<start> the cat by the dog that kisses the girl to the mouse was given . <end>
+True Roles :: N1-O2 N2-A1 N2-A2 N3-O1 N4-R2
+Pred Roles :: N1-O2 N2-A1 N2-A2 N3-O1 N4-R2
+CORRECT :: True
+
+################################### 6-fold ###################################
+Sentence-33:<start> the cat to the mouse was given by the dog that the guy kisses . <end>
+True Roles :: N1-O1 N2-R1 N3-A1 N3-O2 N4-A2
+Pred Roles :: N1-O1 N2-R1 N3-A1 N3-O2 N4-A2
+CORRECT :: True
+
+################################### 6-fold ###################################
+Sentence-34:<start> by the dog the cat that was kissed by the guy to the mouse was given . <end>
+True Roles :: N1-A2 N2-O1 N2-O2 N3-A1 N4-R2
+Pred Roles :: N1-A2 N2-O1 N2-O2 N3-A1 N4-R2
+CORRECT :: True
+
+################################### 6-fold ###################################
+Sentence-35:<start> to the mouse that the guy kisses was given the cat by the dog . <end>
+True Roles :: N1-O1 N1-R2 N2-A1 N3-O2 N4-A2
+Pred Roles :: N1-O1 N1-R2 N2-A1 N3-O2 N4-A2
+CORRECT :: True
+
+################################### 6-fold ###################################
+Sentence-36:<start> given to the mouse by the dog that thinks was the cat . <end>
+True Roles :: N1-R1 N2-A1 N2-A2 N3-O1
+Pred Roles :: N1-R1 N2-A1 N2-A2 N3-O1
+CORRECT :: True
+
+################################### 6-fold ###################################
+Sentence-37:<start> to the mouse the cat by the dog that was kissed by the guy was given . <end>
+True Roles :: N1-R2 N2-O2 N3-O1 N3-A2 N4-A1
+Pred Roles :: N1-R2 N2-O2 N3-O1 N3-A2 N4-A1
+CORRECT :: True
+
+################################### 6-fold ###################################
+Sentence-38:<start> walking was the giraffe that was kissed by the guy . <end>
+True Roles :: N1-A1 N1-O2 N2-A2
+Pred Roles :: N1-R1 N1-O2 N2-O2 N2-A1
+CORRECT :: False
+
+################################### 6-fold ###################################
+Sentence-39:<start> by the dog the cat was given to the mouse that the guy kisses . <end>
+True Roles :: N1-A1 N2-O1 N3-R1 N3-O2 N4-A2
+Pred Roles :: N1-A1 N2-O1 N3-R1 N3-O2 N4-A2
+CORRECT :: True
+
+################################### 6-fold ###################################
+Sentence-40:<start> the cat that thinks was given by the dog to the mouse . <end>
+True Roles :: N1-A1 N1-O2 N2-A2 N3-R2
+Pred Roles :: N1-A1 N1-O2 N2-R2 N3-A2 N2-A1
+CORRECT :: False
+
+################################### 6-fold ###################################
+Sentence-41:<start> the fish was cut by the beaver that thinks . <end>
+True Roles :: N1-O1 N2-A1 N2-A2
+Pred Roles :: N1-O1 N2-A1 N2-A2
+CORRECT :: True
+
+################################### 6-fold ###################################
+Sentence-42:<start> by the beaver the fish that the girl was kissed by was cut . <end>
+True Roles :: N1-A2 N2-A1 N2-O2 N3-O1
+Pred Roles :: N1-A2 N2-O2 N3-A1
+CORRECT :: False
+
+################################### 6-fold ###################################
+Sentence-43:<start> the cat that thinks by the dog was given to the mouse . <end>
+True Roles :: N1-A1 N1-O2 N2-A2 N3-R2
+Pred Roles :: N1-A1 N1-O2 N3-R2
+CORRECT :: False
+
+################################### 6-fold ###################################
+Sentence-44:<start> the dog was taken from the vet to the man that chased the cat . <end>
+True Roles :: N1-O1 N2-A1 N3-R1 N3-A2 N4-O2
+Pred Roles :: N1-A1 N2-O1 N3-A1 N4-O2 N1-O2 N2-A2 N4-O1
+CORRECT :: False
+
+################################### 6-fold ###################################
+Sentence-45:<start> the fish was cut by the beaver that was kissed by the guy . <end>
+True Roles :: N1-O1 N2-A1 N2-O2 N3-A2
+Pred Roles :: N1-O1 N2-A1 N2-O2 N3-A2
+CORRECT :: True
+
+################################### 6-fold ###################################
+Sentence-46:<start> the man hit the dog that gave the rat to the cat . <end>
+True Roles :: N1-A1 N2-O1 N2-A2 N3-O2 N4-R2
+Pred Roles :: N2-O1 N2-A2 N4-R2 N1-O2 N3-O1 N4-R1
+CORRECT :: False
+
+################################### 6-fold ###################################
+Sentence-47:<start> given to the mouse was the cat by the dog that the girl was kissed by . <end>
+True Roles :: N1-R1 N2-O1 N3-A1 N3-A2 N4-O2
+Pred Roles :: N1-R1 N2-O1 N3-A1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 6-fold ###################################
+Sentence-48:<start> to the mouse that the guy kisses by the dog the cat was given . <end>
+True Roles :: N1-O1 N1-R2 N2-A1 N3-A2 N4-O2
+Pred Roles :: N1-O1 N1-R2 N2-A1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 6-fold ###################################
+Sentence-49:<start> the cat by the dog that the girl was kissed by to the mouse was given . <end>
+True Roles :: N1-O2 N2-A1 N2-A2 N3-O1 N4-R2
+Pred Roles :: N1-O2 N2-A1 N2-A2 N3-O1 N4-R2
+CORRECT :: True
+
+################################### 7-fold ###################################
+Sentence-0:<start> the dog that the guy kisses gives to the mouse the cat . <end>
+True Roles :: N1-O1 N1-A2 N2-A1 N3-R2 N4-O2
+Pred Roles :: N1-O1 N1-A2 N2-A1 N3-R2 N4-O2
+CORRECT :: True
+
+################################### 7-fold ###################################
+Sentence-1:<start> the cat to the mouse was given by the dog that thinks . <end>
+True Roles :: N1-O1 N2-R1 N3-A1 N3-A2
+Pred Roles :: N1-O1 N2-R1 N3-A1 N3-A2
+CORRECT :: True
+
+################################### 7-fold ###################################
+Sentence-2:<start> given by the dog that was kissed by the guy was the cat to the mouse . <end>
+True Roles :: N1-A1 N1-O2 N2-A2 N3-O1 N4-R1
+Pred Roles :: N1-A1 N1-O2 N2-A2 N3-O1 N4-R1
+CORRECT :: True
+
+################################### 7-fold ###################################
+Sentence-3:<start> by the beaver the fish was cut . <end>
+True Roles :: N1-A1 N2-O1
+Pred Roles :: N1-O1
+CORRECT :: False
+
+################################### 7-fold ###################################
+Sentence-4:<start> walking was the giraffe that the guy kisses . <end>
+True Roles :: N1-A1 N1-O2 N2-A2
+Pred Roles :: N1-A1 N1-O2 N2-O2
+CORRECT :: False
+
+################################### 7-fold ###################################
+Sentence-5:<start> the fish that the guy kisses , the beaver cut it . <end>
+True Roles :: N1-O1 N1-O2 N2-A1 N3-A2
+Pred Roles :: N1-O1 N1-O2 N2-A1 N3-A2 N2-O2
+CORRECT :: False
+
+################################### 7-fold ###################################
+Sentence-6:<start> given to the mouse was the cat that kisses the girl by the dog . <end>
+True Roles :: N1-R1 N2-O1 N2-A2 N3-O2 N4-A1
+Pred Roles :: N1-R1 N2-O1 N2-A2 N3-O2 N4-A1
+CORRECT :: True
+
+################################### 7-fold ###################################
+Sentence-7:<start> the beaver that the girl was kissed by cuts the fish . <end>
+True Roles :: N1-A1 N1-A2 N2-O1 N3-O2
+Pred Roles :: N1-A1 N1-A2 N2-O1 N3-O2
+CORRECT :: True
+
+################################### 7-fold ###################################
+Sentence-8:<start> given was the cat by the dog to the mouse that kisses the girl . <end>
+True Roles :: N1-O1 N2-A1 N3-R1 N3-A2 N4-O2
+Pred Roles :: N1-O1 N2-A1 N3-R1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 7-fold ###################################
+Sentence-9:<start> to the mouse by the dog the cat that thinks was given . <end>
+True Roles :: N1-R2 N2-A2 N3-A1 N3-O2
+Pred Roles :: N1-R2 N2-A2 N3-A1 N3-O2
+CORRECT :: True
+
+################################### 7-fold ###################################
+Sentence-10:<start> the cat to the mouse was given by the dog that kisses the girl . <end>
+True Roles :: N1-O1 N2-R1 N3-A1 N3-A2 N4-O2
+Pred Roles :: N1-O1 N2-R1 N3-A1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 7-fold ###################################
+Sentence-11:<start> the dog that the girl was kissed by gives the cat to the mouse . <end>
+True Roles :: N1-A1 N1-A2 N2-O1 N3-O2 N4-R2
+Pred Roles :: N1-A1 N1-A2 N2-O1 N3-O2 N4-R2
+CORRECT :: True
+
+################################### 7-fold ###################################
+Sentence-12:<start> given was the cat by the dog that thinks to the mouse . <end>
+True Roles :: N1-O1 N2-A1 N2-A2 N3-R1
+Pred Roles :: N1-O1 N2-A1 N2-A2 N3-R1
+CORRECT :: True
+
+################################### 7-fold ###################################
+Sentence-13:<start> the ball that was caught by the boy was thrown by the man . <end>
+True Roles :: N1-O1 N1-O2 N2-A1 N3-A2
+Pred Roles :: N1-A1 N1-R2 N2-O1 N3-O2 N2-A2 N3-A1
+CORRECT :: False
+
+################################### 7-fold ###################################
+Sentence-14:<start> the fish , the beaver that the guy kisses cut it . <end>
+True Roles :: N1-O2 N2-O1 N2-A2 N3-A1
+Pred Roles :: N1-O2 N2-A1 N3-A2
+CORRECT :: False
+
+################################### 7-fold ###################################
+Sentence-15:<start> given was the cat by the dog to the mouse that was kissed by the guy . <end>
+True Roles :: N1-O1 N2-A1 N3-R1 N3-O2 N4-A2
+Pred Roles :: N1-O1 N2-A1 N3-R1 N3-O2 N4-A2
+CORRECT :: True
+
+################################### 7-fold ###################################
+Sentence-16:<start> the cat was given to the mouse by the dog that was kissed by the guy . <end>
+True Roles :: N1-O1 N2-R1 N3-A1 N3-O2 N4-A2
+Pred Roles :: N1-O1 N2-R1 N3-A1 N3-O2 N4-A2
+CORRECT :: True
+
+################################### 7-fold ###################################
+Sentence-17:<start> given was the cat that kisses the girl by the dog to the mouse . <end>
+True Roles :: N1-O1 N1-A2 N2-O2 N3-A1 N4-R1
+Pred Roles :: N1-O1 N1-A2 N2-O2 N3-A1 N4-R1
+CORRECT :: True
+
+################################### 7-fold ###################################
+Sentence-18:<start> to the mouse the dog that kisses the girl gives the cat . <end>
+True Roles :: N1-R2 N2-A1 N2-A2 N3-O1 N4-O2
+Pred Roles :: N1-R2 N2-A1 N2-A2 N3-O1 N4-O2
+CORRECT :: True
+
+################################### 7-fold ###################################
+Sentence-19:<start> to the mouse the cat that kisses the girl was given by the dog . <end>
+True Roles :: N1-R2 N2-A1 N2-O2 N3-O1 N4-A2
+Pred Roles :: N1-R2 N2-A1 N2-O2 N3-O1 N4-A2
+CORRECT :: True
+
+################################### 7-fold ###################################
+Sentence-20:<start> the cat was given to the mouse that was kissed by the guy by the dog . <end>
+True Roles :: N1-O1 N2-R1 N2-O2 N3-A2 N4-A1
+Pred Roles :: N1-O1 N2-R1 N2-O2 N3-A2 N4-A1
+CORRECT :: True
+
+################################### 7-fold ###################################
+Sentence-21:<start> to the mouse the cat was given by the dog that kisses the girl . <end>
+True Roles :: N1-R1 N2-O1 N3-A1 N3-A2 N4-O2
+Pred Roles :: N1-R1 N2-O1 N3-A1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 7-fold ###################################
+Sentence-22:<start> the cat was given to the mouse that the guy kisses by the dog . <end>
+True Roles :: N1-O1 N2-R1 N2-O2 N3-A2 N4-A1
+Pred Roles :: N1-O1 N2-R1 N2-O2 N3-A2 N4-A1
+CORRECT :: True
+
+################################### 7-fold ###################################
+Sentence-23:<start> the cat by the dog was given to the mouse that the girl was kissed by . <end>
+True Roles :: N1-O1 N2-A1 N3-R1 N3-A2 N4-O2
+Pred Roles :: N1-O1 N3-R1 N3-A2 N4-O2
+CORRECT :: False
+
+################################### 7-fold ###################################
+Sentence-24:<start> the giraffe that thinks walks . <end>
+True Roles :: N1-A1 N1-A2
+Pred Roles :: N1-A1 N1-A2
+CORRECT :: True
+
+################################### 7-fold ###################################
+Sentence-25:<start> the ball was given to the boy by the cat that ate the rat . <end>
+True Roles :: N1-O1 N2-R1 N3-A1 N3-A2 N4-O2
+Pred Roles :: N1-O1 N2-R1 N3-A1 N3-O2 N4-R2 N1-R2 N2-O2 N4-O1
+CORRECT :: False
+
+################################### 7-fold ###################################
+Sentence-26:<start> by the beaver that thinks the fish was cut . <end>
+True Roles :: N1-A1 N1-A2 N2-O2
+Pred Roles :: N1-A1 N1-A2
+CORRECT :: False
+
+################################### 7-fold ###################################
+Sentence-27:<start> the dog that chased the cat ate the rat . <end>
+True Roles :: N1-A1 N1-A2 N2-O1 N3-O2
+Pred Roles :: N1-A1 N1-A2 N3-A2 N2-O2 N3-O1
+CORRECT :: False
+
+################################### 7-fold ###################################
+Sentence-28:<start> the cat to the mouse by the dog that the girl was kissed by was given . <end>
+True Roles :: N1-O2 N2-R2 N3-A1 N3-A2 N4-O1
+Pred Roles :: N1-O2 N2-R2 N3-A1 N3-A2 N4-O1
+CORRECT :: True
+
+################################### 7-fold ###################################
+Sentence-29:<start> the cat by the dog to the mouse was given . <end>
+True Roles :: N1-O1 N2-A1 N3-R1
+Pred Roles :: N1-O1 N2-R1
+CORRECT :: False
+
+################################### 7-fold ###################################
+Sentence-30:<start> the giraffe that kisses the girl walks . <end>
+True Roles :: N1-A1 N1-A2 N2-O1
+Pred Roles :: N1-A1 N1-A2 N2-O1
+CORRECT :: True
+
+################################### 7-fold ###################################
+Sentence-31:<start> the dog gives the cat that thinks to the mouse . <end>
+True Roles :: N1-A1 N2-O1 N2-A2 N3-R1
+Pred Roles :: N1-A1 N2-O1 N3-A2
+CORRECT :: False
+
+################################### 7-fold ###################################
+Sentence-32:<start> the dog to the mouse gives the cat that the girl was kissed by . <end>
+True Roles :: N1-A1 N2-R1 N3-O1 N3-A2 N4-O2
+Pred Roles :: N1-A1 N2-R1 N3-O1 N3-O2 N4-O2
+CORRECT :: False
+
+################################### 7-fold ###################################
+Sentence-33:<start> by the dog that kisses the girl the cat to the mouse was given . <end>
+True Roles :: N1-A1 N1-A2 N2-O1 N3-O2 N4-R2
+Pred Roles :: N1-A1 N1-A2 N2-O1 N3-O2 N4-R2
+CORRECT :: True
+
+################################### 7-fold ###################################
+Sentence-34:<start> to the mouse was given the cat that kisses the girl by the dog . <end>
+True Roles :: N1-R1 N2-O1 N2-A2 N3-O2 N4-A1
+Pred Roles :: N1-R1 N2-O1 N2-A2 N3-O2 N4-A1
+CORRECT :: True
+
+################################### 7-fold ###################################
+Sentence-35:<start> by the beaver the fish that the guy kisses was cut . <end>
+True Roles :: N1-A2 N2-O1 N2-O2 N3-A1
+Pred Roles :: N1-A2 N2-A1 N2-O2 N3-O1 N3-A2
+CORRECT :: False
+
+################################### 7-fold ###################################
+Sentence-36:<start> by the dog that thinks to the mouse the cat was given . <end>
+True Roles :: N1-A1 N1-A2 N2-R2 N3-O2
+Pred Roles :: N1-A1 N1-A2 N2-R2 N3-O2
+CORRECT :: True
+
+################################### 7-fold ###################################
+Sentence-37:<start> the cat that was kissed by the guy by the dog to the mouse was given . <end>
+True Roles :: N1-O1 N1-O2 N2-A1 N3-A2 N4-R2
+Pred Roles :: N1-O1 N1-O2 N2-A1 N3-A2 N4-R2
+CORRECT :: True
+
+################################### 7-fold ###################################
+Sentence-38:<start> to the mouse the cat by the dog that kisses the girl was given . <end>
+True Roles :: N1-R2 N2-O2 N3-A1 N3-A2 N4-O1
+Pred Roles :: N1-R2 N2-O2 N3-A1 N3-A2 N4-O1
+CORRECT :: True
+
+################################### 7-fold ###################################
+Sentence-39:<start> the cat that was kissed by the guy to the mouse was given by the dog . <end>
+True Roles :: N1-O1 N1-O2 N2-A1 N3-R2 N4-A2
+Pred Roles :: N1-O1 N1-O2 N2-A1 N3-R2 N4-A2
+CORRECT :: True
+
+################################### 7-fold ###################################
+Sentence-40:<start> the cat to the mouse by the dog that was kissed by the guy was given . <end>
+True Roles :: N1-O2 N2-R2 N3-O1 N3-A2 N4-A1
+Pred Roles :: N1-O2 N2-R2 N3-O1 N3-A2 N4-A1
+CORRECT :: True
+
+################################### 7-fold ###################################
+Sentence-41:<start> to the mouse was given the cat by the dog that kisses the girl . <end>
+True Roles :: N1-R1 N2-O1 N3-A1 N3-A2 N4-O2
+Pred Roles :: N1-R1 N2-O1 N3-A1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 7-fold ###################################
+Sentence-42:<start> given by the dog was the cat that the guy kisses to the mouse . <end>
+True Roles :: N1-A1 N2-O1 N2-O2 N3-A2 N4-R1
+Pred Roles :: N1-A1 N2-O1 N2-O2 N3-A2 N4-R1
+CORRECT :: True
+
+################################### 7-fold ###################################
+Sentence-43:<start> the cat that kisses the girl to the mouse was given by the dog . <end>
+True Roles :: N1-A1 N1-O2 N2-O1 N3-R2 N4-A2
+Pred Roles :: N1-A1 N1-O2 N2-O1 N3-R2 N4-A2
+CORRECT :: True
+
+################################### 7-fold ###################################
+Sentence-44:<start> to the mouse the cat by the dog that thinks was given . <end>
+True Roles :: N1-R2 N2-O2 N3-A1 N3-A2
+Pred Roles :: N1-R2 N2-O2 N3-A1 N3-A2
+CORRECT :: True
+
+################################### 7-fold ###################################
+Sentence-45:<start> john hit the ball on the head . then it hurt him . <end>
+True Roles :: N1-A1 N1-O2 N2-O1 N2-A2 N3-R1
+Pred Roles :: N1-O1 N1-A2 N2-A1 N2-O2 N3-R1 N3-O2
+CORRECT :: False
+
+################################### 7-fold ###################################
+Sentence-46:<start> to the mouse that was kissed by the guy was given by the dog the cat . <end>
+True Roles :: N1-O1 N1-R2 N2-A1 N3-A2 N4-O2
+Pred Roles :: N1-O1 N1-R2 N2-A1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 7-fold ###################################
+Sentence-47:<start> the beaver cuts the fish that was kissed by the guy . <end>
+True Roles :: N1-A1 N2-O1 N2-O2 N3-A2
+Pred Roles :: N1-A1 N2-O1 N2-A2 N3-O2
+CORRECT :: False
+
+################################### 7-fold ###################################
+Sentence-48:<start> the dog to the mouse gives the cat . <end>
+True Roles :: N1-A1 N2-R1 N3-O1
+Pred Roles :: N1-A1 N2-R1 N3-O1
+CORRECT :: True
+
+################################### 7-fold ###################################
+Sentence-49:<start> the cat that the girl was kissed by by the dog to the mouse was given . <end>
+True Roles :: N1-A1 N1-O2 N2-O1 N3-A2 N4-R2
+Pred Roles :: N1-A1 N1-O2 N2-O1 N3-A2 N4-R2
+CORRECT :: True
+
+################################### 8-fold ###################################
+Sentence-0:<start> the dog was chased by the man that broke the glass . <end>
+True Roles :: N1-O1 N2-A1 N2-A2 N3-O2
+Pred Roles :: N1-O1 N2-R1 N2-R2 N3-O2 N1-R2 N3-A1
+CORRECT :: False
+
+################################### 8-fold ###################################
+Sentence-1:<start> given was the cat that was kissed by the guy by the dog to the mouse . <end>
+True Roles :: N1-O1 N1-O2 N2-A2 N3-A1 N4-R1
+Pred Roles :: N1-O1 N1-O2 N2-A2 N3-A1 N4-R1 N2-O1
+CORRECT :: False
+
+################################### 8-fold ###################################
+Sentence-2:<start> john put the apple on the table . <end>
+True Roles :: N1-A1 N2-O1 N3-R1
+Pred Roles :: N1-A1 N2-A1 N3-R1
+CORRECT :: False
+
+################################### 8-fold ###################################
+Sentence-3:<start> cut was the fish by the beaver that the girl was kissed by . <end>
+True Roles :: N1-O1 N2-A1 N2-A2 N3-O2
+Pred Roles :: N1-O1 N2-A1 N2-A2 N3-O2
+CORRECT :: True
+
+################################### 8-fold ###################################
+Sentence-4:<start> the cat that the guy kisses was given by the dog to the mouse . <end>
+True Roles :: N1-O1 N1-O2 N2-A1 N3-A2 N4-R2
+Pred Roles :: N1-O1 N1-O2 N2-A1 N3-A2 N4-R2
+CORRECT :: True
+
+################################### 8-fold ###################################
+Sentence-5:<start> the cat by the dog was given to the mouse . <end>
+True Roles :: N1-O1 N2-A1 N3-R1
+Pred Roles :: N1-O1 N2-A1 N3-R1
+CORRECT :: True
+
+################################### 8-fold ###################################
+Sentence-6:<start> the man gave the book to the boy . <end>
+True Roles :: N1-A1 N2-O1 N3-R1
+Pred Roles :: N1-A1 N2-R1 N3-O1
+CORRECT :: False
+
+################################### 8-fold ###################################
+Sentence-7:<start> cut by the beaver was the fish that was kissed by the guy . <end>
+True Roles :: N1-A1 N2-O1 N2-O2 N3-A2
+Pred Roles :: N1-A1 N2-O1 N2-O2 N3-A2
+CORRECT :: True
+
+################################### 8-fold ###################################
+Sentence-8:<start> to the mouse that was kissed by the guy the cat by the dog was given . <end>
+True Roles :: N1-O1 N1-R2 N2-A1 N3-O2 N4-A2
+Pred Roles :: N1-O1 N1-R2 N2-A1 N3-O2 N4-A2
+CORRECT :: True
+
+################################### 8-fold ###################################
+Sentence-9:<start> the ball that was thrown to the boy by the man broke the glass . <end>
+True Roles :: N1-O1 N1-A2 N2-R1 N3-A1 N4-O2
+Pred Roles :: N1-A1 N1-O2 N2-R1 N3-A1 N4-R2 N2-A2 N3-O2 N4-O1
+CORRECT :: False
+
+################################### 8-fold ###################################
+Sentence-10:<start> the cat that was kissed by the guy to the mouse by the dog was given . <end>
+True Roles :: N1-O1 N1-O2 N2-A1 N3-R2 N4-A2
+Pred Roles :: N1-O1 N1-O2 N2-A1 N3-R2 N4-A2
+CORRECT :: True
+
+################################### 8-fold ###################################
+Sentence-11:<start> given was the cat that thinks by the dog to the mouse . <end>
+True Roles :: N1-O1 N1-A2 N2-A1 N3-R1
+Pred Roles :: N1-O1 N1-A2 N2-A1 N3-A1 N2-A2 N3-R2
+CORRECT :: False
+
+################################### 8-fold ###################################
+Sentence-12:<start> to the mouse the cat that the guy kisses was given by the dog . <end>
+True Roles :: N1-R2 N2-O1 N2-O2 N3-A1 N4-A2
+Pred Roles :: N1-R2 N2-O1 N2-O2 N3-A1 N4-A2
+CORRECT :: True
+
+################################### 8-fold ###################################
+Sentence-13:<start> by the beaver the fish that thinks was cut . <end>
+True Roles :: N1-A2 N2-A1 N2-O2
+Pred Roles :: N1-A2 N2-A1 N2-O2
+CORRECT :: True
+
+################################### 8-fold ###################################
+Sentence-14:<start> to the mouse that was kissed by the guy by the dog the cat was given . <end>
+True Roles :: N1-O1 N1-R2 N2-A1 N3-A2 N4-O2
+Pred Roles :: N1-O1 N1-R2 N2-A1 N4-O2
+CORRECT :: False
+
+################################### 8-fold ###################################
+Sentence-15:<start> to the mouse that the girl was kissed by the cat was given by the dog . <end>
+True Roles :: N1-A1 N1-R2 N2-O1 N3-O2 N4-A2
+Pred Roles :: N1-A1 N1-R2 N2-O1 N3-O2 N4-A2
+CORRECT :: True
+
+################################### 8-fold ###################################
+Sentence-16:<start> the cat that the girl was kissed by by the dog was given to the mouse . <end>
+True Roles :: N1-A1 N1-O2 N2-O1 N3-A2 N4-R2
+Pred Roles :: N1-A1 N1-O2 N2-O1 N3-A2 N4-R2
+CORRECT :: True
+
+################################### 8-fold ###################################
+Sentence-17:<start> the ball was thrown by john . then he caught it . <end>
+True Roles :: N1-O1 N1-O2 N2-A1 N2-A2
+Pred Roles :: N1-A1 N1-O2 N2-O1 N2-A2
+CORRECT :: False
+
+################################### 8-fold ###################################
+Sentence-18:<start> given to the mouse that the guy kisses was the cat by the dog . <end>
+True Roles :: N1-R1 N1-O2 N2-A2 N3-O1 N4-A1
+Pred Roles :: N1-R1 N1-O2 N2-A2 N3-O1 N4-A1
+CORRECT :: True
+
+################################### 8-fold ###################################
+Sentence-19:<start> to the mouse the cat that the girl was kissed by was given by the dog . <end>
+True Roles :: N1-R2 N2-A1 N2-O2 N3-O1 N4-A2
+Pred Roles :: N1-R2 N2-A1 N2-O2 N3-O1 N4-A2
+CORRECT :: True
+
+################################### 8-fold ###################################
+Sentence-20:<start> cut by the beaver that the girl was kissed by was the fish . <end>
+True Roles :: N1-A1 N1-A2 N2-O2 N3-O1
+Pred Roles :: N1-A1 N1-O2 N2-A2 N3-O1 N2-O1
+CORRECT :: False
+
+################################### 8-fold ###################################
+Sentence-21:<start> the cat by the dog was given to the mouse that kisses the girl . <end>
+True Roles :: N1-O1 N2-A1 N3-R1 N3-A2 N4-O2
+Pred Roles :: N1-O1 N2-A1 N3-R1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 8-fold ###################################
+Sentence-22:<start> to the mouse the cat that thinks was given by the dog . <end>
+True Roles :: N1-R2 N2-A1 N2-O2 N3-A2
+Pred Roles :: N1-R2 N2-A1 N2-O2 N3-A2
+CORRECT :: True
+
+################################### 8-fold ###################################
+Sentence-23:<start> given by the dog that the guy kisses to the mouse was the cat . <end>
+True Roles :: N1-A1 N1-O2 N2-A2 N3-R1 N4-O1
+Pred Roles :: N1-A1 N1-O2 N2-A2 N3-R1 N4-O1
+CORRECT :: True
+
+################################### 8-fold ###################################
+Sentence-24:<start> to the mouse the cat by the dog that the girl was kissed by was given . <end>
+True Roles :: N1-R2 N2-O2 N3-A1 N3-A2 N4-O1
+Pred Roles :: N1-R2 N2-O2 N3-O1 N3-A2 N4-O1 N2-A1
+CORRECT :: False
+
+################################### 8-fold ###################################
+Sentence-25:<start> cut was the fish by the beaver that kisses the girl . <end>
+True Roles :: N1-O1 N2-A1 N2-A2 N3-O2
+Pred Roles :: N1-O1 N2-A1 N2-A2 N3-O2
+CORRECT :: True
+
+################################### 8-fold ###################################
+Sentence-26:<start> the dog that gave the rat to the cat was hit by the man . <end>
+True Roles :: N1-A1 N1-O2 N2-O1 N3-R1 N4-A2
+Pred Roles :: N1-O1 N1-A2 N2-A1 N3-A1 N4-O2 N2-O2 N4-O1
+CORRECT :: False
+
+################################### 8-fold ###################################
+Sentence-27:<start> the fish that thinks was cut by the beaver . <end>
+True Roles :: N1-A1 N1-O2 N2-A2
+Pred Roles :: N1-O1 N1-O2 N2-A1
+CORRECT :: False
+
+################################### 8-fold ###################################
+Sentence-28:<start> by the dog the cat that kisses the girl to the mouse was given . <end>
+True Roles :: N1-A2 N2-A1 N2-O2 N3-O1 N4-R2
+Pred Roles :: N1-A2 N2-A1 N2-O2 N3-O1 N4-R2
+CORRECT :: True
+
+################################### 8-fold ###################################
+Sentence-29:<start> the cat was given to the mouse by the dog that thinks . <end>
+True Roles :: N1-O1 N2-R1 N3-A1 N3-A2
+Pred Roles :: N1-O1 N2-R1 N3-A1 N3-A2
+CORRECT :: True
+
+################################### 8-fold ###################################
+Sentence-30:<start> the cat that kisses the girl by the dog was given to the mouse . <end>
+True Roles :: N1-A1 N1-O2 N2-O1 N3-A2 N4-R2
+Pred Roles :: N1-A1 N1-O2 N2-O1 N3-A2 N4-R2
+CORRECT :: True
+
+################################### 8-fold ###################################
+Sentence-31:<start> cut by the beaver was the fish that thinks . <end>
+True Roles :: N1-A1 N2-O1 N2-A2
+Pred Roles :: N1-A1 N2-O1 N2-A2
+CORRECT :: True
+
+################################### 8-fold ###################################
+Sentence-32:<start> the giraffe walks . <end>
+True Roles :: N1-A1
+Pred Roles :: N1-A1
+CORRECT :: True
+
+################################### 8-fold ###################################
+Sentence-33:<start> by the dog the cat to the mouse was given . <end>
+True Roles :: N1-A1 N2-O1 N3-R1
+Pred Roles :: N1-A1 N2-R1
+CORRECT :: False
+
+################################### 8-fold ###################################
+Sentence-34:<start> the man pushed the ball . <end>
+True Roles :: N1-A1 N2-O1
+Pred Roles :: N1-O1 N2-A1
+CORRECT :: False
+
+################################### 8-fold ###################################
+Sentence-35:<start> the cat by the dog was given to the mouse that the guy kisses . <end>
+True Roles :: N1-O1 N2-A1 N3-R1 N3-O2 N4-A2
+Pred Roles :: N1-O1 N2-A1 N3-R1 N3-O2 N4-A2
+CORRECT :: True
+
+################################### 8-fold ###################################
+Sentence-36:<start> given to the mouse by the dog was the cat that was kissed by the guy . <end>
+True Roles :: N1-R1 N2-A1 N3-O1 N3-O2 N4-A2
+Pred Roles :: N1-R1 N2-A1 N3-O1 N3-O2 N4-A2
+CORRECT :: True
+
+################################### 8-fold ###################################
+Sentence-37:<start> give the cat that the guy kisses to the mouse , the dog did . <end>
+True Roles :: N1-O1 N1-O2 N2-A2 N3-R1 N4-A1
+Pred Roles :: N1-O1 N2-O2 N4-A1 N2-R1 N3-A2
+CORRECT :: False
+
+################################### 8-fold ###################################
+Sentence-38:<start> to the mouse the dog gives the cat that the guy kisses . <end>
+True Roles :: N1-R1 N2-A1 N3-O1 N3-O2 N4-A2
+Pred Roles :: N1-R1 N2-A1 N3-O1 N3-A2 N4-A2
+CORRECT :: False
+
+################################### 8-fold ###################################
+Sentence-39:<start> the dog gives the cat that kisses the girl to the mouse . <end>
+True Roles :: N1-A1 N2-O1 N2-A2 N3-O2 N4-R1
+Pred Roles :: N1-A1 N2-O1 N2-A2 N4-R1 N3-R1
+CORRECT :: False
+
+################################### 8-fold ###################################
+Sentence-40:<start> the cat that kisses the girl was given to the mouse by the dog . <end>
+True Roles :: N1-A1 N1-O2 N2-O1 N3-R2 N4-A2
+Pred Roles :: N1-A1 N1-O2 N2-O1 N3-R2 N4-A2
+CORRECT :: True
+
+################################### 8-fold ###################################
+Sentence-41:<start> to the mouse the cat was given by the dog that the girl was kissed by . <end>
+True Roles :: N1-R1 N2-O1 N3-A1 N3-A2 N4-O2
+Pred Roles :: N1-R1 N2-O1 N3-A1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 8-fold ###################################
+Sentence-42:<start> to the mouse by the dog the cat that the girl was kissed by was given . <end>
+True Roles :: N1-R2 N2-A2 N3-A1 N3-O2 N4-O1
+Pred Roles :: N1-R2 N2-A2 N3-O1 N3-O2 N4-O1 N2-A1
+CORRECT :: False
+
+################################### 8-fold ###################################
+Sentence-43:<start> to the mouse was given the cat by the dog that the girl was kissed by . <end>
+True Roles :: N1-R1 N2-O1 N3-A1 N3-A2 N4-O2
+Pred Roles :: N1-R1 N2-O1 N3-A1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 8-fold ###################################
+Sentence-44:<start> the dog that kisses the girl to the mouse gives the cat . <end>
+True Roles :: N1-A1 N1-A2 N2-O1 N3-R2 N4-O2
+Pred Roles :: N1-A1 N1-A2 N2-O1 N3-R2 N4-O2
+CORRECT :: True
+
+################################### 8-fold ###################################
+Sentence-45:<start> by the beaver that the guy kisses the fish was cut . <end>
+True Roles :: N1-O1 N1-A2 N2-A1 N3-O2
+Pred Roles :: N1-O1 N1-A2 N2-O1 N3-O2
+CORRECT :: False
+
+################################### 8-fold ###################################
+Sentence-46:<start> the fish that was kissed by the guy was cut by the beaver . <end>
+True Roles :: N1-O1 N1-O2 N2-A1 N3-A2
+Pred Roles :: N1-O1 N1-O2 N2-A1 N3-A2
+CORRECT :: True
+
+################################### 8-fold ###################################
+Sentence-47:<start> the beaver cuts the fish that kisses the girl . <end>
+True Roles :: N1-A1 N2-O1 N2-A2 N3-O2
+Pred Roles :: N1-A1 N2-O2 N3-A2 N3-O1
+CORRECT :: False
+
+################################### 8-fold ###################################
+Sentence-48:<start> given by the dog to the mouse that kisses the girl was the cat . <end>
+True Roles :: N1-A1 N2-R1 N2-A2 N3-O2 N4-O1
+Pred Roles :: N1-A1 N2-R1 N2-A2 N3-O2 N4-O1
+CORRECT :: True
+
+################################### 8-fold ###################################
+Sentence-49:<start> to the mouse was given by the dog that was kissed by the guy the cat . <end>
+True Roles :: N1-R1 N2-A1 N2-O2 N3-A2 N4-O1
+Pred Roles :: N1-R1 N2-A1 N2-O2 N3-A2 N4-O1
+CORRECT :: True
+
+################################### 9-fold ###################################
+Sentence-0:<start> given was the cat by the dog that kisses the girl to the mouse . <end>
+True Roles :: N1-O1 N2-A1 N2-A2 N3-O2 N4-R1
+Pred Roles :: N1-O1 N2-A1 N2-A2 N3-O2 N4-R1
+CORRECT :: True
+
+################################### 9-fold ###################################
+Sentence-1:<start> to the mouse the cat that was kissed by the guy by the dog was given . <end>
+True Roles :: N1-R2 N2-O1 N2-O2 N3-A1 N4-A2
+Pred Roles :: N1-R2 N2-O1 N2-O2 N3-A1 N4-A2
+CORRECT :: True
+
+################################### 9-fold ###################################
+Sentence-2:<start> the dog gives the cat that the guy kisses to the mouse . <end>
+True Roles :: N1-A1 N2-O1 N2-O2 N3-A2 N4-R1
+Pred Roles :: N1-A1 N2-O1 N2-A2 N3-O2 N4-R1
+CORRECT :: False
+
+################################### 9-fold ###################################
+Sentence-3:<start> by the dog to the mouse that thinks the cat was given . <end>
+True Roles :: N1-A2 N2-A1 N2-R2 N3-O2
+Pred Roles :: N1-A2 N2-A1 N2-R2
+CORRECT :: False
+
+################################### 9-fold ###################################
+Sentence-4:<start> to the mouse that kisses the girl was given the cat by the dog . <end>
+True Roles :: N1-A1 N1-R2 N2-O1 N3-O2 N4-A2
+Pred Roles :: N1-A1 N1-R2 N2-O1 N3-O2 N4-A2
+CORRECT :: True
+
+################################### 9-fold ###################################
+Sentence-5:<start> given was the cat by the dog to the mouse . <end>
+True Roles :: N1-O1 N2-A1 N3-R1
+Pred Roles :: N1-O1 N2-A1 N3-R1
+CORRECT :: True
+
+################################### 9-fold ###################################
+Sentence-6:<start> the dog that was kissed by the guy gives the cat to the mouse . <end>
+True Roles :: N1-O1 N1-A2 N2-A1 N3-O2 N4-R2
+Pred Roles :: N1-O1 N1-A2 N2-A1 N3-O2 N4-R2
+CORRECT :: True
+
+################################### 9-fold ###################################
+Sentence-7:<start> to the mouse that the girl was kissed by the cat by the dog was given . <end>
+True Roles :: N1-A1 N1-R2 N2-O1 N3-O2 N4-A2
+Pred Roles :: N1-A1 N1-R2 N2-O1 N3-O2 N4-A2
+CORRECT :: True
+
+################################### 9-fold ###################################
+Sentence-8:<start> the dog gives to the mouse the cat that was kissed by the guy . <end>
+True Roles :: N1-A1 N2-R1 N3-O1 N3-O2 N4-A2
+Pred Roles :: N1-A1 N2-R1 N3-O1 N3-O2 N4-A2
+CORRECT :: True
+
+################################### 9-fold ###################################
+Sentence-9:<start> to the mouse was given by the dog that the guy kisses the cat . <end>
+True Roles :: N1-R1 N2-A1 N2-O2 N3-A2 N4-O1
+Pred Roles :: N1-R1 N2-A1 N2-O2 N3-A2 N4-O1
+CORRECT :: True
+
+################################### 9-fold ###################################
+Sentence-10:<start> by the dog that kisses the girl to the mouse the cat was given . <end>
+True Roles :: N1-A1 N1-A2 N2-O1 N3-R2 N4-O2
+Pred Roles :: N1-A1 N1-A2 N2-O1 N3-R2 N4-O2
+CORRECT :: True
+
+################################### 9-fold ###################################
+Sentence-11:<start> by the dog to the mouse the cat that the girl was kissed by was given . <end>
+True Roles :: N1-A2 N2-R2 N3-A1 N3-O2 N4-O1
+Pred Roles :: N1-A2 N2-R2 N3-A1 N3-O2 N4-O1
+CORRECT :: True
+
+################################### 9-fold ###################################
+Sentence-12:<start> given by the dog was the cat that was kissed by the guy to the mouse . <end>
+True Roles :: N1-A1 N2-O1 N2-O2 N3-A2 N4-R1
+Pred Roles :: N1-A1 N2-O1 N2-O2 N3-A2 N4-R1
+CORRECT :: True
+
+################################### 9-fold ###################################
+Sentence-13:<start> by the dog that was kissed by the guy to the mouse the cat was given . <end>
+True Roles :: N1-O1 N1-A2 N2-A1 N3-R2 N4-O2
+Pred Roles :: N1-O1 N1-A2 N2-A1 N3-R2 N4-O2
+CORRECT :: True
+
+################################### 9-fold ###################################
+Sentence-14:<start> the cat by the dog that thinks to the mouse was given . <end>
+True Roles :: N1-O2 N2-A1 N2-A2 N3-R2
+Pred Roles :: N1-O2 N2-A1 N2-A2 N3-R2
+CORRECT :: True
+
+################################### 9-fold ###################################
+Sentence-15:<start> to the mouse that thinks was given by the dog the cat . <end>
+True Roles :: N1-A1 N1-R2 N2-A2 N3-O2
+Pred Roles :: N1-A1 N1-R2 N3-A2 N2-A1
+CORRECT :: False
+
+################################### 9-fold ###################################
+Sentence-16:<start> cut by the beaver that thinks was the fish . <end>
+True Roles :: N1-A1 N1-A2 N2-O1
+Pred Roles :: N1-A1 N1-A2 N2-O2
+CORRECT :: False
+
+################################### 9-fold ###################################
+Sentence-17:<start> given to the mouse that thinks by the dog was the cat . <end>
+True Roles :: N1-R1 N1-A2 N2-A1 N3-O1
+Pred Roles :: N1-R1 N1-A2 N3-O1 N2-A2
+CORRECT :: False
+
+################################### 9-fold ###################################
+Sentence-18:<start> cut was the fish that was kissed by the guy by the beaver . <end>
+True Roles :: N1-O1 N1-O2 N2-A2 N3-A1
+Pred Roles :: N1-O1 N1-O2 N2-A2 N3-A1
+CORRECT :: True
+
+################################### 9-fold ###################################
+Sentence-19:<start> to the mouse by the dog the cat that kisses the girl was given . <end>
+True Roles :: N1-R2 N2-A2 N3-A1 N3-O2 N4-O1
+Pred Roles :: N1-R2 N2-A2 N3-A1 N3-O2 N4-O1
+CORRECT :: True
+
+################################### 9-fold ###################################
+Sentence-20:<start> given by the dog to the mouse that the girl was kissed by was the cat . <end>
+True Roles :: N1-A1 N2-R1 N2-A2 N3-O2 N4-O1
+Pred Roles :: N1-A1 N2-R1 N3-O2 N4-O1
+CORRECT :: False
+
+################################### 9-fold ###################################
+Sentence-21:<start> the giraffe that the girl was kissed by walks . <end>
+True Roles :: N1-A1 N1-A2 N2-O1
+Pred Roles :: N1-A1 N1-A2 N2-O1 N2-O2
+CORRECT :: False
+
+################################### 9-fold ###################################
+Sentence-22:<start> the cat was given by the dog to the mouse . <end>
+True Roles :: N1-O1 N2-A1 N3-R1
+Pred Roles :: N1-O1 N2-A1 N3-R1
+CORRECT :: True
+
+################################### 9-fold ###################################
+Sentence-23:<start> given to the mouse was the cat by the dog that thinks . <end>
+True Roles :: N1-R1 N2-O1 N3-A1 N3-A2
+Pred Roles :: N1-R1 N2-O1 N3-A1 N3-A2
+CORRECT :: True
+
+################################### 9-fold ###################################
+Sentence-24:<start> to the mouse that kisses the girl the cat was given by the dog . <end>
+True Roles :: N1-A1 N1-R2 N2-O1 N3-O2 N4-A2
+Pred Roles :: N1-A1 N1-R2 N2-O1 N3-O2 N4-A2
+CORRECT :: True
+
+################################### 9-fold ###################################
+Sentence-25:<start> the cat that the guy kisses by the dog was given to the mouse . <end>
+True Roles :: N1-O1 N1-O2 N2-A1 N3-A2 N4-R2
+Pred Roles :: N1-O1 N1-O2 N2-A1 N3-A2 N4-R2
+CORRECT :: True
+
+################################### 9-fold ###################################
+Sentence-26:<start> to the mouse that thinks the cat by the dog was given . <end>
+True Roles :: N1-A1 N1-R2 N2-O2 N3-A2
+Pred Roles :: N1-A1 N1-R2 N2-O2 N3-A2
+CORRECT :: True
+
+################################### 9-fold ###################################
+Sentence-27:<start> to the mouse was given the cat by the dog that the guy kisses . <end>
+True Roles :: N1-R1 N2-O1 N3-A1 N3-O2 N4-A2
+Pred Roles :: N1-R1 N2-O1 N3-A1 N3-O2 N4-A2
+CORRECT :: True
+
+################################### 9-fold ###################################
+Sentence-28:<start> the beaver that thinks cuts the fish . <end>
+True Roles :: N1-A1 N1-A2 N2-O2
+Pred Roles :: N1-A1 N1-A2 N2-A2
+CORRECT :: False
+
+################################### 9-fold ###################################
+Sentence-29:<start> the dog that the girl was kissed by to the mouse gives the cat . <end>
+True Roles :: N1-A1 N1-A2 N2-O1 N3-R2 N4-O2
+Pred Roles :: N1-A1 N1-A2 N2-O1 N3-R2 N4-O2 N2-A2
+CORRECT :: False
+
+################################### 9-fold ###################################
+Sentence-30:<start> to the mouse the cat that thinks by the dog was given . <end>
+True Roles :: N1-R2 N2-A1 N2-O2 N3-A2
+Pred Roles :: N1-R2 N2-A1 N2-O2 N3-A2
+CORRECT :: True
+
+################################### 9-fold ###################################
+Sentence-31:<start> the cat by the dog that the guy kisses to the mouse was given . <end>
+True Roles :: N1-O2 N2-O1 N2-A2 N3-A1 N4-R2
+Pred Roles :: N1-O2 N2-O1 N2-A2 N3-A1 N4-R2
+CORRECT :: True
+
+################################### 9-fold ###################################
+Sentence-32:<start> given by the dog to the mouse that thinks was the cat . <end>
+True Roles :: N1-A1 N2-R1 N2-A2 N3-O1
+Pred Roles :: N1-A1 N2-R1 N3-O1
+CORRECT :: False
+
+################################### 9-fold ###################################
+Sentence-33:<start> to the mouse was given by the dog the cat that the girl was kissed by . <end>
+True Roles :: N1-R1 N2-A1 N3-O1 N3-A2 N4-O2
+Pred Roles :: N1-R1 N2-A1 N3-O1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 9-fold ###################################
+Sentence-34:<start> by the dog the cat was given to the mouse . <end>
+True Roles :: N1-A1 N2-O1 N3-R1
+Pred Roles :: N1-A1 N2-O1 N3-R1
+CORRECT :: True
+
+################################### 9-fold ###################################
+Sentence-35:<start> by the dog the cat was given to the mouse that kisses the girl . <end>
+True Roles :: N1-A1 N2-O1 N3-R1 N3-A2 N4-O2
+Pred Roles :: N1-A1 N2-O1 N3-R1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 9-fold ###################################
+Sentence-36:<start> walking was the giraffe that kisses the girl . <end>
+True Roles :: N1-A1 N1-A2 N2-O2
+Pred Roles :: N1-A1 N1-A2 N2-O2
+CORRECT :: True
+
+################################### 9-fold ###################################
+Sentence-37:<start> the cat that thinks by the dog to the mouse was given . <end>
+True Roles :: N1-A1 N1-O2 N2-A2 N3-R2
+Pred Roles :: N1-A1 N1-O2 N2-A2 N3-R2
+CORRECT :: True
+
+################################### 9-fold ###################################
+Sentence-38:<start> given to the mouse by the dog was the cat that thinks . <end>
+True Roles :: N1-R1 N2-A1 N3-O1 N3-A2
+Pred Roles :: N1-R1 N2-A1 N3-O1 N3-A2
+CORRECT :: True
+
+################################### 9-fold ###################################
+Sentence-39:<start> the cat that the guy kisses by the dog to the mouse was given . <end>
+True Roles :: N1-O1 N1-O2 N2-A1 N3-A2 N4-R2
+Pred Roles :: N1-O1 N1-O2 N2-A1 N3-A2 N4-R2
+CORRECT :: True
+
+################################### 9-fold ###################################
+Sentence-40:<start> the cat that was kissed by the guy by the dog was given to the mouse . <end>
+True Roles :: N1-O1 N1-O2 N2-A1 N3-A2 N4-R2
+Pred Roles :: N1-O1 N1-O2 N2-A1 N3-A2 N4-R2
+CORRECT :: True
+
+################################### 9-fold ###################################
+Sentence-41:<start> the cat was given by the dog that was kissed by the guy to the mouse . <end>
+True Roles :: N1-O1 N2-A1 N2-O2 N3-A2 N4-R1
+Pred Roles :: N1-O1 N2-A1 N2-O2 N3-A2 N4-R1
+CORRECT :: True
+
+################################### 9-fold ###################################
+Sentence-42:<start> to the mouse the dog that the guy kisses gives the cat . <end>
+True Roles :: N1-R2 N2-O1 N2-A2 N3-A1 N4-O2
+Pred Roles :: N1-R2 N2-O1 N2-A2 N3-A1 N4-O2
+CORRECT :: True
+
+################################### 9-fold ###################################
+Sentence-43:<start> given by the dog was the cat that thinks to the mouse . <end>
+True Roles :: N1-A1 N2-O1 N2-A2 N3-R1
+Pred Roles :: N1-A1 N2-O1 N2-A2 N3-R1
+CORRECT :: True
+
+################################### 9-fold ###################################
+Sentence-44:<start> the cat to the mouse that was kissed by the guy was given by the dog . <end>
+True Roles :: N1-O2 N2-O1 N2-R2 N3-A1 N4-A2
+Pred Roles :: N1-O2 N2-O1 N2-R2 N3-A1 N4-A2
+CORRECT :: True
+
+################################### 9-fold ###################################
+Sentence-45:<start> the cat by the dog that the guy kisses was given to the mouse . <end>
+True Roles :: N1-O2 N2-O1 N2-A2 N3-A1 N4-R2
+Pred Roles :: N1-O2 N2-O1 N2-A2 N3-A1 N4-R2
+CORRECT :: True
+
+################################### 9-fold ###################################
+Sentence-46:<start> the cat was given by the dog that the girl was kissed by to the mouse . <end>
+True Roles :: N1-O1 N2-A1 N2-A2 N3-O2 N4-R1
+Pred Roles :: N1-O1 N2-A1 N2-A2 N3-O2 N4-R1
+CORRECT :: True
+
+################################### 9-fold ###################################
+Sentence-47:<start> by the dog the cat to the mouse that was kissed by the guy was given . <end>
+True Roles :: N1-A2 N2-O2 N3-O1 N3-R2 N4-A1
+Pred Roles :: N1-A2 N2-O2 N3-O1 N3-R2 N4-A1
+CORRECT :: True
+
+################################### 9-fold ###################################
+Sentence-48:<start> the cat by the dog that kisses the girl was given to the mouse . <end>
+True Roles :: N1-O2 N2-A1 N2-A2 N3-O1 N4-R2
+Pred Roles :: N1-O2 N2-A1 N2-A2 N3-O1 N4-R2
+CORRECT :: True
+
+################################### 9-fold ###################################
+Sentence-49:<start> given to the mouse by the dog was the cat that the girl was kissed by . <end>
+True Roles :: N1-R1 N2-A1 N3-O1 N3-A2 N4-O2
+Pred Roles :: N1-R1 N2-A1 N3-O1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 10-fold ###################################
+Sentence-0:<start> the cat that kisses the girl was given by the dog to the mouse . <end>
+True Roles :: N1-A1 N1-O2 N2-O1 N3-A2 N4-R2
+Pred Roles :: N1-A1 N1-O2 N2-O1 N3-A2 N4-R2
+CORRECT :: True
+
+################################### 10-fold ###################################
+Sentence-1:<start> cut by the beaver that was kissed by the guy was the fish . <end>
+True Roles :: N1-A1 N1-O2 N2-A2 N3-O1
+Pred Roles :: N1-A1 N1-O2 N2-O2 N3-O1 N2-R1 N3-A2
+CORRECT :: False
+
+################################### 10-fold ###################################
+Sentence-2:<start> to the mouse the cat was given by the dog that was kissed by the guy . <end>
+True Roles :: N1-R1 N2-O1 N3-A1 N3-O2 N4-A2
+Pred Roles :: N1-R1 N2-O1 N3-A1 N3-O2 N4-A2
+CORRECT :: True
+
+################################### 10-fold ###################################
+Sentence-3:<start> to the mouse the cat was given by the dog that thinks . <end>
+True Roles :: N1-R1 N2-O1 N3-A1 N3-A2
+Pred Roles :: N1-R1 N2-O1 N3-A1 N3-A2
+CORRECT :: True
+
+################################### 10-fold ###################################
+Sentence-4:<start> to the mouse by the dog that was kissed by the guy the cat was given . <end>
+True Roles :: N1-R2 N2-O1 N2-A2 N3-A1 N4-O2
+Pred Roles :: N1-R2 N2-A2 N3-A1 N4-O2
+CORRECT :: False
+
+################################### 10-fold ###################################
+Sentence-5:<start> by the dog the cat to the mouse that the guy kisses was given . <end>
+True Roles :: N1-A2 N2-O2 N3-O1 N3-R2 N4-A1
+Pred Roles :: N1-A2 N2-O2 N3-O1 N3-R2 N4-A1
+CORRECT :: True
+
+################################### 10-fold ###################################
+Sentence-6:<start> the dog gives the cat to the mouse that thinks . <end>
+True Roles :: N1-A1 N2-O1 N3-R1 N3-A2
+Pred Roles :: N1-A1 N2-O1 N3-R1 N3-A2
+CORRECT :: True
+
+################################### 10-fold ###################################
+Sentence-7:<start> given was the cat that the guy kisses by the dog to the mouse . <end>
+True Roles :: N1-O1 N1-O2 N2-A2 N3-A1 N4-R1
+Pred Roles :: N1-O1 N1-O2 N2-O2 N3-A1 N4-R1 N3-A2
+CORRECT :: False
+
+################################### 10-fold ###################################
+Sentence-8:<start> the man that gave the ball to the boy hit the car . <end>
+True Roles :: N1-A1 N1-A2 N2-O1 N3-R1 N4-O2
+Pred Roles :: N1-A2 N2-O1 N4-A2 N2-R2 N3-O2
+CORRECT :: False
+
+################################### 10-fold ###################################
+Sentence-9:<start> the man that was kissed by the girl gave the ball to the boy . <end>
+True Roles :: N1-O1 N1-A2 N2-A1 N3-O2 N4-R2
+Pred Roles :: N1-O1 N1-A2 N2-R1 N3-O2 N4-A2 N2-A2 N3-A1
+CORRECT :: False
+
+################################### 10-fold ###################################
+Sentence-10:<start> to the mouse by the dog that thinks the cat was given . <end>
+True Roles :: N1-R2 N2-A1 N2-A2 N3-O2
+Pred Roles :: N1-R2 N2-A1 N2-A2 N3-O2
+CORRECT :: True
+
+################################### 10-fold ###################################
+Sentence-11:<start> the dog that thinks gives to the mouse the cat . <end>
+True Roles :: N1-A1 N1-A2 N2-R2 N3-O2
+Pred Roles :: N1-A1 N2-A2 N3-O2 N2-R1
+CORRECT :: False
+
+################################### 10-fold ###################################
+Sentence-12:<start> to the mouse the cat that the girl was kissed by by the dog was given . <end>
+True Roles :: N1-R2 N2-A1 N2-O2 N3-O1 N4-A2
+Pred Roles :: N1-R2 N2-A1 N2-O2 N3-O1 N4-A2
+CORRECT :: True
+
+################################### 10-fold ###################################
+Sentence-13:<start> the cat was given by the dog to the mouse that the guy kisses . <end>
+True Roles :: N1-O1 N2-A1 N3-R1 N3-O2 N4-A2
+Pred Roles :: N1-O1 N2-A1 N3-R1 N3-O2 N4-A2
+CORRECT :: True
+
+################################### 10-fold ###################################
+Sentence-14:<start> the dog gives to the mouse the cat that thinks . <end>
+True Roles :: N1-A1 N2-R1 N3-O1 N3-A2
+Pred Roles :: N1-A1 N2-R1 N3-O1 N3-A2
+CORRECT :: True
+
+################################### 10-fold ###################################
+Sentence-15:<start> given was the cat by the dog to the mouse that thinks . <end>
+True Roles :: N1-O1 N2-A1 N3-R1 N3-A2
+Pred Roles :: N1-O1 N2-A1 N3-R1 N3-A2
+CORRECT :: True
+
+################################### 10-fold ###################################
+Sentence-16:<start> to the mouse that the girl was kissed by was given the cat by the dog . <end>
+True Roles :: N1-A1 N1-R2 N2-O1 N3-O2 N4-A2
+Pred Roles :: N1-A1 N1-R2 N2-O1 N3-O2 N4-A2
+CORRECT :: True
+
+################################### 10-fold ###################################
+Sentence-17:<start> to the mouse by the dog the cat was given . <end>
+True Roles :: N1-R1 N2-A1 N3-O1
+Pred Roles :: N2-A1
+CORRECT :: False
+
+################################### 10-fold ###################################
+Sentence-18:<start> by the dog the cat to the mouse that thinks was given . <end>
+True Roles :: N1-A2 N2-O2 N3-A1 N3-R2
+Pred Roles :: N1-A2 N2-O2 N3-A1 N3-R2
+CORRECT :: True
+
+################################### 10-fold ###################################
+Sentence-19:<start> given was the cat by the dog to the mouse that the guy kisses . <end>
+True Roles :: N1-O1 N2-A1 N3-R1 N3-O2 N4-A2
+Pred Roles :: N1-O1 N2-A1 N3-R1 N3-O2 N4-A2
+CORRECT :: True
+
+################################### 10-fold ###################################
+Sentence-20:<start> give the cat that the girl was kissed by to the mouse , the dog did . <end>
+True Roles :: N1-O1 N1-A2 N2-O2 N3-R1 N4-A1
+Pred Roles :: N1-A2 N2-O2 N3-R1 N4-A1 N2-O1
+CORRECT :: False
+
+################################### 10-fold ###################################
+Sentence-21:<start> to the mouse by the dog that the girl was kissed by the cat was given . <end>
+True Roles :: N1-R2 N2-A1 N2-A2 N3-O1 N4-O2
+Pred Roles :: N1-R2 N2-A1 N2-A2 N3-O1 N4-O2
+CORRECT :: True
+
+################################### 10-fold ###################################
+Sentence-22:<start> by the dog to the mouse that the guy kisses the cat was given . <end>
+True Roles :: N1-A2 N2-O1 N2-R2 N3-A1 N4-O2
+Pred Roles :: N1-A2 N2-A1 N2-R2 N4-O2
+CORRECT :: False
+
+################################### 10-fold ###################################
+Sentence-23:<start> given by the dog was the cat that kisses the girl to the mouse . <end>
+True Roles :: N1-A1 N2-O1 N2-A2 N3-O2 N4-R1
+Pred Roles :: N1-A1 N2-O1 N2-A2 N3-O2 N4-R1
+CORRECT :: True
+
+################################### 10-fold ###################################
+Sentence-24:<start> the cat was given by the dog that thinks to the mouse . <end>
+True Roles :: N1-O1 N2-A1 N2-A2 N3-R1
+Pred Roles :: N1-O1 N2-A1 N2-A2 N3-R1
+CORRECT :: True
+
+################################### 10-fold ###################################
+Sentence-25:<start> to the mouse by the dog the cat that the guy kisses was given . <end>
+True Roles :: N1-R2 N2-A2 N3-O1 N3-O2 N4-A1
+Pred Roles :: N1-R2 N2-A2 N3-O1 N3-O2 N4-A1
+CORRECT :: True
+
+################################### 10-fold ###################################
+Sentence-26:<start> to the mouse by the dog that the guy kisses the cat was given . <end>
+True Roles :: N1-R2 N2-O1 N2-A2 N3-A1 N4-O2
+Pred Roles :: N1-R2 N2-A2 N4-O2
+CORRECT :: False
+
+################################### 10-fold ###################################
+Sentence-27:<start> the cat by the dog to the mouse that kisses the girl was given . <end>
+True Roles :: N1-O2 N2-A2 N3-A1 N3-R2 N4-O1
+Pred Roles :: N1-O2 N2-A2 N3-A1 N3-R2 N4-O1
+CORRECT :: True
+
+################################### 10-fold ###################################
+Sentence-28:<start> to the mouse the dog gives the cat that the girl was kissed by . <end>
+True Roles :: N1-R1 N2-A1 N3-O1 N3-A2 N4-O2
+Pred Roles :: N2-A1 N3-O1 N3-A2 N4-O2 N1-R2
+CORRECT :: False
+
+################################### 10-fold ###################################
+Sentence-29:<start> the beaver that the guy kisses cuts the fish . <end>
+True Roles :: N1-O1 N1-A2 N2-A1 N3-O2
+Pred Roles :: N1-O1 N1-A2 N2-A1 N3-O2 N2-A2
+CORRECT :: False
+
+################################### 10-fold ###################################
+Sentence-30:<start> to the mouse the cat by the dog was given . <end>
+True Roles :: N1-R1 N2-O1 N3-A1
+Pred Roles :: N1-O1 N2-A1
+CORRECT :: False
+
+################################### 10-fold ###################################
+Sentence-31:<start> cut was the fish that thinks by the beaver . <end>
+True Roles :: N1-O1 N1-A2 N2-A1
+Pred Roles :: N1-O1 N1-A2 N2-A2
+CORRECT :: False
+
+################################### 10-fold ###################################
+Sentence-32:<start> given to the mouse was the cat by the dog that was kissed by the guy . <end>
+True Roles :: N1-R1 N2-O1 N3-A1 N3-O2 N4-A2
+Pred Roles :: N1-R1 N2-O1 N3-A1 N3-O2 N4-A2
+CORRECT :: True
+
+################################### 10-fold ###################################
+Sentence-33:<start> the dog gives to the mouse that thinks the cat . <end>
+True Roles :: N1-A1 N2-R1 N2-A2 N3-O1
+Pred Roles :: N1-A1 N2-R1 N2-A2 N3-O1
+CORRECT :: True
+
+################################### 10-fold ###################################
+Sentence-34:<start> the cat that was kissed by the guy was given to the mouse by the dog . <end>
+True Roles :: N1-O1 N1-O2 N2-A1 N3-R2 N4-A2
+Pred Roles :: N1-O1 N1-O2 N2-A1 N3-R2 N4-A2
+CORRECT :: True
+
+################################### 10-fold ###################################
+Sentence-35:<start> to the mouse that was kissed by the guy was given the cat by the dog . <end>
+True Roles :: N1-O1 N1-R2 N2-A1 N3-O2 N4-A2
+Pred Roles :: N1-O1 N1-R2 N2-A1 N3-O2 N4-A2
+CORRECT :: True
+
+################################### 10-fold ###################################
+Sentence-36:<start> the cat to the mouse that the guy kisses was given by the dog . <end>
+True Roles :: N1-O2 N2-O1 N2-R2 N3-A1 N4-A2
+Pred Roles :: N1-O2 N2-O1 N2-R2 N3-A1 N4-A2
+CORRECT :: True
+
+################################### 10-fold ###################################
+Sentence-37:<start> the cat that thinks to the mouse by the dog was given . <end>
+True Roles :: N1-A1 N1-O2 N2-R2 N3-A2
+Pred Roles :: N1-A1 N1-O2 N2-R2 N3-A2
+CORRECT :: True
+
+################################### 10-fold ###################################
+Sentence-38:<start> given by the dog that the guy kisses was the cat to the mouse . <end>
+True Roles :: N1-A1 N1-O2 N2-A2 N3-O1 N4-R1
+Pred Roles :: N1-A1 N1-O2 N2-A2 N3-O1 N4-R1 N2-A1
+CORRECT :: False
+
+################################### 10-fold ###################################
+Sentence-39:<start> cut by the beaver was the fish that the guy kisses . <end>
+True Roles :: N1-A1 N2-O1 N2-O2 N3-A2
+Pred Roles :: N1-A1 N2-O1 N2-O2 N3-A2
+CORRECT :: True
+
+################################### 10-fold ###################################
+Sentence-40:<start> by the dog the cat that the guy kisses to the mouse was given . <end>
+True Roles :: N1-A2 N2-O1 N2-O2 N3-A1 N4-R2
+Pred Roles :: N1-A2 N2-O1 N2-O2 N3-A1 N4-R2
+CORRECT :: True
+
+################################### 10-fold ###################################
+Sentence-41:<start> by the dog that thinks the cat was given to the mouse . <end>
+True Roles :: N1-A1 N1-A2 N2-O2 N3-R2
+Pred Roles :: N1-A1 N1-A2 N2-O2 N3-R2 N2-O1
+CORRECT :: False
+
+################################### 10-fold ###################################
+Sentence-42:<start> by the dog to the mouse the cat that thinks was given . <end>
+True Roles :: N1-A2 N2-R2 N3-A1 N3-O2
+Pred Roles :: N1-A2 N2-R2 N3-A1 N3-O2
+CORRECT :: True
+
+################################### 10-fold ###################################
+Sentence-43:<start> by the dog to the mouse the cat that was kissed by the guy was given . <end>
+True Roles :: N1-A2 N2-R2 N3-O1 N3-O2 N4-A1
+Pred Roles :: N1-A2 N2-R2 N3-O1 N3-O2 N4-A1
+CORRECT :: True
+
+################################### 10-fold ###################################
+Sentence-44:<start> given to the mouse that kisses the girl was the cat by the dog . <end>
+True Roles :: N1-R1 N1-A2 N2-O2 N3-O1 N4-A1
+Pred Roles :: N1-R1 N1-A2 N2-O2 N3-O1 N4-A1
+CORRECT :: True
+
+################################### 10-fold ###################################
+Sentence-45:<start> by the dog the cat that the guy kisses was given to the mouse . <end>
+True Roles :: N1-A2 N2-O1 N2-O2 N3-A1 N4-R2
+Pred Roles :: N1-A2 N2-O1 N2-O2 N3-A1 N4-R2
+CORRECT :: True
+
+################################### 10-fold ###################################
+Sentence-46:<start> to the mouse the dog gives the cat that was kissed by the guy . <end>
+True Roles :: N1-R1 N2-A1 N3-O1 N3-O2 N4-A2
+Pred Roles :: N1-A1 N2-R1 N3-O1 N3-O2 N4-A2 N1-R2
+CORRECT :: False
+
+################################### 10-fold ###################################
+Sentence-47:<start> the dog that thinks gives the cat to the mouse . <end>
+True Roles :: N1-A1 N1-A2 N2-O2 N3-R2
+Pred Roles :: N1-A1 N2-A2 N3-O2 N2-O1
+CORRECT :: False
+
+################################### 10-fold ###################################
+Sentence-48:<start> given to the mouse that the guy kisses by the dog was the cat . <end>
+True Roles :: N1-R1 N1-O2 N2-A2 N3-A1 N4-O1
+Pred Roles :: N1-R1 N1-O2 N2-A2 N3-A1 N4-O1 N2-A1
+CORRECT :: False
+
+################################### 10-fold ###################################
+Sentence-49:<start> the boy that the man bit gave the ball to the girl . <end>
+True Roles :: N1-O1 N1-A2 N2-A1 N2-A2 N3-O2 N4-R2
+Pred Roles :: N1-A1 N1-R2 N2-O1 N2-A2 N3-O2 N4-R2 N3-R1 N4-A1
+CORRECT :: False
+

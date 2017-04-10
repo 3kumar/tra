@@ -3,6 +3,12 @@
 Created on Thu Jun 30 11:55:47 2016
 
 @author: fox
+
+This script contains functions to generate the reservoir and input weights martrix of the  ESN. However this methodoly 
+does not utilize the sparse matrix concept.
+
+Also see: reservoir_weights.py
+
 """
 
 import mdp

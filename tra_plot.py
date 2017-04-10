@@ -1,11 +1,12 @@
 import pylab as pl
 from matplotlib.backends.backend_pdf import PdfPages
 import matplotlib.pyplot
+from sklearn.preprocessing import MinMaxScaler
 
 class PlotRoles(object):
 
     def __init__(self,save_pdf=True,nr_nouns=4, nr_verbs=2,file_name="plots/activations-plot",
-                window=0, verbose=False, y_lim=[-2.5,2.5], no_ext_fct=True):
+                window=0, verbose=False, y_lim=[-2.0,2.0], no_ext_fct=True):
 
             super(PlotRoles,self).__init__()
 
@@ -17,6 +18,7 @@ class PlotRoles(object):
             self.verbose=verbose
             self.y_lim=y_lim
             self.no_ext_fct=no_ext_fct
+            self.min_max= MinMaxScaler((-1,1))
 
     def get_labels(self,test_sentences_subset,verbose=False):
         """
@@ -48,11 +50,16 @@ class PlotRoles(object):
         if self.save_pdf:
             ## Initiate object PdfPages for saving figures
             pp = PdfPages(str(self.file_name)+'_'+str(plot_subtitle)+'.pdf')
+
         for i in range(len(outputs)):
+            outputs[i][0,:]=-1
+
             ## For each sentence, plot as many graphs as the number of nouns
             for j in range(self.nr_nouns):
                 pl.figure()
-                pl.plot(outputs[i][:,TOSpN*j:TOSpN*(j+1)])
+                plot_line=outputs[i][:,TOSpN*j:TOSpN*(j+1)]
+
+                pl.plot(plot_line)
 
                 #style-1 for legends
                 #pl.legend(self.unique_labels[TOSpN*j:TOSpN*(j+1)],ncol=3,fancybox=True,shadow=True,bbox_to_anchor=(0.5, 1.07), loc="upper center")
@@ -64,8 +71,8 @@ class PlotRoles(object):
                 pl.xticks(range(0,outputs[i].shape[0]),lab_tick[i],rotation=40)
                 pl.axhline(y=0, c="brown", linewidth=1)
                 a = matplotlib.pyplot.gca()
-                if self.y_lim!=None:
-                    a.set_ylim(self.y_lim)
+                #if self.y_lim!=None:
+                #    a.set_ylim(self.y_lim)
                 if self.save_pdf:
                     # Save figure for each plot
                     pp.savefig(bbox_inches="tight")

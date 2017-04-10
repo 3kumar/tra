@@ -1,0 +1,312 @@
+################################### 1-fold ###################################
+Sentence-15:<start> the man pushed the ball . <end>
+True Roles :: N1-A1 N2-O1
+Pred Roles :: N1-A1 N2-O1
+CORRECT :: True
+
+################################### 2-fold ###################################
+Sentence-15:<start> the ball was pushed by the man . <end>
+True Roles :: N1-O1 N2-A1
+Pred Roles :: N1-O1 N2-A1
+CORRECT :: True
+
+################################### 3-fold ###################################
+Sentence-15:<start> the man gave the book to the boy . <end>
+True Roles :: N1-A1 N2-O1 N3-R1
+Pred Roles :: N1-A1 N2-O1 N3-R1
+CORRECT :: True
+
+################################### 4-fold ###################################
+Sentence-15:<start> the book was given to the boy by the man . <end>
+True Roles :: N1-O1 N2-R1 N3-A1
+Pred Roles :: N1-O1 N2-R1 N3-A1
+CORRECT :: True
+
+################################### 5-fold ###################################
+Sentence-15:<start> the man gave the boy the book . <end>
+True Roles :: N1-A1 N2-R1 N3-O1
+Pred Roles :: N1-A1 N2-O1 N3-R1
+CORRECT :: False
+
+################################### 6-fold ###################################
+Sentence-15:<start> the dog that chased the cat ate the rat . <end>
+True Roles :: N1-A1 N1-A2 N2-O1 N3-O2
+Pred Roles :: N1-A1 N2-O1 N3-A2
+CORRECT :: False
+
+################################### 7-fold ###################################
+Sentence-15:<start> the dog was chased by the man that broke the glass . <end>
+True Roles :: N1-O1 N2-A1 N2-A2 N3-O2
+Pred Roles :: N1-O1 N2-A1 N2-A2 N3-O2
+CORRECT :: True
+
+################################### 8-fold ###################################
+Sentence-15:<start> the ball that hit the boy was given by the man . <end>
+True Roles :: N1-A1 N1-O2 N2-O1 N3-A2
+Pred Roles :: N1-A1 N1-O2 N2-O1 N3-A2
+CORRECT :: True
+
+################################### 9-fold ###################################
+Sentence-15:<start> the man took the ball that hit the glass . <end>
+True Roles :: N1-A1 N2-O1 N2-A2 N3-O2
+Pred Roles :: N1-A1 N2-A1 N3-O2
+CORRECT :: False
+
+################################### 10-fold ###################################
+Sentence-15:<start> the ball that was given by the man hit the glass . <end>
+True Roles :: N1-O1 N1-A2 N2-A1 N3-O2
+Pred Roles :: N1-A1 N1-A2 N2-O1 N3-A2
+CORRECT :: False
+
+################################### 11-fold ###################################
+Sentence-15:<start> the glass was hit by the ball that was given by the man . <end>
+True Roles :: N1-O1 N2-A1 N2-O2 N3-A2
+Pred Roles :: N1-O1 N2-A1 N3-A2 N1-O2
+CORRECT :: False
+
+################################### 12-fold ###################################
+Sentence-15:<start> the ball that was caught by the boy was thrown by the man . <end>
+True Roles :: N1-O1 N1-O2 N2-A1 N3-A2
+Pred Roles :: N1-O1 N1-O2 N3-A2
+CORRECT :: False
+
+################################### 13-fold ###################################
+Sentence-15:<start> the boy caught the ball that was thrown by the man . <end>
+True Roles :: N1-A1 N2-O1 N2-O2 N3-A2
+Pred Roles :: N1-O1
+CORRECT :: False
+
+################################### 14-fold ###################################
+Sentence-15:<start> the ball was given to the boy by the cat that ate the rat . <end>
+True Roles :: N1-O1 N2-R1 N3-A1 N3-A2 N4-O2
+Pred Roles :: N1-A1 N2-O1 N3-R1 N3-A2 N4-R2 N2-O2
+CORRECT :: False
+
+################################### 15-fold ###################################
+Sentence-15:<start> the ball that hit the car was given to the boy by the man . <end>
+True Roles :: N1-A1 N1-O2 N2-O1 N3-R2 N4-A2
+Pred Roles :: N1-A1 N1-O2 N2-O1 N3-A2 N4-O2
+CORRECT :: False
+
+################################### 16-fold ###################################
+Sentence-15:<start> the man gave the ball to the boy that hit the car . <end>
+True Roles :: N1-A1 N2-O1 N3-R1 N3-A2 N4-O2
+Pred Roles :: N1-A1 N2-O1 N3-R1 N4-O2
+CORRECT :: False
+
+################################### 17-fold ###################################
+Sentence-15:<start> the dog was taken from the vet to the man that chased the cat . <end>
+True Roles :: N1-O1 N2-A1 N3-R1 N3-A2 N4-O2
+Pred Roles :: N1-O1 N2-A1 N3-R1 N3-A2 N1-A2
+CORRECT :: False
+
+################################### 18-fold ###################################
+Sentence-15:<start> the man that was kissed by the girl gave the ball to the boy . <end>
+True Roles :: N1-O1 N1-A2 N2-A1 N3-O2 N4-R2
+Pred Roles :: N1-O1 N2-R1 N4-O2 N3-R1
+CORRECT :: False
+
+################################### 19-fold ###################################
+Sentence-15:<start> the man gave the rat to the cat that was chased by the dog . <end>
+True Roles :: N1-A1 N2-O1 N3-R1 N3-O2 N4-A2
+Pred Roles :: N1-A1 N2-O1 N3-R1 N3-A2
+CORRECT :: False
+
+################################### 20-fold ###################################
+Sentence-15:<start> the man that gave the ball to the boy hit the car . <end>
+True Roles :: N1-A1 N1-A2 N2-O1 N3-R1 N4-O2
+Pred Roles :: N1-A1 N1-A2 N2-O1 N3-R1 N4-O2
+CORRECT :: True
+
+################################### 21-fold ###################################
+Sentence-15:<start> the cat was chased by the dog that took the rat to the man . <end>
+True Roles :: N1-O1 N2-A1 N2-A2 N3-O2 N4-R2
+Pred Roles :: N1-A1 N2-O1 N4-A2
+CORRECT :: False
+
+################################### 22-fold ###################################
+Sentence-15:<start> the man hit the dog that gave the rat to the cat . <end>
+True Roles :: N1-A1 N2-O1 N2-A2 N3-O2 N4-R2
+Pred Roles :: N1-A1 N2-O1 N3-O2 N4-R2 N1-A2
+CORRECT :: False
+
+################################### 23-fold ###################################
+Sentence-15:<start> the dog that gave the rat to the cat was hit by the man . <end>
+True Roles :: N1-A1 N1-O2 N2-O1 N3-R1 N4-A2
+Pred Roles :: N1-A1 N1-A2 N2-O1 N4-A2 N3-O2
+CORRECT :: False
+
+################################### 24-fold ###################################
+Sentence-15:<start> the ball that was thrown to the boy by the man broke the glass . <end>
+True Roles :: N1-O1 N1-A2 N2-R1 N3-A1 N4-O2
+Pred Roles :: N1-O1 N1-A2 N2-R1 N4-A2
+CORRECT :: False
+
+################################### 25-fold ###################################
+Sentence-15:<start> the dog ate the rat that was given by the man to the cat . <end>
+True Roles :: N1-A1 N2-O1 N2-O2 N3-A2 N4-R2
+Pred Roles :: N1-A1 N2-O1 N3-O2 N4-R2
+CORRECT :: False
+
+################################### 26-fold ###################################
+Sentence-15:<start> the man that chased the dog gave the rat to the cat . <end>
+True Roles :: N1-A1 N1-A2 N2-O1 N3-O2 N4-R2
+Pred Roles :: N1-A1 N1-A2 N2-O1 N3-O2 N4-R2 N2-A2
+CORRECT :: False
+
+################################### 1-fold ###################################
+Sentence-15:<start> the man pushed the ball . <end>
+True Roles :: N1-A1 N2-O1
+Pred Roles :: N1-A1 N2-O1
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-16:<start> the ball was pushed by the man . <end>
+True Roles :: N1-O1 N2-A1
+Pred Roles :: N1-O1 N2-A1
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-17:<start> the man gave the book to the boy . <end>
+True Roles :: N1-A1 N2-O1 N3-R1
+Pred Roles :: N1-A1 N2-O1 N3-R1
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-18:<start> the book was given to the boy by the man . <end>
+True Roles :: N1-O1 N2-R1 N3-A1
+Pred Roles :: N1-O1 N2-R1 N3-A1
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-19:<start> the man gave the boy the book . <end>
+True Roles :: N1-A1 N2-R1 N3-O1
+Pred Roles :: N1-A1 N2-R1 N3-O1
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-20:<start> the dog that chased the cat ate the rat . <end>
+True Roles :: N1-A1 N1-A2 N2-O1 N3-O2
+Pred Roles :: N1-A1 N1-A2 N2-O1 N3-O2
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-21:<start> the dog was chased by the man that broke the glass . <end>
+True Roles :: N1-O1 N2-A1 N2-A2 N3-O2
+Pred Roles :: N1-O1 N2-A1 N2-A2 N3-O2
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-22:<start> the ball that hit the boy was given by the man . <end>
+True Roles :: N1-A1 N1-O2 N2-O1 N3-A2
+Pred Roles :: N1-A1 N1-O2 N2-O1 N3-A2
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-23:<start> the man took the ball that hit the glass . <end>
+True Roles :: N1-A1 N2-O1 N2-A2 N3-O2
+Pred Roles :: N1-A1 N2-O1 N2-A2 N3-O2
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-24:<start> the ball that was given by the man hit the glass . <end>
+True Roles :: N1-O1 N1-A2 N2-A1 N3-O2
+Pred Roles :: N1-O1 N1-A2 N2-A1 N3-O2
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-25:<start> the glass was hit by the ball that was given by the man . <end>
+True Roles :: N1-O1 N2-A1 N2-O2 N3-A2
+Pred Roles :: N1-O1 N2-A1 N2-O2 N3-A2
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-26:<start> the ball that was caught by the boy was thrown by the man . <end>
+True Roles :: N1-O1 N1-O2 N2-A1 N3-A2
+Pred Roles :: N1-O1 N1-O2 N2-A1 N3-A2
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-27:<start> the boy caught the ball that was thrown by the man . <end>
+True Roles :: N1-A1 N2-O1 N2-O2 N3-A2
+Pred Roles :: N1-A1 N2-O1 N2-O2 N3-A2
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-28:<start> the ball was given to the boy by the cat that ate the rat . <end>
+True Roles :: N1-O1 N2-R1 N3-A1 N3-A2 N4-O2
+Pred Roles :: N1-O1 N2-R1 N3-A1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-29:<start> the ball that hit the car was given to the boy by the man . <end>
+True Roles :: N1-A1 N1-O2 N2-O1 N3-R2 N4-A2
+Pred Roles :: N1-A1 N1-O2 N2-O1 N3-R2 N4-A2
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-30:<start> the man gave the ball to the boy that hit the car . <end>
+True Roles :: N1-A1 N2-O1 N3-R1 N3-A2 N4-O2
+Pred Roles :: N1-A1 N2-O1 N3-R1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-31:<start> the dog was taken from the vet to the man that chased the cat . <end>
+True Roles :: N1-O1 N2-A1 N3-R1 N3-A2 N4-O2
+Pred Roles :: N1-O1 N2-A1 N3-R1 N3-A2 N4-O2
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-32:<start> the man that was kissed by the girl gave the ball to the boy . <end>
+True Roles :: N1-O1 N1-A2 N2-A1 N3-O2 N4-R2
+Pred Roles :: N1-O1 N1-A2 N2-A1 N3-O2 N4-R2
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-33:<start> the man gave the rat to the cat that was chased by the dog . <end>
+True Roles :: N1-A1 N2-O1 N3-R1 N3-O2 N4-A2
+Pred Roles :: N1-A1 N2-O1 N3-R1 N3-O2 N4-A2
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-34:<start> the man that gave the ball to the boy hit the car . <end>
+True Roles :: N1-A1 N1-A2 N2-O1 N3-R1 N4-O2
+Pred Roles :: N1-A1 N1-A2 N2-O1 N3-R1 N4-O2
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-35:<start> the cat was chased by the dog that took the rat to the man . <end>
+True Roles :: N1-O1 N2-A1 N2-A2 N3-O2 N4-R2
+Pred Roles :: N1-O1 N2-A1 N2-A2 N3-O2 N4-R2
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-36:<start> the man hit the dog that gave the rat to the cat . <end>
+True Roles :: N1-A1 N2-O1 N2-A2 N3-O2 N4-R2
+Pred Roles :: N1-A1 N2-O1 N2-A2 N3-O2 N4-R2
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-37:<start> the dog that gave the rat to the cat was hit by the man . <end>
+True Roles :: N1-A1 N1-O2 N2-O1 N3-R1 N4-A2
+Pred Roles :: N1-A1 N1-O2 N2-O1 N3-R1 N4-A2
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-38:<start> the ball that was thrown to the boy by the man broke the glass . <end>
+True Roles :: N1-O1 N1-A2 N2-R1 N3-A1 N4-O2
+Pred Roles :: N1-O1 N1-A2 N2-R1 N3-A1 N4-O2
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-39:<start> the dog ate the rat that was given by the man to the cat . <end>
+True Roles :: N1-A1 N2-O1 N2-O2 N3-A2 N4-R2
+Pred Roles :: N1-A1 N2-O1 N2-O2 N3-A2 N4-R2
+CORRECT :: True
+
+################################### 1-fold ###################################
+Sentence-40:<start> the man that chased the dog gave the rat to the cat . <end>
+True Roles :: N1-A1 N1-A2 N2-O1 N3-O2 N4-R2
+Pred Roles :: N1-A1 N1-A2 N2-O1 N3-O2 N4-R2
+CORRECT :: True
+

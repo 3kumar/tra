@@ -58,43 +58,59 @@ def plot_outputs(corpus='45',subplots=2,plot_noun=2,sentences_order=None,noun_ti
             if j==plot_noun-1:
                 ax.plot(s_act[:,TOSpN*j:TOSpN*(j+1)])
                 if ax_index==0:
-                    ax.legend(unique_labels[TOSpN*j:TOSpN*(j+1)],fancybox=True,prop=fontP,loc="upper left").get_frame().set_alpha(0.4)
+                    ax.legend(unique_labels[TOSpN*j:TOSpN*(j+1)],fancybox=True,loc="upper left").get_frame().set_alpha(0.4)
 
-                ax.set_title("Sent-"+str(sent_no+1)+ ": '"+" ".join(tok_sent[1:-1])+"'")
+                ax.set_title("("+str(ax_index+1)+ ") "+" ".join(tok_sent[1:-1])+"", loc='left')
                 ax.set_xticks(range(0,s_act.shape[0]+1))
                 tok_sent[0]=""
                 tok_sent[-1]=""
-                ax.set_xticklabels(tok_sent,rotation=40)
+                ax.set_xticklabels(tok_sent,rotation=60)
 
                 if noun_tick_pos is not None or verbs_tick_pos is not None:
                     noun_color_tick=noun_tick_pos[ax_index]
-                    for i in verbs_tick_pos[ax_index]:
-                        ax.get_xticklabels()[i].set_color('green')
+                    for vn,verb_color_tick in enumerate(verbs_tick_pos[ax_index]):
+                        ax.get_xticklabels()[verb_color_tick].set_color('green')
                     ax.get_xticklabels()[noun_color_tick].set_color('red')
 
-                ax.axhline(y=0, c="brown", linewidth=1)
-                ax.grid()
+                ax.axhline(y=0, c="brown",ls='--', linewidth=1)
+                ax.grid(alpha=0.6,c='grey',ls='dotted')
                 ax.set_ylim([-2.0,2.0])
 
-    f.subplots_adjust(hspace=0.2, wspace=0.03)
+    f.subplots_adjust(left=0.05,right=0.95, top=0.95,bottom=0.1,hspace=0.25, wspace=0.1)
     plt.show()
+    f.set_size_inches(12, 10)
+    plt.savefig('/home/fox/thesis_report/src/act_analysis_1.pdf')
 
 if __name__=="__main__":
 
+    pgf_with_latex = {
+        "text.usetex": True,                # use LaTeX to write all text
+        "font.family": "serif",
+        "font.serif":[],
+        'font.size': 14,                   # blank entries should cause plots to inherit fonts from the document
+        'axes.titlesize':'medium',
+        "axes.labelsize": 'medium',
+        "legend.fontsize": 12,               # Make the legend/label fonts a little smaller
+        "xtick.labelsize": 12,
+        "ytick.labelsize": 12,
+        }
+
+    plt.rcParams.update(pgf_with_latex)
+
     nr_nouns=4
     TOSpN = 3*2  #number of Total Output Signal per Noun (for AOR, it's 3 times the number of verbs)
-    unique_labels=['N1-A1','N1-O1','N1-R1','N1-A2','N1-O2','N1-R2','N2-A1','N2-O1','N2-R1','N2-A2','N2-O2','N2-R2',
-                   'N3-A1','N3-O1','N3-R1','N3-A2','N3-O2','N3-R2','N4-A1','N4-O1','N4-R1','N4-A2','N4-O2','N4-R2']
+    unique_labels=['N1-A-V1','N1-O-V1','N1-R-V1','N1-A-V2','N1-O-V2','N1-R-V2',
+                   'N2-A-V1','N2-O-V1','N2-R-V1','N2-A-V2','N2-O-V2','N2-R-V2',
+                   'N3-A-V1','N3-O-V1','N3-R-V1','N3-A-V2','N3-O-V2','N3-R-V2',
+                   'N4-A-V1','N4-O-V1','N4-R-V1','N4-A-V2','N4-O-V2','N4-R-V2']
 
-    fontP = FontProperties()
-    fontP.set_size('medium')
 
-    #sentences_order=[462+17,462+23,462+27,462+16]
-    #noun_tick_pos=[5,5,5,7]
-    #verbs_tick_pos=[[3],[3,7],[3,8],[4]]
+    sentences_order=[462+17,462+23,462+27,462+16]
+    noun_tick_pos=[5,5,5,7]
+    verbs_tick_pos=[[3],[3,7],[3,8],[4]]
 
-    sentences_order=[462+0,462+1,462+10,462+11]
+    '''sentences_order=[462+0,462+1,462+10,462+11]
     noun_tick_pos=[1,2,1,2]
-    verbs_tick_pos=[[2,8],[4,10],[2,8],[4,10]]
+    verbs_tick_pos=[[2,8],[4,10],[2,8],[4,10]]'''
 
-    plot_outputs(corpus='462_45',subplots=4,plot_noun=1,sentences_order=sentences_order,noun_tick_pos=noun_tick_pos,verbs_tick_pos=verbs_tick_pos)
+    plot_outputs(corpus='462_45',subplots=4,plot_noun=2,sentences_order=sentences_order,noun_tick_pos=noun_tick_pos,verbs_tick_pos=verbs_tick_pos)

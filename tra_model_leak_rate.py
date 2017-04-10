@@ -13,15 +13,13 @@ import base64
 import numpy as np
 from Oger.nodes import LeakyReservoirNode
 from Oger.evaluation import n_fold_random,leave_one_out
-from Oger.utils import rmse,make_inspectable
+from Oger.utils import rmse,make_inspectable,enable_washout
 from copy import deepcopy
 from random import shuffle
 import random
-
 from tra_error import ThematicRoleError,keep_max_for_each_time_step_with_default
 from reservoir_weights import generate_sparse_w, generate_sparse_w_in
 #from random_res_weights import generate_internal_weights,generate_input_weights
-#from ridge_node import RidgeRegressionNode
 from Oger.nodes import RidgeRegressionNode
 from tra_plot import PlotRoles
 try:
@@ -125,7 +123,7 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
                 i.e. ['N1-A1','N2-O1','N1-A2','N2-O2'] corresponding labels indices in unique_labels
             index: index of sentence for which labels are given
             start: when to start giving teacher labels wrt to sentence, use 0 to start for the beginning
-                    of sentence, 'end' to present at the end of sentence
+                    of sentence, 'end' to present at the last word  of sentence
             returns:
                 a matrix of dimension (sentence length * len(self.unique_labels))
         """
@@ -172,7 +170,6 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
 
         x_data=self.generate_x_data(sentences=self.sentences)
         y_data=self.__generate_y_data(labels=self.labels)
-
         return (x_data, y_data)
 
     def initialize_esn(self,verbose=False):
@@ -186,13 +183,12 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
         #w_bias=generate_input_weights(reservoir_size=1,input_dim=self.reservoir_size,input_scaling=self.bias_scaling,seed=self.seed,proba=0.3)
 
         ## Instansiate reservoir node, read-out and flow
-        self.reservoir = LeakyReservoirNode(nonlin_func=mdp.numx.tanh,input_dim=self.input_dim,output_dim=self.reservoir_size,
-                                            leak_rate=self.leak_rate,w=w_r,w_in=w_in,w_bias=w_bias,_instance=self._instance)
+        self.reservoir = LeakyReservoirNode(nonlin_func = mdp.numx.tanh,input_dim=self.input_dim,output_dim=self.reservoir_size,
+                                            leak_rate = self.leak_rate,w = w_r,w_in=w_in,w_bias=w_bias,_instance=self._instance)
 
-        self.read_out = RidgeRegressionNode(ridge_param=self.ridge, use_pinv=True, with_bias=True)
+        self.read_out = RidgeRegressionNode(ridge_param = self.ridge, use_pinv = True, with_bias = True)
         #read_out = RidgeRegressionNode(ridge_param=self.ridge,other_error_measure= rmse,cross_validate_function=n_fold_random,n_folds=10,verbose=self.verbose)
         self.flow = mdp.Flow([self.reservoir, self.read_out],verbose=self.verbose)
-        make_inspectable(LeakyReservoirNode)
 
     def trainModel(self,training_sentences,training_labels):
         '''
@@ -375,7 +371,7 @@ class ThematicRoleModel(ThematicRoleError,PlotRoles):
         return y_true_lbl, y_pred_lbl
 
     def save_test_activations(self,test_activations):
-        pkl_file='outputs/activations/corpus-'+str(self.corpus)+'.act'
+        pkl_file='outputs/activations/corpus-'+str(self.corpus)+'_new.act'
 
         output_data=[]
         output_data.append(test_activations)
@@ -471,6 +467,13 @@ if __name__=="__main__":
         learning mode can be:
             SFL : sentence final learning
             SCL : sentence continous learning
+            
+            sub_corpus_per: percentage of sub-corpus to be selected out of corpus
+            n-folds: no. of folds used for cross validation
+            iss: input scaling for ESN
+            sr: spectral radius for ESN
+            lr: leak rate for ESN
+                        
     '''
     start_time = time.time()
     learning_mode='SCL' # 'SCL'
@@ -486,13 +489,13 @@ if __name__=="__main__":
     lr=  0.13 # 0.13 for SFL'''
 
     #************************** Corpus 462 ************************************
-    corpus='462'
+    '''corpus='462'
     sub_corpus_per=100
     subset=range(0,462)
-    n_folds=10
+    n_folds=2
     iss= 2.5 #2.5 for SCL # 2.3 for SFL
     sr= 2.4 #2.4  for SCL # 2.2 for SFL
-    lr= 0.07 #0.07 for SCL # 0.13 for SFL
+    lr= 0.07 #0.07 for SCL # 0.13 for SFL'''
 
     #************************** Corpus 462+45 *********************************
     '''corpus='462_45'
@@ -504,28 +507,30 @@ if __name__=="__main__":
     lr= 0.07  # 0.08 for SFL'''
 
     #************************** Corpus 45 *************************************
-    '''corpus='45'
+    corpus='45'
     sub_corpus_per=100
     subset=range(15,41)
     n_folds=-1
-    iss= 6.6  #  for SFL
-    sr= 2.1   #  for SFL
-    lr= 0.5  #  for SFL'''
+    iss= 2.5  # 6.6 for SFL
+    sr= 2.4   # 2.1 for SFL
+    lr= 0.07  #  0.5 for SFL
 
     #******************* Initialize a Model ***********************************
 
     model = ThematicRoleModel(corpus=corpus,input_dim=50,reservoir_size=1000,input_scaling=iss,spectral_radius=sr,
-                            leak_rate=lr,ridge=1e-6,subset=subset,n_folds=n_folds,verbose=True,seed=2,_instance=1,
+                            leak_rate=lr,ridge=1e-6,subset=subset,n_folds=n_folds,verbose=True,seed=4,_instance=1,
                             plot_activations=False,save_predictions=False,learning_mode=learning_mode)
     model.initialize_esn()
-    #model.execute(verbose=True)
+    model.execute(verbose=True)
 
     # To run the multiple instance of the model set 'seed' parameter to range of instances, in grid_search_param dict and call the grid search method.
+    '''
     grid_search_params={
-            'seed':range(5)
+            'seed':range(10)
     }
 
     model.grid_search(search_parameters=grid_search_params)
+    '''
 
     end_time = time.time()
     print '\nTotal execution time : %s min '%((end_time-start_time)/60)
